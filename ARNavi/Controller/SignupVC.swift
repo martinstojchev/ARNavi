@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import DTTextField
 
 class SignupVC: UIViewController {
 
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var repeatPassTextField: UITextField!
+    @IBOutlet weak var nameTextField: DTTextField!
+    @IBOutlet weak var usernameTextField: DTTextField!
+    @IBOutlet weak var emailTextField: DTTextField!
+    @IBOutlet weak var passwordTextField: DTTextField!
+    @IBOutlet weak var repeatPassTextField: DTTextField!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var facebookSignupButton: UIButton!
     @IBOutlet weak var twitterSignupButton: UIButton!

@@ -1,0 +1,6 @@
+framework module Pods_ARNavi {
+  umbrella header "Pods-ARNavi-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import DTTextField
 
 class LoginVC: UIViewController {
     
     @IBOutlet weak var loginLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: DTTextField!
+    @IBOutlet weak var passwordTextField: DTTextField!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var biometricImageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
@@ -41,6 +42,9 @@ class LoginVC: UIViewController {
         forgotPasswordButton.tintColor = AppColor.gray.rawValue
         infoLabel.textColor = AppColor.gray.rawValue
         
+        emailTextField.placeholderColor = AppColor.gray.rawValue
+        passwordTextField.placeholderColor = AppColor.gray.rawValue
+        
     }
     
 
@@ -53,5 +57,16 @@ class LoginVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    @IBAction func loginUser(_ sender: Any) {
+        
+        emailTextField.showError(message: "Error")
+        
+        
+    }
+    
+    
+    
 
 }

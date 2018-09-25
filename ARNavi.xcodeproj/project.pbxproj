@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1ACE632DF07F70F3F212E9A5 /* Pods_ARNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF323CD5276291790698F275 /* Pods_ARNavi.framework */; };
 		5BACF6202158F8FA00D8E056 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF61F2158F8FA00D8E056 /* AppColors.swift */; };
 		5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF621215903DB00D8E056 /* FirstScreenVC.swift */; };
 		5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6232159088D00D8E056 /* LoginVC.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F0DC36F55DB8CAE3650782F /* Pods-ARNavi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARNavi.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARNavi/Pods-ARNavi.release.xcconfig"; sourceTree = "<group>"; };
 		5BACF61F2158F8FA00D8E056 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		5BACF621215903DB00D8E056 /* FirstScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenVC.swift; sourceTree = "<group>"; };
 		5BACF6232159088D00D8E056 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -30,6 +32,8 @@
 		5BFF09EB2158DABD0067B35F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BFF09EE2158DABD0067B35F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BFF09F02158DABD0067B35F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		918447CDBDC445F97DEDDCF1 /* Pods-ARNavi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARNavi.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ARNavi/Pods-ARNavi.debug.xcconfig"; sourceTree = "<group>"; };
+		EF323CD5276291790698F275 /* Pods_ARNavi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ARNavi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ACE632DF07F70F3F212E9A5 /* Pods_ARNavi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +53,8 @@
 			children = (
 				5BFF09E02158DABC0067B35F /* ARNavi */,
 				5BFF09DF2158DABC0067B35F /* Products */,
+				A9E7EF98DA2A18B20BF7C695 /* Pods */,
+				79B451D9C56F5CECAA8E8B62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +115,23 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		79B451D9C56F5CECAA8E8B62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF323CD5276291790698F275 /* Pods_ARNavi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9E7EF98DA2A18B20BF7C695 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				918447CDBDC445F97DEDDCF1 /* Pods-ARNavi.debug.xcconfig */,
+				1F0DC36F55DB8CAE3650782F /* Pods-ARNavi.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,9 +139,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BFF09F32158DABD0067B35F /* Build configuration list for PBXNativeTarget "ARNavi" */;
 			buildPhases = (
+				59FC6086391DB2ED2E07F4B4 /* [CP] Check Pods Manifest.lock */,
 				5BFF09DA2158DABC0067B35F /* Sources */,
 				5BFF09DB2158DABC0067B35F /* Frameworks */,
 				5BFF09DC2158DABC0067B35F /* Resources */,
+				804772DF9DB5A8064BFDA3D9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,6 +199,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		59FC6086391DB2ED2E07F4B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ARNavi-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		804772DF9DB5A8064BFDA3D9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ARNavi/Pods-ARNavi-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DTTextField/DTTextField.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTTextField.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ARNavi/Pods-ARNavi-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5BFF09DA2158DABC0067B35F /* Sources */ = {
@@ -328,6 +401,7 @@
 		};
 		5BFF09F42158DABD0067B35F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 918447CDBDC445F97DEDDCF1 /* Pods-ARNavi.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -347,6 +421,7 @@
 		};
 		5BFF09F52158DABD0067B35F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F0DC36F55DB8CAE3650782F /* Pods-ARNavi.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

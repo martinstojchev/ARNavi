@@ -1,0 +1,16 @@
+PODS:
+  - DTTextField (0.3.0)
+
+DEPENDENCIES:
+  - DTTextField
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - DTTextField
+
+SPEC CHECKSUMS:
+  DTTextField: c26deead1a51c92156e2a638ac7d2c702c2f345e
+
+PODFILE CHECKSUM: 07987b55bc553119ed17172e735cd0dc28e4f1fc
+
+COCOAPODS: 1.5.3
