@@ -20,12 +20,12 @@ class FirstScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        signupButton.backgroundColor = UIColor.red
-        signupButton.tintColor       = UIColor.white
+        view.backgroundColor         = AppColor.backgroundColor.rawValue
+        signupButton.backgroundColor = AppColor.red.rawValue
+        signupButton.tintColor       = AppColor.white.rawValue
         signupButton.layer.cornerRadius = 7
-        loginButton.backgroundColor  = UIColor.gray
-        loginButton.tintColor        = UIColor.white
+        loginButton.backgroundColor  = AppColor.gray.rawValue
+        loginButton.tintColor        = AppColor.white.rawValue
         loginButton.layer.cornerRadius = 7
         
     }

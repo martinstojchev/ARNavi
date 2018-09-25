@@ -19,24 +19,27 @@ class LoginVC: UIViewController {
     @IBOutlet weak var facebookLoginbutton: UIButton!
     @IBOutlet weak var twitterLoginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
+    @IBOutlet weak var infoLabel: UILabel!
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginButton.backgroundColor = UIColor.red
-        loginButton.tintColor = UIColor.white
+        view.backgroundColor = AppColor.backgroundColor.rawValue
+        loginButton.backgroundColor = AppColor.red.rawValue
+        loginButton.tintColor = AppColor.white.rawValue
         loginButton.layer.cornerRadius = 7
-        facebookLoginbutton.backgroundColor = UIColor.blue
-        facebookLoginbutton.tintColor = UIColor.white
+        facebookLoginbutton.backgroundColor = AppColor.facebookBlue.rawValue
+        facebookLoginbutton.tintColor = AppColor.white.rawValue
         facebookLoginbutton.layer.cornerRadius = 7
-        twitterLoginButton.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-        twitterLoginButton.tintColor = UIColor.white
+        twitterLoginButton.backgroundColor = AppColor.twitterBlue.rawValue
+        twitterLoginButton.tintColor = AppColor.white.rawValue
         twitterLoginButton.layer.cornerRadius = 7
-        signupButton.backgroundColor = UIColor(red: 42, green: 163, blue: 239, alpha: 1)
-        forgotPasswordButton.tintColor = UIColor.gray
-        
+        signupButton.backgroundColor = AppColor.backgroundColor.rawValue
+        signupButton.tintColor = AppColor.white.rawValue
+        forgotPasswordButton.tintColor = AppColor.gray.rawValue
+        infoLabel.textColor = AppColor.gray.rawValue
         
     }
     

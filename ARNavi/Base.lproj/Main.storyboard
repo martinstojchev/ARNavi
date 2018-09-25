@@ -193,6 +193,7 @@
                         <outlet property="emailTextField" destination="iUB-MF-Ksj" id="chC-US-xUx"/>
                         <outlet property="facebookLoginbutton" destination="LSN-gq-jcg" id="U5Q-5D-s4S"/>
                         <outlet property="forgotPasswordButton" destination="P8q-F1-gmB" id="ayW-xZ-QAm"/>
+                        <outlet property="infoLabel" destination="ZbQ-Lj-AzF" id="3br-cm-AwQ"/>
                         <outlet property="loginButton" destination="fWQ-Da-XjA" id="qa5-gl-4WA"/>
                         <outlet property="loginLabel" destination="Mwm-O7-wKW" id="T8C-Kq-XuJ"/>
                         <outlet property="passwordTextField" destination="DyT-nd-l4f" id="rhV-X7-Omi"/>
@@ -329,6 +330,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="inK-81-WCS" id="Jdj-XB-aVp"/>
                         <outlet property="facebookSignupButton" destination="9nD-Gm-Rrw" id="2Be-1a-TzP"/>
+                        <outlet property="infoLabel" destination="4y9-C7-8oo" id="20S-bg-NYL"/>
                         <outlet property="loginButton" destination="Lfu-zf-PTE" id="5hU-Zi-1C9"/>
                         <outlet property="nameTextField" destination="7NI-Wf-k1B" id="hOW-kj-df0"/>
                         <outlet property="passwordTextField" destination="wAL-an-EWI" id="ouO-q6-Qvv"/>
@@ -348,6 +350,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zEx-o5-SBe"/>
-        <segue reference="TdM-JI-VD3"/>
+        <segue reference="aQ0-qO-hB3"/>
     </inferredMetricsTieBreakers>
 </document>
