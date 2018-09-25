@@ -71,16 +71,5 @@ extension AppColor: RawRepresentable {
     
 }
 
-extension UIColor {
-    
-    struct MyColors {
-        
-        static var facebookBlue: UIColor { return UIColor(red: 60/255, green: 90/255, blue: 150/255, alpha: 1) }
-        
-        
-    }
-    
-    
-    
-}
+
 
