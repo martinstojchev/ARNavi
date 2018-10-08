@@ -14,6 +14,7 @@ class FirstScreenVC: UIViewController {
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var tryDemoButton: UIButton!
     
     
 
@@ -37,6 +38,10 @@ class FirstScreenVC: UIViewController {
     @IBAction func loginUser(_ sender: Any) {
         
     }
+    
+    @IBAction func showDemo(_ sender: Any) {
+    }
+    
     
     
 }

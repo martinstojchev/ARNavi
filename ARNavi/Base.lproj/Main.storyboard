@@ -48,6 +48,13 @@
                                     <segue destination="Jsz-md-uVm" kind="show" id="TdM-JI-VD3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2J-u7-XnH">
+                                <rect key="frame" x="142" y="571" width="91" height="30"/>
+                                <state key="normal" title="Try the demo"/>
+                                <connections>
+                                    <action selector="showDemo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nIz-LO-vz1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.22352941176470587" green="0.48627450980392156" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -58,9 +65,11 @@
                             <constraint firstItem="sUS-XZ-4Yf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="L3y-Zs-Ap3"/>
                             <constraint firstAttribute="trailing" secondItem="sUS-XZ-4Yf" secondAttribute="trailing" constant="25" id="Q8V-6K-yjZ"/>
                             <constraint firstItem="uPo-W5-xCD" firstAttribute="top" secondItem="sUS-XZ-4Yf" secondAttribute="bottom" constant="65.5" id="VEP-Ak-42z"/>
+                            <constraint firstItem="q2J-u7-XnH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZUc-5X-goH"/>
                             <constraint firstItem="IUr-t1-3KB" firstAttribute="top" secondItem="uPo-W5-xCD" secondAttribute="bottom" constant="20" id="bPY-Mr-6pB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uPo-W5-xCD" secondAttribute="trailing" constant="25" id="sPE-Ar-I6p"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IUr-t1-3KB" secondAttribute="trailing" constant="25" id="t70-qh-sAp"/>
+                            <constraint firstItem="q2J-u7-XnH" firstAttribute="top" secondItem="IUr-t1-3KB" secondAttribute="bottom" constant="16" id="wlJ-zO-X7G"/>
                             <constraint firstItem="uPo-W5-xCD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="yzk-S0-pz1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -70,6 +79,7 @@
                         <outlet property="loginButton" destination="IUr-t1-3KB" id="4vc-ef-Nvs"/>
                         <outlet property="signupButton" destination="uPo-W5-xCD" id="xza-U8-z8C"/>
                         <outlet property="titleLabel" destination="njc-2Z-y9Q" id="OCp-4d-5sc"/>
+                        <outlet property="tryDemoButton" destination="q2J-u7-XnH" id="zvb-le-cVT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -350,7 +360,7 @@
         <image name="touchid_logo" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zEx-o5-SBe"/>
-        <segue reference="aQ0-qO-hB3"/>
+        <segue reference="jjN-hG-lfA"/>
+        <segue reference="TdM-JI-VD3"/>
     </inferredMetricsTieBreakers>
 </document>
