@@ -7,5 +7,5 @@ target 'ARNavi' do
 
   # Pods for ARNavi
   pod 'DTTextField'
-
+  pod 'Firebase/Core'
 end
