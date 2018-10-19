@@ -8,6 +8,7 @@
 
 import UIKit
 import DTTextField
+import Firebase
 
 class SignupVC: UIViewController {
 
@@ -21,7 +22,6 @@ class SignupVC: UIViewController {
     @IBOutlet weak var twitterSignupButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,104 @@ class SignupVC: UIViewController {
     }
     
     
+    @IBAction func signupUser(_ sender: Any) {
+        print("signupUser clicked")
+        
+        if nameTextField.text == "" {
+            nameTextField.showError(message: "Name can not be empty")
+            return
+        }
+        
+        if usernameTextField.text == ""{
+            usernameTextField.showError(message: "Username can not be empty")
+            return
+        }
+        
+        if emailTextField.text == ""{
+            emailTextField.showError(message: "Email can not be empty")
+            return
+        }
+        
+        if passwordTextField.text == ""{
+            passwordTextField.showError(message: "Password can not be empty")
+            return
+        }
+        if repeatPassTextField.text == ""{
+            repeatPassTextField.showError(message: "Password can not be empty")
+            return
+        }
+        
+        
+        guard let name            = nameTextField.text              else { return }
+        guard let username        = usernameTextField.text          else { return }
+        guard let email           = emailTextField.text             else { return }
+        guard let password        = passwordTextField.text          else { return }
+        guard let confirmPassword = repeatPassTextField.text        else { return }
+        
+        print("name name")
+        
+        let checkEmail = isValidEmail(email: email)
+        
+        if (!checkEmail){
+            emailTextField.showError(message: "Email is not valid")
+        }
+        else {
+        let stylePass = checkPasswordStyle(password: password)
+        
+        if (!stylePass){
+         passwordTextField.showError(message: "Password must be longer than 6 chars")
+        }
+        else {
+         let equalsPass = checkEqualsPasswords(password: password, repeatPassword: confirmPassword)
+            
+            if (!equalsPass){
+              //password and repeat password are not equal
+                repeatPassTextField.showError(message: "Passwords are diffrent")
+                
+            }
+            else {
+                // signup the user
+                Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+                    
+                    if let err = error {
+                         print("creating user failed")
+                    }
+                    else {
+                        
+                        print("successfully created user")
+                    }
+                    
+                    
+                }
+                
+            }
+            
+            
+            
+            
+          }
+        }
+        
+        
+    }
+    
+    func checkEqualsPasswords(password: String, repeatPassword: String) -> Bool {
+        
+        return password == repeatPassword
+        
+    }
+    
+    func checkPasswordStyle(password: String) -> Bool {
+    
+         return password.count > 6
+    }
+    
+    func isValidEmail(email:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
     
 
     /*

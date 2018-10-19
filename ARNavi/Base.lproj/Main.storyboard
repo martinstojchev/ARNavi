@@ -265,6 +265,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="SIGN UP"/>
                                 <connections>
+                                    <action selector="signupUser:" destination="Q1U-ng-7P1" eventType="touchUpInside" id="0cV-yF-t8E"/>
                                     <action selector="signupUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gxg-NL-J1l"/>
                                 </connections>
                             </button>
@@ -361,6 +362,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jjN-hG-lfA"/>
-        <segue reference="TdM-JI-VD3"/>
+        <segue reference="aQ0-qO-hB3"/>
     </inferredMetricsTieBreakers>
 </document>

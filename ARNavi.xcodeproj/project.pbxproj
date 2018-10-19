@@ -13,6 +13,7 @@
 		5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6232159088D00D8E056 /* LoginVC.swift */; };
 		5BACF6262159156100D8E056 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6252159156100D8E056 /* SignupVC.swift */; };
 		5BC8E12D2179F7110045BC37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BC8E12C2179F7110045BC37 /* GoogleService-Info.plist */; };
+		5BC8E12F217A00FC0045BC37 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC8E12E217A00FC0045BC37 /* User.swift */; };
 		5BFF09E22158DABC0067B35F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF09E12158DABC0067B35F /* AppDelegate.swift */; };
 		5BFF09E72158DABC0067B35F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFF09E52158DABC0067B35F /* Main.storyboard */; };
 		5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF09E82158DABC0067B35F /* ARNavi.xcdatamodeld */; };
@@ -27,6 +28,7 @@
 		5BACF6232159088D00D8E056 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		5BACF6252159156100D8E056 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		5BC8E12C2179F7110045BC37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5BC8E12E217A00FC0045BC37 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5BFF09DE2158DABC0067B35F /* ARNavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFF09E12158DABC0067B35F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFF09E62158DABC0067B35F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 		5BFF09F62158DAE80067B35F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5BC8E12E217A00FC0045BC37 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ARNavi/Pods-ARNavi-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DTTextField/DTTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -245,6 +249,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -266,6 +271,7 @@
 				5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */,
 				5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */,
 				5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */,
+				5BC8E12F217A00FC0045BC37 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
