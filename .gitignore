@@ -106,6 +106,6 @@ iOSInjectionProject/
 !*.xcodeproj/xcshareddata/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
-
+*.plist
 
 # End of https://www.gitignore.io/api/swift,xcode,firebase
