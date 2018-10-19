@@ -104,6 +104,7 @@ class SignupVC: UIViewController {
                     
                     if let err = error {
                          print("creating user failed")
+                         print(err.localizedDescription)
                     }
                     else {
                         

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FirstScreenVC: UIViewController {
     
@@ -28,6 +29,16 @@ class FirstScreenVC: UIViewController {
         loginButton.backgroundColor  = AppColor.gray.rawValue
         loginButton.tintColor        = AppColor.white.rawValue
         loginButton.layer.cornerRadius = 7
+        
+        // Check for previous logged user
+        if Auth.auth().currentUser != nil {
+            // User is signed in
+            print("User \(Auth.auth().currentUser?.email) is signed in")
+        }
+        else {
+            // No user is signed in
+            print("no user is signed in")
+        }
         
     }
     
