@@ -116,6 +116,9 @@
                                 <rect key="frame" x="25" y="294" width="108" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Forgot password?"/>
+                                <connections>
+                                    <action selector="forgotPassword:" destination="Jsz-md-uVm" eventType="touchUpInside" id="Hsz-U5-C3A"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWQ-Da-XjA">
                                 <rect key="frame" x="25" y="431" width="325" height="34"/>

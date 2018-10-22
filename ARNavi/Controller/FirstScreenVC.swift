@@ -37,7 +37,7 @@ class FirstScreenVC: UIViewController {
             print("User \(Auth.auth().currentUser?.email) is signed in")
             
             isUserLogged = true
-            //logoutCurrentUser()
+            logoutCurrentUser()
         }
         else {
             // No user is signed in

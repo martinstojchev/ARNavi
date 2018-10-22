@@ -118,5 +118,39 @@ class LoginVC: UIViewController {
     
     
     
+    @IBAction func forgotPassword(_ sender: Any) {
+        
+        if emailTextField.text == "" {
+            emailTextField.showError(message: "Insert email")
+            return
+        }
+        
+        guard let email    = emailTextField.text    else { return }
+        
+        let emailValid = isValidEmail(email: email)
+        
+        if (emailValid){
+            // send the reset password link to the inserted email
+            
+            Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+                
+                if let err = error {
+                    print(err.localizedDescription)
+                }
+                else {
+                    print("password reset email sent.")
+                }
+            }
+            
+        }
+        else {
+            emailTextField.showError(message: "Email is not valid")
+        }
+        
+        
+    }
+    
+    
+    
 
 }
