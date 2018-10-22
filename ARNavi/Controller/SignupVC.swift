@@ -26,6 +26,7 @@ class SignupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = AppColor.backgroundColor.rawValue
         signupButton.backgroundColor = AppColor.red.rawValue
         signupButton.tintColor = AppColor.white.rawValue

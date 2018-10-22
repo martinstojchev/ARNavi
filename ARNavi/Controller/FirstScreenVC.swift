@@ -23,6 +23,7 @@ class FirstScreenVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor         = AppColor.backgroundColor.rawValue
         signupButton.backgroundColor = AppColor.red.rawValue
         signupButton.tintColor       = AppColor.white.rawValue
@@ -37,7 +38,7 @@ class FirstScreenVC: UIViewController {
             print("User \(Auth.auth().currentUser?.email) is signed in")
             
             isUserLogged = true
-            logoutCurrentUser()
+            //logoutCurrentUser()
         }
         else {
             // No user is signed in
@@ -56,7 +57,8 @@ class FirstScreenVC: UIViewController {
             
             if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
                 
-                self.present(favPlacesVC, animated: true, completion: nil)
+                //self.present(favPlacesVC, animated: true, completion: nil)
+                self.navigationController?.pushViewController(favPlacesVC, animated: true)
             }
             
         }

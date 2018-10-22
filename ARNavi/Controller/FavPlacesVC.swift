@@ -12,7 +12,15 @@ class FavPlacesVC: UIViewController {
     
     
     
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.title = "Favourite places"
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationItem.title = "Favourite places"
+        navigationController?.navigationBar.tintColor = UIColor.red
+        navigationItem.hidesBackButton = true
+    }
     
     
     

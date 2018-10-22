@@ -28,6 +28,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = AppColor.backgroundColor.rawValue
         loginButton.backgroundColor = AppColor.red.rawValue
         loginButton.tintColor = AppColor.white.rawValue
@@ -91,7 +92,8 @@ class LoginVC: UIViewController {
                      //Show fav places vc
                     if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
                        
-                        self.present(favPlacesVC, animated: true, completion: nil)
+                        //self.present(favPlacesVC, animated: true, completion: nil)
+                        self.navigationController?.pushViewController(favPlacesVC, animated: true)
                     }
                 }
                 
