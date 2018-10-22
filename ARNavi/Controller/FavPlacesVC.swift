@@ -19,9 +19,22 @@ class FavPlacesVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationItem.title = "Favourite places"
         navigationController?.navigationBar.tintColor = UIColor.red
-        navigationItem.hidesBackButton = true
+        //navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "sheets_icon"), style: .plain, target: self, action: #selector(showLeftMenu))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "placemark_icon"), style: .plain, target: self, action: #selector(addNewLocation))
+        
+    }
+   
+    
+    @objc func showLeftMenu(){
+        
+        print("sheets icon tapped")
     }
     
+    @objc func addNewLocation(){
+        
+        print("add new place tapped")
+    }
     
     
     

@@ -24,6 +24,7 @@ class FirstScreenVC: UIViewController {
         super.viewDidLoad()
 
         navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor         = AppColor.backgroundColor.rawValue
         signupButton.backgroundColor = AppColor.red.rawValue
         signupButton.tintColor       = AppColor.white.rawValue
