@@ -39,7 +39,8 @@ class SignupVC: UIViewController {
         twitterSignupButton.layer.cornerRadius = 7
         infoLabel.textColor = AppColor.gray.rawValue
         loginButton.tintColor = AppColor.white.rawValue
-        
+        passwordTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
+        repeatPassTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
         
     }
     

@@ -22,7 +22,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var twitterLoginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
-    
+    var showPasswordButton: UIButton!
     
 
     override func viewDidLoad() {
@@ -47,19 +47,9 @@ class LoginVC: UIViewController {
         emailTextField.placeholderColor = AppColor.gray.rawValue
         passwordTextField.placeholderColor = AppColor.gray.rawValue
         
+        passwordTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
+        
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     
     @IBAction func loginUser(_ sender: Any) {
         

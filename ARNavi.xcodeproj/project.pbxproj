@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1ACE632DF07F70F3F212E9A5 /* Pods_ARNavi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF323CD5276291790698F275 /* Pods_ARNavi.framework */; };
 		5B87DE39217DA6720094B7F2 /* FavPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87DE38217DA6720094B7F2 /* FavPlacesVC.swift */; };
+		5B87DE3B217DDDB80094B7F2 /* DTTextField extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87DE3A217DDDB80094B7F2 /* DTTextField extension.swift */; };
 		5BACF6202158F8FA00D8E056 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF61F2158F8FA00D8E056 /* AppColors.swift */; };
 		5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF621215903DB00D8E056 /* FirstScreenVC.swift */; };
 		5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6232159088D00D8E056 /* LoginVC.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		1F0DC36F55DB8CAE3650782F /* Pods-ARNavi.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARNavi.release.xcconfig"; path = "Pods/Target Support Files/Pods-ARNavi/Pods-ARNavi.release.xcconfig"; sourceTree = "<group>"; };
 		5B87DE38217DA6720094B7F2 /* FavPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavPlacesVC.swift; sourceTree = "<group>"; };
+		5B87DE3A217DDDB80094B7F2 /* DTTextField extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTextField extension.swift"; sourceTree = "<group>"; };
 		5BACF61F2158F8FA00D8E056 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		5BACF621215903DB00D8E056 /* FirstScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenVC.swift; sourceTree = "<group>"; };
 		5BACF6232159088D00D8E056 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				5BACF61F2158F8FA00D8E056 /* AppColors.swift */,
+				5B87DE3A217DDDB80094B7F2 /* DTTextField extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */,
 				5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */,
 				5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */,
+				5B87DE3B217DDDB80094B7F2 /* DTTextField extension.swift in Sources */,
 				5BC8E12F217A00FC0045BC37 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
