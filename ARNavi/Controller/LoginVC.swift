@@ -8,6 +8,7 @@
 
 import UIKit
 import DTTextField
+import Firebase
 
 class LoginVC: UIViewController {
     
@@ -61,9 +62,58 @@ class LoginVC: UIViewController {
     
     @IBAction func loginUser(_ sender: Any) {
         
-        emailTextField.showError(message: "Error")
+        if emailTextField.text == "" {
+            emailTextField.showError(message: "Insert email")
+            return
+        }
+        
+        if passwordTextField.text == "" {
+            passwordTextField.showError(message: "Insert password")
+            return
+        }
+        
+        guard let email    = emailTextField.text    else { return }
+        guard let password = passwordTextField.text else { return }
+
+        let emailValid = isValidEmail(email: email)
+        
+        if (emailValid){
+            //email is valid, try to log in the user
+            
+            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                
+                if let err = error {
+                    print("Error with logging user")
+                    print(err.localizedDescription)
+                }
+                else {
+                    print("user successfully logged in")
+                     //Show fav places vc
+                    if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
+                       
+                        self.present(favPlacesVC, animated: true, completion: nil)
+                    }
+                }
+                
+            }
+            
+        }
+        else {
+            //email style is not ok, show an error
+            
+            emailTextField.showError(message: "Email is not valid")
+            return
+        }
         
         
+    }
+    
+    
+    func isValidEmail(email:String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
     }
     
     

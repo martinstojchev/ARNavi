@@ -110,7 +110,7 @@
                                 <rect key="frame" x="25" y="261.5" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8q-F1-gmB">
                                 <rect key="frame" x="25" y="294" width="108" height="28"/>
@@ -216,6 +216,21 @@
             </objects>
             <point key="canvasLocation" x="950" y="365"/>
         </scene>
+        <!--Fav PlacesVC-->
+        <scene sceneID="K10-FI-tyk">
+            <objects>
+                <viewController storyboardIdentifier="FavPlacesVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hh0-WP-8xY" customClass="FavPlacesVC" customModule="ARNavi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Dw-KS-hhl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="iVg-TK-3Sf"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Js-nF-RQB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2057" y="-385"/>
+        </scene>
         <!--SignupVC-->
         <scene sceneID="mhR-76-3UH">
             <objects>
@@ -252,13 +267,13 @@
                                 <rect key="frame" x="25" y="280" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCf-T5-V9N" customClass="DTTextField" customModule="DTTextField">
                                 <rect key="frame" x="25" y="330" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdy-25-T0i">
                                 <rect key="frame" x="25" y="447" width="325" height="34"/>
@@ -361,7 +376,7 @@
         <image name="touchid_logo" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jjN-hG-lfA"/>
+        <segue reference="zEx-o5-SBe"/>
         <segue reference="aQ0-qO-hB3"/>
     </inferredMetricsTieBreakers>
 </document>
