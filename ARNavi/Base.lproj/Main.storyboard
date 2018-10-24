@@ -282,21 +282,33 @@
                                 <rect key="frame" x="25" y="344" width="93" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Update info"/>
+                                <connections>
+                                    <action selector="updateInfo:" destination="6vy-7L-K9F" eventType="touchUpInside" id="9H1-Xa-j1n"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="261-wX-cmo">
                                 <rect key="frame" x="25" y="397" width="60" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Friends"/>
+                                <connections>
+                                    <action selector="friendsAction:" destination="6vy-7L-K9F" eventType="touchUpInside" id="TO3-7C-DaW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHr-jC-44r">
                                 <rect key="frame" x="25" y="450" width="66" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Request"/>
+                                <connections>
+                                    <action selector="requestsAction:" destination="6vy-7L-K9F" eventType="touchUpInside" id="mqg-ls-N47"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P6z-Lg-u9H">
                                 <rect key="frame" x="25" y="503" width="67" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Settings"/>
+                                <connections>
+                                    <action selector="settingsAction:" destination="6vy-7L-K9F" eventType="touchUpInside" id="c4s-Vp-P3k"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R95-zS-xwT">
                                 <rect key="frame" x="25" y="611" width="325" height="36"/>

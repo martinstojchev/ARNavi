@@ -13,7 +13,8 @@ class UpdateInfoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        //navigationController?.navigationItem.title = "Favourite places"
+        self.navigationItem.title = "Update info"
     }
     
 

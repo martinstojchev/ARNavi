@@ -87,5 +87,34 @@ class SideMenuVC: UIViewController {
     }
     
     
+    @IBAction func updateInfo(_ sender: Any) {
+        
+        transitionTo(viewControllerIdentifier: "UpdateInfoVC")
+        
+    }
+    
+    func transitionTo(viewControllerIdentifier: String) {
+        
+        
+    if let destinationVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewControllerIdentifier) as? UIViewController {
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
+         }
+        
+    }
+    
+    
+    @IBAction func friendsAction(_ sender: Any) {
+        transitionTo(viewControllerIdentifier: "FriendsVC")
+    }
+    
+    @IBAction func requestsAction(_ sender: Any) {
+        transitionTo(viewControllerIdentifier: "RequestsVC")
+    }
+    
+    @IBAction func settingsAction(_ sender: Any) {
+        transitionTo(viewControllerIdentifier: "SettingsVC")
+    }
+    
 
 }

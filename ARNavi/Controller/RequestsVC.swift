@@ -13,6 +13,7 @@ class RequestsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = "Requests"
         // Do any additional setup after loading the view.
     }
     

@@ -13,6 +13,7 @@ class FriendsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = "Friends"
         // Do any additional setup after loading the view.
     }
     
