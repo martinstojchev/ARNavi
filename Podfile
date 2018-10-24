@@ -9,7 +9,7 @@ target 'ARNavi' do
   pod 'DTTextField'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
-
+  pod 'SideMenu'
 
 
 end
