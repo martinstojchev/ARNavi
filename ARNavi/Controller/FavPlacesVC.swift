@@ -39,11 +39,12 @@ class FavPlacesVC: UIViewController {
         if (segue.identifier == "showSideMenu"){
          
             print("prepareForSegue")
-            if let sideMenuVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SideMenuVC") as? SideMenuVC {
+            // using segue.destination.children.first because the destination is SideMenu navigation controller
+            if let sideMenuVC =  segue.destination.children.first as? SideMenuVC {
                 //set the user's name
-                let name = Auth.auth().currentUser?.email
-                sideMenuVC.usersName = name
-                print("users display name: \(name)")
+                let name = Auth.auth().currentUser?.displayName
+                sideMenuVC.currentUserName = name
+                //print("user email: \(user), name: \(name)")
             }
         }
         

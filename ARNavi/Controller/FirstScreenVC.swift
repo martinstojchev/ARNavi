@@ -66,19 +66,7 @@ class FirstScreenVC: UIViewController {
         
     }
     
-    func logoutCurrentUser() {
-        
-        let firebaseAuth = Auth.auth()
-        do{
-            try firebaseAuth.signOut()
-            print("user is signed out")
-            isUserLogged = false
-        }
-        catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
-        
-    }
+    
     
     @IBAction func signupUser(_ sender: Any) {
         

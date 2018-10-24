@@ -8,6 +8,7 @@
 
 import UIKit
 import SideMenu
+import Firebase
 
 class SideMenuVC: UIViewController {
     
@@ -20,7 +21,7 @@ class SideMenuVC: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     
     
-    var usersName: String?
+    var currentUserName: String?
     
     
     override func viewDidLoad() {
@@ -37,12 +38,8 @@ class SideMenuVC: UIViewController {
         SideMenuManager.default.menuPresentMode = .viewSlideInOut
         
         view.backgroundColor = AppColor.backgroundColor.rawValue
-        print("usersName: \(usersName)")
-        if let name = usersName {
-            nameLabel.text = name
-            print("name label")
-        }
-        
+     
+        nameLabel.text = currentUserName
         let profileImage = UIImage(named: "profile_pic")
         profileImageView.image = profileImage
         profileImageView.layer.borderWidth = 1.0
@@ -61,14 +58,34 @@ class SideMenuVC: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func logoutCurrentUser() {
+        
+        let firebaseAuth = Auth.auth()
+        do{
+            try firebaseAuth.signOut()
+            print("user is signed out")
+            //isUserLogged = false
+        }
+        catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+        
     }
-    */
+    
+    
+    @IBAction func logoutUser(_ sender: Any) {
+        
+        logoutCurrentUser()
+        transitionToFirstScreen()
+    }
+    
+    func transitionToFirstScreen() {
+        
+        if let firstScreenVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstScreenVC") as? FirstScreenVC {
+            navigationController?.pushViewController(firstScreenVC, animated: true)
+        }
+    }
+    
+    
 
 }

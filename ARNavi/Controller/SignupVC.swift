@@ -111,6 +111,8 @@ class SignupVC: UIViewController {
                     else {
                         
                         print("successfully created user")
+                        //print("current User after sign up: \(Auth.auth().currentUser?.email)")
+                        self.updateUsersName(displayName: name)
                     }
                     
                     
@@ -125,6 +127,31 @@ class SignupVC: UIViewController {
         }
         
         
+    }
+    
+
+    func updateUsersName(displayName name: String){
+
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = name
+        changeRequest?.commitChanges { (error) in
+            
+            if let err = error {
+                print("error while setting display name for the user")
+                print(err.localizedDescription)
+            }
+            else {
+                print("successfully updated users display name")
+                self.transitionToFavPlaces()
+            }
+        }
+    }
+    
+    func transitionToFavPlaces() {
+        
+        if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
+            navigationController?.pushViewController(favPlacesVC, animated: true)
+        }
     }
     
     func checkEqualsPasswords(password: String, repeatPassword: String) -> Bool {
