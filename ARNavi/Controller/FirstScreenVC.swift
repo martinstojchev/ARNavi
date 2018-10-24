@@ -32,14 +32,14 @@ class FirstScreenVC: UIViewController {
         loginButton.backgroundColor  = AppColor.gray.rawValue
         loginButton.tintColor        = AppColor.white.rawValue
         loginButton.layer.cornerRadius = 7
-        print("viewDidLoad")
+        //print("viewDidLoad")
         // Check for previous logged user
         if Auth.auth().currentUser != nil {
             // User is signed in
             print("User \(Auth.auth().currentUser?.email) is signed in")
             
             isUserLogged = true
-            logoutCurrentUser()
+            //logoutCurrentUser()
         }
         else {
             // No user is signed in

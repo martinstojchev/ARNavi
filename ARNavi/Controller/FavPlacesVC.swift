@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SideMenu
+import Firebase
 
 class FavPlacesVC: UIViewController {
     
@@ -28,7 +30,24 @@ class FavPlacesVC: UIViewController {
     
     @objc func showLeftMenu(){
         
-        print("sheets icon tapped")
+        performSegue(withIdentifier: "showSideMenu", sender: nil)
+        print("performSegue")
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showSideMenu"){
+         
+            print("prepareForSegue")
+            if let sideMenuVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SideMenuVC") as? SideMenuVC {
+                //set the user's name
+                let name = Auth.auth().currentUser?.email
+                sideMenuVC.usersName = name
+                print("users display name: \(name)")
+            }
+        }
+        
+        
     }
     
     @objc func addNewLocation(){
