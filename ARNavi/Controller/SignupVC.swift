@@ -26,7 +26,7 @@ class SignupVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = AppColor.backgroundColor.rawValue
         signupButton.backgroundColor = AppColor.red.rawValue
@@ -140,11 +140,12 @@ class SignupVC: UIViewController {
             if let err = error {
                 print("error while setting display name for the user")
                 print(err.localizedDescription)
+                self.showRegisterPopup(title: "Error!", description: err.localizedDescription, image: UIImage(named: "error_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.red, isError: true)
             }
             else {
                 print("successfully updated users display name")
                 //self.transitionToFavPlaces()
-                self.showRegisterPopup()
+                self.showRegisterPopup(title: "AWESOME!", description: "You have successfully signed up.", image: UIImage(named: "checkmark_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.registerPopupColor, isError: false)
             }
         }
     }
@@ -175,7 +176,7 @@ class SignupVC: UIViewController {
     }
     
 
-    func showRegisterPopup(){
+    func showRegisterPopup(title: String, description: String, image: UIImage, buttonTitle: String, buttonTitleColor: AppColor, buttonBackgroundColor: AppColor, popupBackgroundColor: AppColor, isError: Bool){
         
         // Generate top floating entry and set some properties
         
@@ -183,7 +184,7 @@ class SignupVC: UIViewController {
         
         let widthConstraint = EKAttributes.PositionConstraints.Edge.ratio(value: 0.9)
         let heightConstraint = EKAttributes.PositionConstraints.Edge.intrinsic
-        let entryColor = EKAttributes.BackgroundStyle.color(color: AppColor.registerPopupColor.rawValue)
+        let entryColor = EKAttributes.BackgroundStyle.color(color: popupBackgroundColor.rawValue)
         let screenBlur = EKAttributes.BackgroundStyle.visualEffect(style: UIBlurEffect.Style.dark)
         
         attributes.border = .value(color: AppColor.black.rawValue, width: 1)
@@ -199,23 +200,27 @@ class SignupVC: UIViewController {
         
         attributes.lifecycleEvents.willDisappear = {
             
+            if(!isError){
+            
             if let favPlacesVC =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC{
                 
                 self.navigationController?.pushViewController(favPlacesVC, animated: true)
+               }
+                
             }
         }
         
         
-        let title = EKProperty.LabelContent(text: "AWESOME!", style: .init(font: UIFont.boldSystemFont(ofSize: 22), color: AppColor.black.rawValue, alignment: NSTextAlignment.center, numberOfLines: 1))
+        let title = EKProperty.LabelContent(text: title, style: .init(font: UIFont.boldSystemFont(ofSize: 22), color: AppColor.black.rawValue, alignment: NSTextAlignment.center, numberOfLines: 1))
         
-        let description = EKProperty.LabelContent(text: "You have successfully signed up.", style: .init(font: UIFont.boldSystemFont(ofSize: 15), color: UIColor.white, alignment: NSTextAlignment.center, numberOfLines: 0))
-        let image = EKProperty.ImageContent(image: UIImage(named: "checkmark_icon")!)
+        let description = EKProperty.LabelContent(text: description, style: .init(font: UIFont.boldSystemFont(ofSize: 15), color: UIColor.white, alignment: NSTextAlignment.center, numberOfLines: 0))
+        let image = EKProperty.ImageContent(image: image)
         
         
         
-        let btnTitle = EKProperty.LabelContent(text: "OK", style: .init(font: .boldSystemFont(ofSize: 20), color: AppColor.white.rawValue))
+        let btnTitle = EKProperty.LabelContent(text: buttonTitle, style: .init(font: .boldSystemFont(ofSize: 20), color: buttonTitleColor.rawValue))
         
-        let btnContent = EKProperty.ButtonContent(label: btnTitle, backgroundColor: AppColor.black.rawValue, highlightedBackgroundColor: AppColor.registerPopupColor.rawValue )
+        let btnContent = EKProperty.ButtonContent(label: btnTitle, backgroundColor: buttonBackgroundColor.rawValue, highlightedBackgroundColor: popupBackgroundColor.rawValue )
         
         
         
@@ -226,9 +231,13 @@ class SignupVC: UIViewController {
             
             SwiftEntryKit.dismiss()
             
+            if(!isError){
+            
             if let favPlacesVC =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC{
                 
                 self.navigationController?.pushViewController(favPlacesVC, animated: true)
+               }
+                
             }
             
         }
