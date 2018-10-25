@@ -9,6 +9,7 @@
 import UIKit
 import DTTextField
 import Firebase
+import SwiftEntryKit
 
 class LoginVC: UIViewController {
     
@@ -27,6 +28,7 @@ class LoginVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = AppColor.backgroundColor.rawValue
@@ -76,6 +78,7 @@ class LoginVC: UIViewController {
                 if let err = error {
                     print("Error with logging user")
                     print(err.localizedDescription)
+                    self.showLoginPopup(title: "Error!", description: err.localizedDescription, image: UIImage(named: "error_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.red, isError: true)
                 }
                 else {
                     print("user successfully logged in")
@@ -128,9 +131,11 @@ class LoginVC: UIViewController {
                 
                 if let err = error {
                     print(err.localizedDescription)
+                    self.showLoginPopup(title: "Password reset", description: err.localizedDescription, image: UIImage(named: "error_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.red, isError: true)
                 }
                 else {
                     print("password reset email sent.")
+                    self.showLoginPopup(title: "Password reset", description: "Password reset email sent", image: UIImage(named: "mail_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.facebookBlue, isError: true)
                 }
             }
             
@@ -141,6 +146,80 @@ class LoginVC: UIViewController {
         
         
     }
+    
+    
+    func showLoginPopup(title: String, description: String, image: UIImage, buttonTitle: String, buttonTitleColor: AppColor, buttonBackgroundColor: AppColor, popupBackgroundColor: AppColor, isError: Bool){
+        
+        // Generate top floating entry and set some properties
+        
+        var attributes = EKAttributes()
+        
+        let widthConstraint = EKAttributes.PositionConstraints.Edge.ratio(value: 0.9)
+        let heightConstraint = EKAttributes.PositionConstraints.Edge.intrinsic
+        let entryColor = EKAttributes.BackgroundStyle.color(color: popupBackgroundColor.rawValue)
+        let screenBlur = EKAttributes.BackgroundStyle.visualEffect(style: UIBlurEffect.Style.dark)
+        
+        attributes.border = .value(color: AppColor.black.rawValue, width: 1)
+        attributes.roundCorners = .all(radius: 20)
+        attributes.displayDuration = .infinity
+        attributes.screenInteraction = .dismiss
+        attributes.positionConstraints.verticalOffset = 20
+        attributes.positionConstraints.size = .init(width: widthConstraint, height: heightConstraint)
+        attributes.entryBackground = entryColor
+        attributes.screenBackground = screenBlur
+        attributes.position = .bottom
+        attributes.windowLevel = .alerts
+        
+        attributes.lifecycleEvents.willDisappear = {
+            
+            if(!isError){
+                
+                if let favPlacesVC =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC{
+                    
+                    self.navigationController?.pushViewController(favPlacesVC, animated: true)
+                }
+                
+            }
+        }
+        
+        
+        let title = EKProperty.LabelContent(text: title, style: .init(font: UIFont.boldSystemFont(ofSize: 22), color: AppColor.black.rawValue, alignment: NSTextAlignment.center, numberOfLines: 1))
+        
+        let description = EKProperty.LabelContent(text: description, style: .init(font: UIFont.boldSystemFont(ofSize: 15), color: UIColor.white, alignment: NSTextAlignment.center, numberOfLines: 0))
+        let image = EKProperty.ImageContent(image: image)
+        
+        
+        
+        let btnTitle = EKProperty.LabelContent(text: buttonTitle, style: .init(font: .boldSystemFont(ofSize: 20), color: buttonTitleColor.rawValue))
+        
+        let btnContent = EKProperty.ButtonContent(label: btnTitle, backgroundColor: buttonBackgroundColor.rawValue, highlightedBackgroundColor: popupBackgroundColor.rawValue )
+        
+        
+        
+        let themeImage = EKPopUpMessage.ThemeImage(image: image)
+        
+        
+        let popupMessage = EKPopUpMessage(themeImage: themeImage, title: title, description: description, button: btnContent) {
+            
+            SwiftEntryKit.dismiss()
+            
+            if(!isError){
+                
+                if let favPlacesVC =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC{
+                    
+                    self.navigationController?.pushViewController(favPlacesVC, animated: true)
+                }
+                
+            }
+            
+        }
+        
+        let popupMessageView = EKPopUpMessageView(with: popupMessage)
+        
+        SwiftEntryKit.display(entry: popupMessageView, using: attributes)
+        
+    }
+
     
     
     

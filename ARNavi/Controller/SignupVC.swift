@@ -27,6 +27,7 @@ class SignupVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = AppColor.backgroundColor.rawValue
         signupButton.backgroundColor = AppColor.red.rawValue
