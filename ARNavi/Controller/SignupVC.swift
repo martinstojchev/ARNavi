@@ -9,6 +9,7 @@
 import UIKit
 import DTTextField
 import Firebase
+import SwiftEntryKit
 
 class SignupVC: UIViewController {
 
@@ -142,7 +143,8 @@ class SignupVC: UIViewController {
             }
             else {
                 print("successfully updated users display name")
-                self.transitionToFavPlaces()
+                //self.transitionToFavPlaces()
+                self.showRegisterPopup()
             }
         }
     }
@@ -173,14 +175,68 @@ class SignupVC: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func showRegisterPopup(){
+        
+        // Generate top floating entry and set some properties
+        
+        var attributes = EKAttributes()
+        
+        let widthConstraint = EKAttributes.PositionConstraints.Edge.ratio(value: 0.9)
+        let heightConstraint = EKAttributes.PositionConstraints.Edge.intrinsic
+        let entryColor = EKAttributes.BackgroundStyle.color(color: AppColor.registerPopupColor.rawValue)
+        let screenBlur = EKAttributes.BackgroundStyle.visualEffect(style: UIBlurEffect.Style.dark)
+        
+        attributes.border = .value(color: AppColor.black.rawValue, width: 1)
+        attributes.roundCorners = .all(radius: 20)
+        attributes.displayDuration = .infinity
+        attributes.screenInteraction = .dismiss
+        attributes.positionConstraints.verticalOffset = 20
+        attributes.positionConstraints.size = .init(width: widthConstraint, height: heightConstraint)
+        attributes.entryBackground = entryColor
+        attributes.screenBackground = screenBlur
+        attributes.position = .bottom
+        attributes.windowLevel = .alerts
+        
+        attributes.lifecycleEvents.willDisappear = {
+            
+            if let favPlacesVC =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC{
+                
+                self.navigationController?.pushViewController(favPlacesVC, animated: true)
+            }
+        }
+        
+        
+        let title = EKProperty.LabelContent(text: "AWESOME!", style: .init(font: UIFont.boldSystemFont(ofSize: 22), color: AppColor.black.rawValue, alignment: NSTextAlignment.center, numberOfLines: 1))
+        
+        let description = EKProperty.LabelContent(text: "You have successfully signed up.", style: .init(font: UIFont.boldSystemFont(ofSize: 15), color: UIColor.white, alignment: NSTextAlignment.center, numberOfLines: 0))
+        let image = EKProperty.ImageContent(image: UIImage(named: "checkmark_icon")!)
+        
+        
+        
+        let btnTitle = EKProperty.LabelContent(text: "OK", style: .init(font: .boldSystemFont(ofSize: 20), color: AppColor.white.rawValue))
+        
+        let btnContent = EKProperty.ButtonContent(label: btnTitle, backgroundColor: AppColor.black.rawValue, highlightedBackgroundColor: AppColor.registerPopupColor.rawValue )
+        
+        
+        
+        let themeImage = EKPopUpMessage.ThemeImage(image: image)
+        
+        
+        let popupMessage = EKPopUpMessage(themeImage: themeImage, title: title, description: description, button: btnContent) {
+            
+            SwiftEntryKit.dismiss()
+            
+            if let favPlacesVC =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC{
+                
+                self.navigationController?.pushViewController(favPlacesVC, animated: true)
+            }
+            
+        }
+        
+        let popupMessageView = EKPopUpMessageView(with: popupMessage)
+        
+        SwiftEntryKit.display(entry: popupMessageView, using: attributes)
+        
     }
-    */
 
 }
