@@ -45,7 +45,7 @@ extension AppColor: RawRepresentable {
             
         case UIColor(red: 0/255, green: 169/255, blue: 165/255, alpha: 1)      :self = .backgroundColor
         
-        case UIColor(red: 159/255, green: 75/255, blue: 71/255, alpha: 1)      :self = .registerPopupColor
+        case UIColor(red: 98/255, green: 149/255, blue: 101/255, alpha: 1)      :self = .registerPopupColor
             
             
         default: return nil
@@ -66,7 +66,7 @@ extension AppColor: RawRepresentable {
         case .red                : return  UIColor(red: 196/255, green: 32/255, blue: 33/255, alpha: 1)
         case .gray               : return  UIColor(red: 68/255, green: 68/255, blue: 68/255, alpha: 1)
         case .backgroundColor    : return UIColor(red: 0/255, green: 169/255, blue: 165/255, alpha: 1)
-        case .registerPopupColor : return UIColor(red: 159/255, green: 75/255, blue: 71/255, alpha: 1)
+        case .registerPopupColor : return UIColor(red: 98/255, green: 149/255, blue: 101/255, alpha: 1)
             
         }
     }
