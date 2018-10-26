@@ -9,6 +9,7 @@ target 'ARNavi' do
   pod 'DTTextField'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
   pod 'SideMenu'
   pod 'SwiftEntryKit', '0.8.2'
 
