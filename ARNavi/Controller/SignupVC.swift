@@ -9,6 +9,7 @@
 import UIKit
 import DTTextField
 import Firebase
+import FirebaseDatabase
 import SwiftEntryKit
 
 class SignupVC: UIViewController {
@@ -23,26 +24,17 @@ class SignupVC: UIViewController {
     @IBOutlet weak var twitterSignupButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
+    var loggedUser: User?
+    
+    var ref: DatabaseReference!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
         
         self.hideKeyboardWhenTappedAround()
-        navigationController?.setNavigationBarHidden(true, animated: false)
-        view.backgroundColor = AppColor.backgroundColor.rawValue
-        signupButton.backgroundColor = AppColor.red.rawValue
-        signupButton.tintColor = AppColor.white.rawValue
-        signupButton.layer.cornerRadius = 7
-        facebookSignupButton.backgroundColor = AppColor.facebookBlue.rawValue
-        facebookSignupButton.tintColor = AppColor.white.rawValue
-        facebookSignupButton.layer.cornerRadius = 7
-        twitterSignupButton.backgroundColor = AppColor.twitterBlue.rawValue
-        twitterSignupButton.tintColor = AppColor.white.rawValue
-        twitterSignupButton.layer.cornerRadius = 7
-        infoLabel.textColor = AppColor.gray.rawValue
-        loginButton.tintColor = AppColor.white.rawValue
-        passwordTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
-        repeatPassTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
+        prepareSignupVC()
         
     }
     
@@ -81,8 +73,7 @@ class SignupVC: UIViewController {
         guard let password        = passwordTextField.text          else { return }
         guard let confirmPassword = repeatPassTextField.text        else { return }
         
-        print("name name")
-        
+        print("username: \(username)")
         let checkEmail = isValidEmail(email: email)
         
         if (!checkEmail){
@@ -113,7 +104,7 @@ class SignupVC: UIViewController {
                     else {
                         
                         print("successfully created user")
-                        //print("current User after sign up: \(Auth.auth().currentUser?.email)")
+                        self.loggedUser = User(name: name, username: username, email: email)
                         self.updateUsersName(displayName: name)
                     }
                     
@@ -131,9 +122,40 @@ class SignupVC: UIViewController {
         
     }
     
+    func prepareSignupVC() {
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.backgroundColor = AppColor.backgroundColor.rawValue
+        signupButton.backgroundColor = AppColor.red.rawValue
+        signupButton.tintColor = AppColor.white.rawValue
+        signupButton.layer.cornerRadius = 7
+        facebookSignupButton.backgroundColor = AppColor.facebookBlue.rawValue
+        facebookSignupButton.tintColor = AppColor.white.rawValue
+        facebookSignupButton.layer.cornerRadius = 7
+        twitterSignupButton.backgroundColor = AppColor.twitterBlue.rawValue
+        twitterSignupButton.tintColor = AppColor.white.rawValue
+        twitterSignupButton.layer.cornerRadius = 7
+        infoLabel.textColor = AppColor.gray.rawValue
+        loginButton.tintColor = AppColor.white.rawValue
+        passwordTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
+        repeatPassTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
+        
+    }
+    
 
     func updateUsersName(displayName name: String){
 
+        if let userID  = Auth.auth().currentUser?.uid {
+        print("userID: \(userID)")
+        
+            self.loggedUser?.setUserID(id: userID)
+            
+           
+            if let loggUser = self.loggedUser {
+               self.writeUserToDatabase(user: loggUser)
+            }
+        }
+        
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = name
         changeRequest?.commitChanges { (error) in
@@ -149,6 +171,21 @@ class SignupVC: UIViewController {
                 self.showRegisterPopup(title: "AWESOME!", description: "You have successfully signed up.", image: UIImage(named: "checkmark_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.registerPopupColor, isError: false)
             }
         }
+    }
+    
+    func writeUserToDatabase(user: User) {
+        
+        guard let userID = self.loggedUser?.getUserID()   else { return }
+        guard let userName = self.loggedUser?.getName()   else { return }
+        guard let username = self.loggedUser?.getUsername()  else { return }
+        guard let userEmail = self.loggedUser?.getEmail() else { return }
+        
+        print("userID: \(userID), userName: \(userName), username: \(username), userEmail: \(userEmail)")
+        
+        self.ref.child("users").child(userID).setValue(["name": userName,"username": username,"email": userEmail ])
+        
+        
+        print("User stored to realtime database....")
     }
     
     func transitionToFavPlaces() {

@@ -9,6 +9,7 @@
 import UIKit
 import DTTextField
 import Firebase
+import FirebaseDatabase
 import SwiftEntryKit
 
 class LoginVC: UIViewController {
@@ -24,11 +25,15 @@ class LoginVC: UIViewController {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
     var showPasswordButton: UIButton!
-    
+    var ref: DatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        
+        ref = Database.database().reference()
+        
+        
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = AppColor.backgroundColor.rawValue
@@ -82,6 +87,9 @@ class LoginVC: UIViewController {
                 }
                 else {
                     print("user successfully logged in")
+                    DispatchQueue.main.async {
+                        self.updateDatabaseForUser()
+                    }
                      //Show fav places vc
                     if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
                        
@@ -111,6 +119,64 @@ class LoginVC: UIViewController {
         return emailTest.evaluate(with: email)
     }
     
+    #warning("this method returning always false")
+    func checkForExistingUserInDatabase(userID: String) -> Bool{
+        var existingUser:Bool = false
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            
+        let group = DispatchGroup()
+         group.enter()
+        
+        self.ref.child("users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            let username = value?["username"] as? String ?? ""
+            print("username for existing user: \(username)")
+            existingUser = true
+            
+        }) { (error) in
+            
+            existingUser = false
+            print("error: \(error.localizedDescription)")
+            
+            
+        }
+        
+        group.leave()
+        
+        group.wait()
+            
+        }
+        return existingUser
+    }
+    
+    func updateDatabaseForUser(){
+        
+        print("updateDatabaseForUser")
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        print("currentUserID: \(currentUserID)")
+        let existingUser = checkForExistingUserInDatabase(userID: currentUserID)
+        
+        print("existingUser: \(existingUser)")
+        
+        if (existingUser){
+            print("existing user")
+        }
+        else {
+            print("user has no data in the database.")
+            
+            guard let name = Auth.auth().currentUser?.displayName else { return }
+            guard let email = Auth.auth().currentUser?.email      else { return }
+            
+            self.ref.child("users").child(currentUserID).setValue(["name" : name, "email" : email])
+            
+            print("updated info for logged user.")
+        }
+        
+        
+        
+    }
     
     
     @IBAction func forgotPassword(_ sender: Any) {
