@@ -406,9 +406,57 @@
                     <view key="view" contentMode="scaleToFill" id="61q-nV-qdx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Update name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kFc-QV-21U" customClass="DTTextField" customModule="DTTextField">
+                                <rect key="frame" x="25" y="78" width="325" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Update username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Lx-Sx-ZFJ" customClass="DTTextField" customModule="DTTextField">
+                                <rect key="frame" x="25" y="128" width="325" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Change password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ht4-2o-JnD" customClass="DTTextField" customModule="DTTextField">
+                                <rect key="frame" x="25" y="178" width="325" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PE1-aV-0u5">
+                                <rect key="frame" x="25" y="611" width="325" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Remove Account"/>
+                                <connections>
+                                    <action selector="removeAccount:" destination="Abu-2T-WtR" eventType="touchUpInside" id="1Kc-mK-zWd"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2Lx-Sx-ZFJ" firstAttribute="leading" secondItem="uQm-jS-uZZ" secondAttribute="leading" constant="25" id="168-08-bHe"/>
+                            <constraint firstItem="PE1-aV-0u5" firstAttribute="leading" secondItem="uQm-jS-uZZ" secondAttribute="leading" constant="25" id="628-g4-WI2"/>
+                            <constraint firstItem="kFc-QV-21U" firstAttribute="leading" secondItem="uQm-jS-uZZ" secondAttribute="leading" constant="25" id="7p4-wT-IAq"/>
+                            <constraint firstItem="Ht4-2o-JnD" firstAttribute="top" secondItem="2Lx-Sx-ZFJ" secondAttribute="bottom" constant="20" id="Nz2-6l-Kbm"/>
+                            <constraint firstItem="uQm-jS-uZZ" firstAttribute="trailing" secondItem="kFc-QV-21U" secondAttribute="trailing" constant="25" id="Oj2-Q6-xnm"/>
+                            <constraint firstItem="2Lx-Sx-ZFJ" firstAttribute="top" secondItem="kFc-QV-21U" secondAttribute="bottom" constant="20" id="S9Z-aq-Egv"/>
+                            <constraint firstItem="kFc-QV-21U" firstAttribute="top" secondItem="uQm-jS-uZZ" secondAttribute="top" constant="58" id="TIc-PP-Gh1"/>
+                            <constraint firstItem="uQm-jS-uZZ" firstAttribute="bottom" secondItem="PE1-aV-0u5" secondAttribute="bottom" constant="20" id="VUd-DJ-yz4"/>
+                            <constraint firstItem="Ht4-2o-JnD" firstAttribute="leading" secondItem="uQm-jS-uZZ" secondAttribute="leading" constant="25" id="eBB-uA-lgn"/>
+                            <constraint firstItem="uQm-jS-uZZ" firstAttribute="trailing" secondItem="2Lx-Sx-ZFJ" secondAttribute="trailing" constant="25" id="m3O-N3-HQX"/>
+                            <constraint firstItem="uQm-jS-uZZ" firstAttribute="trailing" secondItem="PE1-aV-0u5" secondAttribute="trailing" constant="25" id="rBF-Kj-pY4"/>
+                            <constraint firstItem="uQm-jS-uZZ" firstAttribute="trailing" secondItem="Ht4-2o-JnD" secondAttribute="trailing" constant="25" id="xGg-Q0-bcj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uQm-jS-uZZ"/>
                     </view>
+                    <connections>
+                        <outlet property="changePassTxtField" destination="Ht4-2o-JnD" id="XQ5-05-bJo"/>
+                        <outlet property="removeAccButton" destination="PE1-aV-0u5" id="1RZ-WM-8SA"/>
+                        <outlet property="updateNameTxtField" destination="kFc-QV-21U" id="LKw-zD-s0D"/>
+                        <outlet property="updateUsernameTxtField" destination="2Lx-Sx-ZFJ" id="DWY-hC-N2R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5PP-Yx-c2N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -578,6 +626,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="jjN-hG-lfA"/>
-        <segue reference="TdM-JI-VD3"/>
+        <segue reference="aQ0-qO-hB3"/>
     </inferredMetricsTieBreakers>
 </document>

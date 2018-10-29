@@ -7,25 +7,34 @@
 //
 
 import UIKit
+import DTTextField
 
 class UpdateInfoVC: UIViewController {
+    @IBOutlet weak var updateUsernameTxtField: DTTextField!
+    
+    @IBOutlet weak var updateNameTxtField: DTTextField!
+    @IBOutlet weak var changePassTxtField: DTTextField!
+    @IBOutlet weak var removeAccButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //navigationController?.navigationItem.title = "Favourite places"
+        
         self.navigationItem.title = "Update info"
+        view.backgroundColor = AppColor.backgroundColor.rawValue
+        updateNameTxtField.placeholder = "Update name"
+        updateUsernameTxtField.placeholder = "Update username"
+        changePassTxtField.placeholder = "Change password"
+        removeAccButton.titleLabel?.text = "Remove Account"
+        removeAccButton.backgroundColor = AppColor.red.rawValue
+        removeAccButton.tintColor = AppColor.white.rawValue
+        removeAccButton.layer.cornerRadius = 10
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func removeAccount(_ sender: Any) {
     }
-    */
+    
 
 }
