@@ -10,13 +10,18 @@ import UIKit
 import SideMenu
 import Firebase
 
-class FavPlacesVC: UIViewController {
+class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+   
     
     
+    @IBOutlet weak var favPlacesTableView: UITableView!
+    let favPlaces: [String] = ["Home", "Work", "City Mall"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        favPlacesTableView.dataSource = self
+        favPlacesTableView.delegate   = self
         navigationItem.title = "Favourite places"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationItem.title = "Favourite places"
@@ -54,6 +59,18 @@ class FavPlacesVC: UIViewController {
     @objc func addNewLocation(){
         
         print("add new place tapped")
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return favPlaces.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = favPlaces[indexPath.row]
+        
+        return cell
     }
     
     
