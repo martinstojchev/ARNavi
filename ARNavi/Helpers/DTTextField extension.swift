@@ -73,6 +73,27 @@ extension DTTextField {
         
         guard let fieldPlaceholder = self.placeholder else { return }
         print("placeholder: ",fieldPlaceholder)
+        guard let textfieldText = self.text else { return }
+        
+        if let updateInfoVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UpdateInfoVC") as? UpdateInfoVC {
+            
+            if (placeholder == "Update name"){
+              
+                updateInfoVC.updateUsersName(name: textfieldText)
+            }
+            
+            if (placeholder == "Update username"){
+                
+                updateInfoVC.updateUsersUsername(username: textfieldText)
+            }
+            
+            if (placeholder == "Change password"){
+                
+                updateInfoVC.updateUsersPassword(password: textfieldText)
+            }
+            
+        }
+        
         
         
     }

@@ -282,6 +282,7 @@ class SignupVC: UIViewController {
         
         let popupMessageView = EKPopUpMessageView(with: popupMessage)
         
+        
         SwiftEntryKit.display(entry: popupMessageView, using: attributes)
         
     }
