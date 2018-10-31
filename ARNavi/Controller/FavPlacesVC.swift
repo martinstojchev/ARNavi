@@ -70,7 +70,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = favPlaces[indexPath.row]
         
-        return cell
+        return cell 
     }
     
     
