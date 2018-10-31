@@ -10,11 +10,20 @@ import UIKit
 
 class SettingsVC: UIViewController {
 
+    @IBOutlet weak var gpsStackView: UIStackView!
+    @IBOutlet weak var biometricalStackView: UIStackView!
+    @IBOutlet weak var gpsSwitch: UISwitch!
+    @IBOutlet weak var biometricalLabel: UILabel!
+    @IBOutlet weak var biometricalSwitch: UISwitch!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationItem.title = "Settings"
+        view.backgroundColor = AppColor.backgroundColor.rawValue
+        
     }
     
 

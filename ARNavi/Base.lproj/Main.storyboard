@@ -376,9 +376,54 @@
                     <view key="view" contentMode="scaleToFill" id="LrO-JS-LAo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="182" translatesAutoresizingMaskIntoConstraints="NO" id="CrA-U4-1v1">
+                                <rect key="frame" x="25" y="78" width="325" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svc-IH-04y">
+                                        <rect key="frame" x="0.0" y="0.0" width="94" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ug5-mp-blL">
+                                        <rect key="frame" x="276" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="189" translatesAutoresizingMaskIntoConstraints="NO" id="OB6-bw-YVD">
+                                <rect key="frame" x="25" y="129" width="325" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSC-f6-ALm">
+                                        <rect key="frame" x="0.0" y="0.0" width="87" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AWm-Zb-6cd">
+                                        <rect key="frame" x="276" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CrA-U4-1v1" firstAttribute="top" secondItem="TC2-WX-bJG" secondAttribute="top" constant="58" id="506-MA-33g"/>
+                            <constraint firstItem="CrA-U4-1v1" firstAttribute="leading" secondItem="TC2-WX-bJG" secondAttribute="leading" constant="25" id="J7O-mR-rRx"/>
+                            <constraint firstItem="TC2-WX-bJG" firstAttribute="trailing" secondItem="OB6-bw-YVD" secondAttribute="trailing" constant="25" id="UE7-Qp-HPI"/>
+                            <constraint firstItem="OB6-bw-YVD" firstAttribute="leading" secondItem="TC2-WX-bJG" secondAttribute="leading" constant="25" id="cfS-s7-o5K"/>
+                            <constraint firstItem="OB6-bw-YVD" firstAttribute="top" secondItem="CrA-U4-1v1" secondAttribute="bottom" constant="20" id="sFq-a3-XWQ"/>
+                            <constraint firstItem="TC2-WX-bJG" firstAttribute="trailing" secondItem="CrA-U4-1v1" secondAttribute="trailing" constant="25" id="uRG-e7-hWt"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="TC2-WX-bJG"/>
                     </view>
+                    <connections>
+                        <outlet property="biometricalLabel" destination="xSC-f6-ALm" id="GMm-VG-gCJ"/>
+                        <outlet property="biometricalStackView" destination="OB6-bw-YVD" id="3vC-U0-gQa"/>
+                        <outlet property="biometricalSwitch" destination="AWm-Zb-6cd" id="Khi-lz-TQ4"/>
+                        <outlet property="gpsStackView" destination="CrA-U4-1v1" id="DjL-Vy-3bx"/>
+                        <outlet property="gpsSwitch" destination="Ug5-mp-blL" id="d4J-vL-IKi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mwx-JX-Jau" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
