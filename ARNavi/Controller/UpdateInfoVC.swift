@@ -55,6 +55,28 @@ class UpdateInfoVC: UIViewController {
 
     @IBAction func removeAccount(_ sender: Any) {
         
+        let currentUser = Auth.auth().currentUser
+        guard let currentUserId = currentUser?.uid else { return }
+        
+        currentUser?.delete(completion: { (error) in
+            if let err = error {
+                print("error while removing this account")
+                print(err.localizedDescription)
+                
+            }
+            else {
+                print("Successfully removed this account")
+                
+                self.ref.child("users").child(currentUserId).removeValue()
+                print("successfully removed this account from database")
+                
+                if let firstVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstScreenVC") as? FirstScreenVC {
+                    self.navigationController?.pushViewController(firstVC, animated: true)
+                }
+                
+            }
+        })
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,7 +146,7 @@ class UpdateInfoVC: UIViewController {
     func reauthenticateUserForm(){
         
         let alert = UIAlertController(title: "Reauthenticate", message: "Please fill your credentials", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Mail input", style: .default) { (alertAction) in
+        let loginAction = UIAlertAction(title: "Login", style: .default) { (alertAction) in
             
             let emailTextField = alert.textFields![0] as UITextField
             let passTextField = alert.textFields![1] as  UITextField
@@ -157,6 +179,10 @@ class UpdateInfoVC: UIViewController {
             
         }
         
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alertAction) in
+             self.dismiss(animated: true, completion: nil)
+        }
+        
         alert.addTextField { (textField) in
             textField.placeholder = "Email"
             
@@ -166,7 +192,8 @@ class UpdateInfoVC: UIViewController {
             textField.isSecureTextEntry = true
         }
         
-        alert.addAction(action)
+        alert.addAction(loginAction)
+        alert.addAction(cancelAction)
         present(alert, animated: true)
     }
     
