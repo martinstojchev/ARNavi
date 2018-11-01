@@ -17,6 +17,8 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var favPlacesTableView: UITableView!
     let favPlaces: [String] = ["Home", "Work", "City Mall"]
     
+    var selectedCustomImage: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +51,12 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                 //set the user's name
                 let name = Auth.auth().currentUser?.displayName
                 sideMenuVC.currentUserName = name
+                
+                if let customImg = selectedCustomImage {
+                sideMenuVC.currenProfilePicture = customImg
+                    print("customImg for side menu")
+                    
+                }
                 //print("user email: \(user), name: \(name)")
             }
         }

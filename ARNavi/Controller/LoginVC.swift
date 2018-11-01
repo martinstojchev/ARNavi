@@ -235,7 +235,6 @@ class LoginVC: UIViewController {
         attributes.screenBackground = screenBlur
         attributes.position = .bottom
         attributes.windowLevel = .alerts
-        
         attributes.lifecycleEvents.willDisappear = {
             
             if(!isError){

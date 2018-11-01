@@ -341,6 +341,12 @@
                                     <action selector="logoutUser:" destination="6vy-7L-K9F" eventType="touchUpInside" id="E7b-HC-UFJ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lLU-5d-LFE">
+                                <rect key="frame" x="112.5" y="100" width="150" height="150"/>
+                                <connections>
+                                    <action selector="chooseProfileImage:" destination="6vy-7L-K9F" eventType="touchUpInside" id="Ny8-9r-0TV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -348,14 +354,18 @@
                             <constraint firstItem="ZFj-2n-7Rp" firstAttribute="top" secondItem="zwd-aR-Hu0" secondAttribute="top" constant="36" id="5Af-ed-7Ym"/>
                             <constraint firstItem="rHr-jC-44r" firstAttribute="leading" secondItem="zwd-aR-Hu0" secondAttribute="leading" constant="25" id="6Lg-OT-b3s"/>
                             <constraint firstItem="KRH-oK-5Kd" firstAttribute="top" secondItem="Syq-bb-9V7" secondAttribute="bottom" constant="41" id="6zK-Nh-Lq6"/>
+                            <constraint firstItem="lLU-5d-LFE" firstAttribute="height" secondItem="ZFj-2n-7Rp" secondAttribute="height" id="AS8-D8-m1W"/>
+                            <constraint firstItem="lLU-5d-LFE" firstAttribute="width" secondItem="ZFj-2n-7Rp" secondAttribute="width" id="BWu-FC-fPO"/>
                             <constraint firstItem="Syq-bb-9V7" firstAttribute="centerX" secondItem="PQT-fL-1Ce" secondAttribute="centerX" id="G69-Gb-hE1"/>
                             <constraint firstItem="KRH-oK-5Kd" firstAttribute="leading" secondItem="zwd-aR-Hu0" secondAttribute="leading" constant="25" id="LpH-6f-v1b"/>
                             <constraint firstItem="zwd-aR-Hu0" firstAttribute="bottom" secondItem="R95-zS-xwT" secondAttribute="bottom" constant="20" id="Ma2-3o-2N4"/>
                             <constraint firstItem="P6z-Lg-u9H" firstAttribute="top" secondItem="rHr-jC-44r" secondAttribute="bottom" constant="20" id="OSn-yn-v4G"/>
                             <constraint firstItem="zwd-aR-Hu0" firstAttribute="trailing" secondItem="R95-zS-xwT" secondAttribute="trailing" constant="25" id="R61-eP-nwp"/>
+                            <constraint firstItem="lLU-5d-LFE" firstAttribute="top" secondItem="ZFj-2n-7Rp" secondAttribute="top" id="TTD-OG-QT5"/>
                             <constraint firstItem="P6z-Lg-u9H" firstAttribute="leading" secondItem="zwd-aR-Hu0" secondAttribute="leading" constant="25" id="U9h-cK-fhS"/>
                             <constraint firstItem="rHr-jC-44r" firstAttribute="top" secondItem="261-wX-cmo" secondAttribute="bottom" constant="20" id="Yso-EJ-Qg7"/>
                             <constraint firstItem="R95-zS-xwT" firstAttribute="leading" secondItem="zwd-aR-Hu0" secondAttribute="leading" constant="25" id="ckI-5q-Qb6"/>
+                            <constraint firstItem="lLU-5d-LFE" firstAttribute="centerX" secondItem="ZFj-2n-7Rp" secondAttribute="centerX" id="ifR-e6-10x"/>
                             <constraint firstItem="261-wX-cmo" firstAttribute="leading" secondItem="zwd-aR-Hu0" secondAttribute="leading" constant="25" id="ifu-YY-br5"/>
                             <constraint firstItem="261-wX-cmo" firstAttribute="top" secondItem="KRH-oK-5Kd" secondAttribute="bottom" constant="20" id="qRS-vG-F33"/>
                             <constraint firstItem="ZFj-2n-7Rp" firstAttribute="centerX" secondItem="PQT-fL-1Ce" secondAttribute="centerX" id="tFA-m1-qkA"/>
