@@ -115,6 +115,18 @@ open class UISideMenuNavigationController: UINavigationController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
+        if let newFrame = UIApplication.shared.keyWindow?.bounds {
+            // Remove autoresizing constraints
+            self.view.translatesAutoresizingMaskIntoConstraints = false
+            
+            // Add width constraint
+            self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: SideMenuManager.defaultManager.menuWidth))
+            
+            // Add height constraint
+            self.view.addConstraint(NSLayoutConstraint.init(item: self.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: newFrame.size.height))
+        }
+        // Code above added for acheving menu not disappearing when pushed anoter view/vc from it
+        
         if !locked && usingInterfaceBuilder {
             if leftSide {
                 sideMenuManager.menuLeftNavigationController = self
@@ -206,23 +218,24 @@ open class UISideMenuNavigationController: UINavigationController {
         // the view hierarchy leaving the screen black/empty. This is because the transition moves views within a container
         // view, but dismissing without animation removes the container view before the original hierarchy is restored.
         // This check corrects that.
-        if let sideMenuDelegate = activeDelegate as? UIViewController, sideMenuDelegate.view.window == nil {
-            transition.hideMenuStart().hideMenuComplete()
-        }
-        
-        activeDelegate?.sideMenuDidDisappear?(menu: self, animated: animated)
-        
-        // Clear selecton on UITableViewControllers when reappearing using custom transitions
-        guard let tableViewController = topViewController as? UITableViewController,
-            let tableView = tableViewController.tableView,
-            let indexPaths = tableView.indexPathsForSelectedRows,
-            tableViewController.clearsSelectionOnViewWillAppear else {
-            return
-        }
-        
-        for indexPath in indexPaths {
-            tableView.deselectRow(at: indexPath, animated: false)
-        }
+//        if let sideMenuDelegate = activeDelegate as? UIViewController, sideMenuDelegate.view.window == nil {
+//            transition.hideMenuStart().hideMenuComplete()
+//        }
+//
+//        activeDelegate?.sideMenuDidDisappear?(menu: self, animated: animated)
+//
+//        // Clear selecton on UITableViewControllers when reappearing using custom transitions
+//        guard let tableViewController = topViewController as? UITableViewController,
+//            let tableView = tableViewController.tableView,
+//            let indexPaths = tableView.indexPathsForSelectedRows,
+//            tableViewController.clearsSelectionOnViewWillAppear else {
+//            return
+//        }
+//
+//        for indexPath in indexPaths {
+//            tableView.deselectRow(at: indexPath, animated: false)
+//        }
+        #warning("Commented this code for not dismissing the side menu after pushing another vc from it")
     }
     
     override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

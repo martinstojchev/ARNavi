@@ -11,6 +11,12 @@ import SideMenu
 import Firebase
 import Photos
 
+protocol ProfilePictureDelegate: class {
+    
+    func changePickedProfilePicture(image: UIImage?)
+    
+}
+
 class SideMenuVC: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -24,11 +30,12 @@ class SideMenuVC: UIViewController {
     var currentUserName: String?
     let imagePicker = UIImagePickerController()
     var currenProfilePicture = UIImage()
+    weak var pictureDelegate: ProfilePictureDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
       setupMenuView()
-       
+       setProfileImage()
         
     
     }
@@ -37,6 +44,8 @@ class SideMenuVC: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuPresentMode = .viewSlideInOut
+        
+        
         
         view.backgroundColor = AppColor.backgroundColor.rawValue
      
@@ -56,7 +65,7 @@ class SideMenuVC: UIViewController {
         logoutButton.tintColor           = AppColor.white.rawValue
         logoutButton.backgroundColor     = AppColor.red.rawValue
         
-    
+   
     }
     
 
@@ -183,6 +192,7 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
             self.currenProfilePicture = editedImage
             selectedImg = editedImage
             
+            
         }
         
         //Dismiss the UIImagePicker after selection
@@ -191,32 +201,87 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
             if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
                 favPlacesVC.selectedCustomImage = self.currenProfilePicture
                 print("selected image transfered")
-                #warning("Improve tranfsering the selected photo, not with pushing again the favPlacesVC..")
-                self.navigationController?.popViewController(animated: false)
-                self.navigationController?.pushViewController(favPlacesVC, animated: true)
+                self.pictureDelegate?.changePickedProfilePicture(image: selectedImg)
+                let profilePictureFilePath = self.savePickedImageToStorage(pickedImage: selectedImg)
+                print("profilePictureFilePath: \(profilePictureFilePath)")
             }
         }
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         picker.isNavigationBarHidden = false
         self.dismiss(animated: true, completion: nil)
     }
     
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func setProfileImage() {
+        let image = getProfilePictureFromStorage()
+        currenProfilePicture = image
+        print("setProfileImage called")
+        profileImageView.image = currenProfilePicture
         
-            // using segue.destination.children.first because the destination is SideMenu navigation controller
-        if segue.destination is FavPlacesVC {
-                //set the user's name
-               // sideMenuVC.currenProfilePicture = self.currenProfilePicture
-                
-                print("prepare for segue")
-                //print("user email: \(user), name: \(name)")
-            }
     }
     
-   
     
+    func savePickedImageToStorage(pickedImage image: UIImage) -> String{
+        
+        let directoryPath = NSHomeDirectory().appending("/Documents")
+        
+        if !FileManager.default.fileExists(atPath: directoryPath){
+            do{
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                 print(error)
+                 print("error while saving image")
+            }
+        }
+        
+        guard let fileName = Auth.auth().currentUser?.uid.appending(".jpg") else { return "error"}
+        let filepath = directoryPath.appending(fileName)
+        let url = NSURL.fileURL(withPath: filepath)
+        
+        do{
+            try image.jpegData(compressionQuality: 1.0)?.write(to: url, options: .atomic)
+             print("image saved ")
+            return String.init("/Documents/\(fileName)")
+           
+        }
+        
+        catch {
+             print(error)
+            print("file cant not be save at path \(filepath), with error: \(error)")
+            return filepath
+            
+        }
+        
+    }
     
+    func getProfilePictureFromStorage() -> UIImage {
+        print("getPictureFromStorage called")
+        var imageForReturn: UIImage!
+        
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask    = FileManager.SearchPathDomainMask.userDomainMask
+        let paths               = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        guard let userID = Auth.auth().currentUser?.uid else {return UIImage()}
+        print("userID get: \(userID) ")
+        
+        
+        if let dirPath          = paths.first{
+         
+            print("dirPath: \(dirPath)")
+            let imagePath = dirPath.appending("\(userID).jpg")
+            let imageURL = NSURL.fileURL(withPath: imagePath)
+            guard let image    = UIImage(contentsOfFile: imageURL.path) else {return UIImage()}
+            imageForReturn = image
+            print("image returned from documents")
+        
+         }
+        
+        return imageForReturn
+    }
+    
+
 }
+
+

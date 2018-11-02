@@ -10,10 +10,14 @@ import UIKit
 import SideMenu
 import Firebase
 
-class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-   
+
+
+
+class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfilePictureDelegate {
     
     
+    
+
     @IBOutlet weak var favPlacesTableView: UITableView!
     let favPlaces: [String] = ["Home", "Work", "City Mall"]
     
@@ -49,6 +53,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             // using segue.destination.children.first because the destination is SideMenu navigation controller
             if let sideMenuVC =  segue.destination.children.first as? SideMenuVC {
                 //set the user's name
+                sideMenuVC.pictureDelegate = self
                 let name = Auth.auth().currentUser?.displayName
                 sideMenuVC.currentUserName = name
                 
@@ -57,7 +62,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     print("customImg for side menu")
                     
                 }
-                //print("user email: \(user), name: \(name)")
+                
             }
         }
         
@@ -81,6 +86,33 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         return cell 
     }
     
+    func changePickedProfilePicture(image: UIImage?) {
+        if let uploadedImage = image {
+            selectedCustomImage = uploadedImage
+            print("favplaceVC selectedCustom image set")
+        }
+    }
     
     
+    
+}
+
+extension FavPlacesVC: UISideMenuNavigationControllerDelegate {
+    
+    func sideMenuWillAppear(menu: UISideMenuNavigationController, animated: Bool) {
+        print("SideMenu Appearing! (animated: \(animated))")
+    }
+    
+    func sideMenuDidAppear(menu: UISideMenuNavigationController, animated: Bool) {
+        print("SideMenu Appeared! (animated: \(animated))")
+    }
+    
+    func sideMenuWillDisappear(menu: UISideMenuNavigationController, animated: Bool) {
+        print("SideMenu Disappearing! (animated: \(animated))")
+    }
+    
+    func sideMenuDidDisappear(menu: UISideMenuNavigationController, animated: Bool) {
+        print("SideMenu Disappeared! (animated: \(animated))")
+        
+    }
 }
