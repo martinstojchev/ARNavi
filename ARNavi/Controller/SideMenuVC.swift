@@ -10,6 +10,8 @@ import UIKit
 import SideMenu
 import Firebase
 import Photos
+import FirebaseFirestore
+
 
 protocol ProfilePictureDelegate: class {
     
@@ -31,9 +33,13 @@ class SideMenuVC: UIViewController {
     let imagePicker = UIImagePickerController()
     var currenProfilePicture = UIImage()
     weak var pictureDelegate: ProfilePictureDelegate?
+    var ref: DatabaseReference!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
       setupMenuView()
        setProfileImage()
         
@@ -173,6 +179,31 @@ class SideMenuVC: UIViewController {
         self.present(imagePicker, animated: true, completion: nil)
     }
     
+    func saveImageToCloud(image: UIImage){
+        
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        
+        
+        
+        
+        
+        let uploadData = image.jpegData(compressionQuality: 1.0)
+        
+        print("upload data: \(uploadData!)")
+        ref.child("profilePictures").child(currentUserID)
+        ref.child("profilePictures").child(currentUserID).setValue(["image": uploadData!]) { (error, databaseRef) in
+            
+            if let err = error {
+                print("error while uploading photo to cloud")
+                print(err)
+                return
+            }
+            else {
+                print("successfully uploaded image to cloud")
+            }
+        }
+    }
+    
     
     //UIImagePicker delegate methods
 
@@ -204,6 +235,8 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
                 self.pictureDelegate?.changePickedProfilePicture(image: selectedImg)
                 let profilePictureFilePath = self.savePickedImageToStorage(pickedImage: selectedImg)
                 print("profilePictureFilePath: \(profilePictureFilePath)")
+                self.saveImageToCloud(image: selectedImg)
+                
             }
         }
     }

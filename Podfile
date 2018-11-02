@@ -10,6 +10,7 @@ target 'ARNavi' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
   pod 'SideMenu'
   pod 'SwiftEntryKit', '0.8.2'
 
