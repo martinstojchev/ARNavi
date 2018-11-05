@@ -23,6 +23,9 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     var selectedCustomImage: UIImage!
     var checkChangesForProfilePic: Bool!
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredPlaces = [String]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,14 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         //navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "sheets_icon"), style: .plain, target: self, action: #selector(showLeftMenu))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "placemark_icon"), style: .plain, target: self, action: #selector(addNewLocation))
+        
+        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Candies"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
     }
    
@@ -85,13 +96,22 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if isFiltering(){
+            return filteredPlaces.count
+        }
         return favPlaces.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = favPlaces[indexPath.row]
+        if isFiltering(){
+            cell.textLabel?.text = filteredPlaces[indexPath.row]
+        }else {
+            cell.textLabel?.text = favPlaces[indexPath.row]
+        }
+        
         
         return cell 
     }
@@ -103,7 +123,24 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     
+    // MARK: - Private instance methods
     
+    func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredPlaces = favPlaces.filter({( place : String) -> Bool in
+            return place.lowercased().contains(searchText.lowercased())
+        })
+        
+        favPlacesTableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
     
 }
 
@@ -124,5 +161,13 @@ extension FavPlacesVC: UISideMenuNavigationControllerDelegate {
     func sideMenuDidDisappear(menu: UISideMenuNavigationController, animated: Bool) {
         print("SideMenu Disappeared! (animated: \(animated))")
         
+    }
+}
+
+extension FavPlacesVC: UISearchResultsUpdating {
+    // MARK: - UISearchResultsUpdating Delegate
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
+        filterContentForSearchText(searchController.searchBar.text!)
     }
 }
