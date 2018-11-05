@@ -94,7 +94,7 @@ class LoginVC: UIViewController {
                     if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
                        
                         //self.present(favPlacesVC, animated: true, completion: nil)
-                        self.navigationController?.pushViewController(favPlacesVC, animated: true)
+                        self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
                     }
                 }
                 
@@ -169,7 +169,7 @@ class LoginVC: UIViewController {
             guard let name = Auth.auth().currentUser?.displayName else { return }
             guard let email = Auth.auth().currentUser?.email      else { return }
             
-            self.ref.child("users").child(currentUserID).setValue(["name" : name, "email" : email])
+            self.ref.child("users").child(currentUserID).updateChildValues(["name" : name, "email" : email])
             
             print("updated info for logged user.")
         }
@@ -211,6 +211,15 @@ class LoginVC: UIViewController {
         }
         
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loginToFavSegue" {
+            if let favPlacesVC = segue.destination as? FavPlacesVC {
+                favPlacesVC.checkChangesForProfilePic = true
+                print("checkChangesForProfilePic = true")
+            }
+        }
     }
     
     
@@ -272,7 +281,7 @@ class LoginVC: UIViewController {
                 
                 if let favPlacesVC =  UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC{
                     
-                    self.navigationController?.pushViewController(favPlacesVC, animated: true)
+                    self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
                 }
                 
             }

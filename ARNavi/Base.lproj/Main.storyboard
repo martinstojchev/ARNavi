@@ -96,25 +96,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mwm-O7-wKW">
-                                <rect key="frame" x="154" y="84" width="67.5" height="31.5"/>
+                                <rect key="frame" x="154" y="40" width="67.5" height="31.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iUB-MF-Ksj" customClass="DTTextField" customModule="DTTextField">
-                                <rect key="frame" x="25" y="255.5" width="325" height="30"/>
+                                <rect key="frame" x="25" y="211.5" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DyT-nd-l4f" customClass="DTTextField" customModule="DTTextField">
-                                <rect key="frame" x="25" y="305.5" width="325" height="30"/>
+                                <rect key="frame" x="25" y="261.5" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8q-F1-gmB">
-                                <rect key="frame" x="25" y="338" width="108" height="28"/>
+                                <rect key="frame" x="25" y="294" width="108" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Forgot password?"/>
                                 <connections>
@@ -214,6 +214,7 @@
                         <outlet property="passwordTextField" destination="DyT-nd-l4f" id="rhV-X7-Omi"/>
                         <outlet property="signupButton" destination="jGw-tY-pnp" id="QH9-a7-NFv"/>
                         <outlet property="twitterLoginButton" destination="1d4-4g-m5f" id="BXW-lz-Ctr"/>
+                        <segue destination="cmB-1P-qft" kind="show" identifier="loginToFavSegue" id="0SM-cV-VmH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vN0-qA-wPk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -676,43 +677,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKz-pm-JlS">
-                                <rect key="frame" x="142" y="84" width="91.5" height="31.5"/>
+                                <rect key="frame" x="142" y="40" width="91.5" height="31.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7NI-Wf-k1B" customClass="DTTextField" customModule="DTTextField">
-                                <rect key="frame" x="25" y="174" width="325" height="30"/>
+                                <rect key="frame" x="25" y="130" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DVS-G2-XI4" customClass="DTTextField" customModule="DTTextField">
-                                <rect key="frame" x="25" y="224" width="325" height="30"/>
+                                <rect key="frame" x="25" y="180" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="inK-81-WCS" customClass="DTTextField" customModule="DTTextField">
-                                <rect key="frame" x="25" y="274" width="325" height="30"/>
+                                <rect key="frame" x="25" y="230" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wAL-an-EWI" customClass="DTTextField" customModule="DTTextField">
-                                <rect key="frame" x="25" y="324" width="325" height="30"/>
+                                <rect key="frame" x="25" y="280" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XCf-T5-V9N" customClass="DTTextField" customModule="DTTextField">
-                                <rect key="frame" x="25" y="374" width="325" height="30"/>
+                                <rect key="frame" x="25" y="330" width="325" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdy-25-T0i">
-                                <rect key="frame" x="25" y="491" width="325" height="34"/>
+                                <rect key="frame" x="25" y="447" width="325" height="34"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="SIGN UP"/>
                                 <connections>
@@ -721,7 +722,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-Gm-Rrw">
-                                <rect key="frame" x="25" y="545" width="325" height="34"/>
+                                <rect key="frame" x="25" y="501" width="325" height="34"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Sign up with Facebook"/>
                                 <connections>
@@ -729,7 +730,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBd-Ng-3Zj">
-                                <rect key="frame" x="25" y="599" width="325" height="34"/>
+                                <rect key="frame" x="25" y="555" width="325" height="34"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Sign up with Twitter"/>
                                 <connections>
@@ -737,7 +738,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1mS-KQ-u2h">
-                                <rect key="frame" x="25" y="648" width="325" height="34"/>
+                                <rect key="frame" x="25" y="604" width="325" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4y9-C7-8oo">
                                         <rect key="frame" x="0.0" y="7" width="237" height="20.5"/>
@@ -830,7 +831,7 @@
         <image name="touchid_logo" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jjN-hG-lfA"/>
+        <segue reference="zEx-o5-SBe"/>
         <segue reference="aQ0-qO-hB3"/>
     </inferredMetricsTieBreakers>
 </document>

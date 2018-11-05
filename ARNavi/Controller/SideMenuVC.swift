@@ -11,7 +11,7 @@ import SideMenu
 import Firebase
 import Photos
 import FirebaseFirestore
-
+import FirebaseStorage
 
 protocol ProfilePictureDelegate: class {
     
@@ -31,18 +31,25 @@ class SideMenuVC: UIViewController {
     
     var currentUserName: String?
     let imagePicker = UIImagePickerController()
-    var currenProfilePicture = UIImage()
+    var currentProfilePicture: UIImage!
     weak var pictureDelegate: ProfilePictureDelegate?
     var ref: DatabaseReference!
-    
+    let storage = Storage.storage()
+    var storageRef: StorageReference!
+    var isProfileImgSet = false
+    var checkImageChanges = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
-      setupMenuView()
-       setProfileImage()
-        
+        storageRef = storage.reference()
+        setupMenuView()
+        if(checkImageChanges){
+          checkChangedProfilePicture()
+        }else {
+        setProfileImage()
+        }
     
     }
     
@@ -56,7 +63,7 @@ class SideMenuVC: UIViewController {
         view.backgroundColor = AppColor.backgroundColor.rawValue
      
         nameLabel.text = currentUserName
-        profileImageView.image = currenProfilePicture
+        profileImageView.image = currentProfilePicture
         profileImageView.layer.borderWidth = 1.0
         profileImageView.layer.masksToBounds = false
         profileImageView.layer.borderColor = UIColor.white.cgColor
@@ -182,26 +189,94 @@ class SideMenuVC: UIViewController {
     func saveImageToCloud(image: UIImage){
         
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        var imageDownloadURL: String!
+        let imageName = currentUserID.appending(".jpg")
+        let imagesRef = storageRef.child(imageName)
         
-        
-        
-        
-        
-        let uploadData = image.jpegData(compressionQuality: 1.0)
-        
-        print("upload data: \(uploadData!)")
-        ref.child("profilePictures").child(currentUserID)
-        ref.child("profilePictures").child(currentUserID).setValue(["image": uploadData!]) { (error, databaseRef) in
+        guard let uploadData = image.jpegData(compressionQuality: 1.0) else {return}
+
+        imagesRef.putData(uploadData, metadata: nil) { (metaData, error) in
             
             if let err = error {
-                print("error while uploading photo to cloud")
-                print(err)
-                return
+             print(err.localizedDescription)
             }
             else {
-                print("successfully uploaded image to cloud")
+              print("successfull uploaded image to cloud")
+                print(metaData)
+                imagesRef.downloadURL(completion: { (url, error) in
+                    if let err = error {
+                        print("error while getting the download url for the image")
+                        print(err.localizedDescription)
+                     }
+                    else {
+                        guard let downloadURL = url else {return }
+                        imageDownloadURL = downloadURL.absoluteString
+                        print("downloadURL: \(downloadURL)")
+                        print("imageDownloadURL absolute string: \(imageDownloadURL!)")
+                        self.ref.child("users").child(currentUserID).updateChildValues(["imageURL": imageDownloadURL!], withCompletionBlock: { (error, databaseRef) in
+                            if let err = error {
+                                print("error while uploading image url to cloud")
+                                print(err)
+                                return
+                            }
+                            else {
+                                print("successfully uploaded image url to cloud")
+                            }
+                        })
+
+                        
+                         }
+                                   })
+                   }
+        }
+        
+        print("upload data: \(uploadData)")
+
+      
+    }
+    
+    func downloadImageFromCloud() {
+        
+        
+        let directoryPath = NSHomeDirectory().appending("/Documents")
+        
+        if !FileManager.default.fileExists(atPath: directoryPath){
+            do{
+                try FileManager.default.createDirectory(at: NSURL.fileURL(withPath: directoryPath), withIntermediateDirectories: true, attributes: nil)
+            }
+            catch {
+                print(error)
+                print("error while saving image")
             }
         }
+        
+        if let fileName = Auth.auth().currentUser?.uid.appending(".jpg") {
+            let downloadRef = storageRef.child(fileName)
+            
+            let filepath = directoryPath.appending("\(fileName)")
+            let url = NSURL.fileURL(withPath: filepath)
+            
+            downloadRef.write(toFile: url) { (url, error) in
+                
+                if let err = error {
+                    print("error while downloading image from cloud")
+                    print(err.localizedDescription)
+                }
+                else {
+                    print("successfully downloaded image from cloud")
+                    print("url: \(url!)")
+                    self.setProfileImage()
+                }
+            }
+            
+        }
+        else {
+            print("error file name")
+            return
+        }
+        
+        
+        
     }
     
     
@@ -220,7 +295,7 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
         
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             self.profileImageView.image = editedImage
-            self.currenProfilePicture = editedImage
+            self.currentProfilePicture = editedImage
             selectedImg = editedImage
             
             
@@ -230,12 +305,13 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
         picker.dismiss(animated: true) {
             
             if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
-                favPlacesVC.selectedCustomImage = self.currenProfilePicture
+                favPlacesVC.selectedCustomImage = self.currentProfilePicture
                 print("selected image transfered")
                 self.pictureDelegate?.changePickedProfilePicture(image: selectedImg)
                 let profilePictureFilePath = self.savePickedImageToStorage(pickedImage: selectedImg)
                 print("profilePictureFilePath: \(profilePictureFilePath)")
                 self.saveImageToCloud(image: selectedImg)
+                self.changeDatabaseValue(parameter: "profilePictureChanged", value: "true")
                 
             }
         }
@@ -246,11 +322,47 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
         self.dismiss(animated: true, completion: nil)
     }
     
+    func changeDatabaseValue(parameter: String, value: String) {
+        guard let userID = Auth.auth().currentUser?.uid else {return }
+        ref.child("users").child(userID).updateChildValues([parameter: value]) { (error, databaseRed) in
+            
+            if let err = error {
+                print("error while chainging parameter in cloud")
+                print(err.localizedDescription)
+            }
+            else {
+                print("successfully changed parameter")
+            }
+            
+        }
+    }
+    
     func setProfileImage() {
         let image = getProfilePictureFromStorage()
-        currenProfilePicture = image
+        currentProfilePicture = image
         print("setProfileImage called")
-        profileImageView.image = currenProfilePicture
+        profileImageView.image = currentProfilePicture
+        isProfileImgSet = true
+        
+    }
+    
+    func checkChangedProfilePicture(){
+        print("checkChangedProfilePicture called")
+        guard let userID = Auth.auth().currentUser?.uid else {return }
+        print("checkChangedProfilePicture called")
+        ref.child("users").child(userID).observeSingleEvent(of: .value) { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            let isProfilePicChanged = value?["profilePictureChanged"] as? String ?? ""
+            print("isProfilePicChanged: \(isProfilePicChanged)")
+            if (isProfilePicChanged == "true"){
+                //download the imaga locally
+                self.changeDatabaseValue(parameter: "profilePictureChanged", value: "false")
+                self.downloadImageFromCloud()
+                
+            }
+        }
+        
         
     }
     
@@ -305,9 +417,16 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
             print("dirPath: \(dirPath)")
             let imagePath = dirPath.appending("\(userID).jpg")
             let imageURL = NSURL.fileURL(withPath: imagePath)
-            guard let image    = UIImage(contentsOfFile: imageURL.path) else {return UIImage()}
-            imageForReturn = image
-            print("image returned from documents")
+            if let image = UIImage(contentsOfFile: imageURL.path){
+                imageForReturn = image
+                print("image returned from documents")
+                
+            } else {
+                downloadImageFromCloud()
+                print("download image because is not existing in the storage")
+                imageForReturn = UIImage()
+            }
+            
         
          }
         

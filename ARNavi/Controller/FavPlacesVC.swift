@@ -22,6 +22,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     let favPlaces: [String] = ["Home", "Work", "City Mall"]
     
     var selectedCustomImage: UIImage!
+    var checkChangesForProfilePic: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,9 +59,18 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 sideMenuVC.currentUserName = name
                 
                 if let customImg = selectedCustomImage {
-                sideMenuVC.currenProfilePicture = customImg
+                sideMenuVC.currentProfilePicture = customImg
                     print("customImg for side menu")
                     
+                }
+                
+                if let checkProfilePic = checkChangesForProfilePic {
+                    print("checkProfilePic: \(checkProfilePic)")
+                    if (checkProfilePic){
+                        //call check for profile pic changes
+                        sideMenuVC.checkImageChanges = true
+                        print("checking for profileImage changed")
+                    }
                 }
                 
             }
