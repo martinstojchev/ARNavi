@@ -573,7 +573,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQ9-DC-cCg">
-                                                    <rect key="frame" x="272" y="15.5" width="73" height="40"/>
+                                                    <rect key="frame" x="282" y="15.5" width="73" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="GsS-Bb-azR"/>
                                                         <constraint firstAttribute="width" constant="73" id="vC9-8w-URW"/>
@@ -586,7 +586,7 @@
                                                 <constraint firstItem="UqI-5Q-EgG" firstAttribute="centerY" secondItem="kpM-y5-3xq" secondAttribute="centerY" id="1km-8P-WJY"/>
                                                 <constraint firstItem="X41-Ke-NRu" firstAttribute="leading" secondItem="UqI-5Q-EgG" secondAttribute="trailing" constant="8" id="5Kz-KK-BoM"/>
                                                 <constraint firstItem="X41-Ke-NRu" firstAttribute="centerY" secondItem="kpM-y5-3xq" secondAttribute="centerY" id="ME5-oQ-Vbc"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="bQ9-DC-cCg" secondAttribute="trailing" constant="15" id="TLq-TA-ltn"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bQ9-DC-cCg" secondAttribute="trailing" constant="5" id="TLq-TA-ltn"/>
                                                 <constraint firstItem="bQ9-DC-cCg" firstAttribute="centerY" secondItem="kpM-y5-3xq" secondAttribute="centerY" id="cjk-kf-TVG"/>
                                                 <constraint firstItem="UqI-5Q-EgG" firstAttribute="leading" secondItem="kpM-y5-3xq" secondAttribute="leading" constant="10" id="ghF-lJ-8yJ"/>
                                             </constraints>

@@ -10,12 +10,11 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-struct FriendsData {
-    let image : UIImage?
-    let title : String?
-}
 
-class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+    
     
     @IBOutlet weak var friendsTableView: UITableView!
     
@@ -56,13 +55,18 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellTitle: String!
+        let userID: String!
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsCell
         if isFiltering(){
          cellTitle = filteredFriends[indexPath.row].getName()
+         userID = filteredFriends[indexPath.row].getUserID()
         }
         else {
          cellTitle = friends[indexPath.row].getName()
+            userID = friends[indexPath.row].getUserID()
         }
+        
+        
         let cellImage = UIImage()
         
         var buttonText:String!
@@ -80,8 +84,8 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             buttonText = "Add"
             buttonColor = AppColor.green
         }
-        
-        cell.setFriendsCell(cellImage: cellImage, title: cellTitle, buttonText: buttonText, buttonColor: buttonColor)
+        cell.addRemoveDelegate = self
+        cell.setFriendsCell(cellImage: cellImage, title: cellTitle, buttonText: buttonText, buttonColor: buttonColor, userID: userID)
         
         return cell
     }
@@ -123,12 +127,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        //print("retrievedFriends: \(retrievedFriends)")
-        
-        
-//        filteredFriends = friends.filter({( friend : Friend) -> Bool in
-//            return friend.getName().lowercased().contains(searchText.lowercased())
-//        })
+ 
         
         friendsTableView.reloadData()
     }
@@ -148,4 +147,22 @@ extension FriendsVC: UISearchResultsUpdating {
         return searchController.isActive && !searchBarIsEmpty()
     }
    
+}
+
+extension FriendsVC : AddRemoveFriendDelegate {
+    
+    func addFriend(withID id: String) {
+        print("friendsVC add friend withID: \(id)")
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        let requestsID = id
+        self.ref.child("requests").child(id).updateChildValues([currentUserID : currentUserID])
+        
+        
+        ref.child("users").child(id).updateChildValues(["requests" : currentUserID])
+        
+    }
+    
+    func removeFriend(withID id: String) {
+        print("friendsVC remove friend withID: \(id)")
+    }
 }

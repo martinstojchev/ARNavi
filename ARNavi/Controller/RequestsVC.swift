@@ -60,12 +60,13 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 let id = ids.key as? String ?? ""
                 print("id: \(id)")
                 if id == currentUserID {
-                    //print("id equal to current id")
-                    let requestIDs  = ids.value as? NSArray ?? []
-                     print("requestIDs : \(requestIDs)")
-                    for requestID in requestIDs {
+                    print("id equal to current id")
+                    let requestIDsDic  = ids.value as? NSDictionary ?? [:]
+                     print("requestIDs : \(requestIDsDic)")
+                    for requestID in requestIDsDic {
                         print("requestID: \(requestID)")
-                        if let requestIDString = requestID as? String {
+                        if let requestIDString = requestID.value as? String {
+                            print("requestIDString: \(requestIDString)")
                         // find the info for the founded users
                         self.ref.child("users").child(requestIDString).observeSingleEvent(of: .value, with: { (snapshot) in
                             
