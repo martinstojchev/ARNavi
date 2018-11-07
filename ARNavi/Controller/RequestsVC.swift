@@ -7,31 +7,30 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
-struct CellData {
-    let image : UIImage?
-    let title : String?
-    let acceptImage: UIImage?
-    let declineImage: UIImage?
-}
 
 class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var requestsTableView: UITableView!
     
-    var data = [CellData]()
+    var requests = [Friend]()
     let searchController = UISearchController(searchResultsController: nil)
+    var filteredRequests = [Friend]()
+    var ref: DatabaseReference!
     
-    var filteredRequests = [CellData]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Martin", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Petar", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Stefan", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-        data.append(CellData(image: UIImage(named: "profile_pic"), title: "leon", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Boris", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
+        ref = Database.database().reference()
+//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Martin", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
+//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Petar", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
+//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Stefan", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
+//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "leon", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
+//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Boris", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
         
         self.navigationItem.title = "Requests"
          requestsTableView.dataSource = self
@@ -43,11 +42,57 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Candies"
+        searchController.searchBar.placeholder = "Search requests"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+         checkForRequests()
     }
     
+    func checkForRequests(){
+        guard let currentUserID = Auth.auth().currentUser?.uid else {return}
+        
+        
+        ref.child("requests").observe(.value) { (snapshot) in
+            var requestArray = [Friend]()
+            let value = snapshot.value as? NSDictionary ?? [:]
+            print("requests value: \(value)")
+            for ids in value {
+                let id = ids.key as? String ?? ""
+                print("id: \(id)")
+                if id == currentUserID {
+                    //print("id equal to current id")
+                    let requestIDs  = ids.value as? NSArray ?? []
+                     print("requestIDs : \(requestIDs)")
+                    for requestID in requestIDs {
+                        print("requestID: \(requestID)")
+                        if let requestIDString = requestID as? String {
+                        // find the info for the founded users
+                        self.ref.child("users").child(requestIDString).observeSingleEvent(of: .value, with: { (snapshot) in
+                            
+                            let value = snapshot.value as? NSDictionary ?? [:]
+                            let name = value["name"] as? String ?? ""
+                            let email = value["email"] as? String ?? ""
+                            let username = value["username"] as? String ?? ""
+                            
+                            let requestFriend = Friend(userID: requestIDString, name: name, username: username, email: email, image: UIImage())
+                            requestArray.append(requestFriend)
+                            self.requests = requestArray
+                            self.requestsTableView.reloadData()
+                            print("requests count: \(self.requests.count)")
+                            
+                        })
+                        
+                    }
+                        
+                    }
+                    
+                    
+                }
+            }
+            
+        }
+        
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -55,7 +100,7 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             return filteredRequests.count
         }
         
-        return data.count
+        return requests.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,16 +108,16 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell") as! RequestsTableViewCell
         var cellTitle: String!
         
-        let cellImage = data[indexPath.row].image!
+        let cellImage = requests[indexPath.row].getImage()
         if isFiltering(){
-          cellTitle = filteredRequests[indexPath.row].title!
+          cellTitle = filteredRequests[indexPath.row].getName()
         }
         else {
-          cellTitle = data[indexPath.row].title!
+          cellTitle = requests[indexPath.row].getName()
         }
         
-        let acceptImage = data[indexPath.row].acceptImage!
-        let declineImage = data[indexPath.row].declineImage!
+         let acceptImage = UIImage(named: "request_accept_checkmark") ?? UIImage()
+         let declineImage = UIImage(named: "request_decline_checkmark") ?? UIImage()
         
         cell.setRequestCell(image: cellImage, title: cellTitle, acceptImage: acceptImage, declineImage: declineImage)
         
@@ -87,8 +132,8 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredRequests = data.filter({( request : CellData) -> Bool in
-            return request.title!.lowercased().contains(searchText.lowercased())
+        filteredRequests = requests.filter({( request : Friend) -> Bool in
+            return request.getName().lowercased().contains(searchText.lowercased())
         })
         
         requestsTableView.reloadData()

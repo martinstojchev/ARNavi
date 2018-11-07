@@ -87,7 +87,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             let value = snapshot.value as? NSDictionary ?? [:]
             for friend in value {
                 let friendID = friend.key as? String ?? ""
-                print("friendID: \(friendID)")
+                //print("friendID: \(friendID)")
                 
                 if friendID != currentUserID {
                     
@@ -108,7 +108,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-        print("retrievedFriends: \(retrievedFriends)")
+        //print("retrievedFriends: \(retrievedFriends)")
         
         
 //        filteredFriends = friends.filter({( friend : Friend) -> Bool in

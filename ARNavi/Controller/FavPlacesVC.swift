@@ -49,6 +49,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         definesPresentationContext = true
         
         getUsersFriends()
+        //insertNewRequests()
         
     }
    
@@ -215,11 +216,13 @@ extension FavPlacesVC: UISideMenuNavigationControllerDelegate {
         
     }
     
-    func insertNewFriends(){
+    func insertNewRequests(){
         
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        let friendsID = ["NUdZ3DBNNUN6LqwRNwyXLTuKjm22","qCh5JIAjArPSema4mzIUbL2zr522", "qEqJbxVhQFYc7zJA01blnIAMkct2", "tVsSzAgJkbbMa11Oe7XJPrVduzp2"]
-        self.ref.child("users").child(currentUserID).child("friends").updateChildValues(["id" : friendsID])
+        let requestsID = ["tVsSzAgJkbbMa11Oe7XJPrVduzp2"]
+        self.ref.child("requests").updateChildValues([currentUserID : requestsID])
+        
+        ref.child("users").child(currentUserID).updateChildValues(["requests" : "tVsSzAgJkbbMa11Oe7XJPrVduzp2"])
         
     }
     
