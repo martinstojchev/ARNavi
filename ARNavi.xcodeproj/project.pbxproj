@@ -18,6 +18,7 @@
 		5B77AE3E21807AD500084ACC /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B77AE3D21807AD500084ACC /* SettingsVC.swift */; };
 		5B87DE39217DA6720094B7F2 /* FavPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87DE38217DA6720094B7F2 /* FavPlacesVC.swift */; };
 		5B87DE3B217DDDB80094B7F2 /* DTTextField extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87DE3A217DDDB80094B7F2 /* DTTextField extension.swift */; };
+		5B8889D02192CCB800B122C6 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8889CF2192CCB800B122C6 /* Friend.swift */; };
 		5BACF6202158F8FA00D8E056 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF61F2158F8FA00D8E056 /* AppColors.swift */; };
 		5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF621215903DB00D8E056 /* FirstScreenVC.swift */; };
 		5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6232159088D00D8E056 /* LoginVC.swift */; };
@@ -44,6 +45,7 @@
 		5B77AE3D21807AD500084ACC /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		5B87DE38217DA6720094B7F2 /* FavPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavPlacesVC.swift; sourceTree = "<group>"; };
 		5B87DE3A217DDDB80094B7F2 /* DTTextField extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTextField extension.swift"; sourceTree = "<group>"; };
+		5B8889CF2192CCB800B122C6 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		5BACF61F2158F8FA00D8E056 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		5BACF621215903DB00D8E056 /* FirstScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenVC.swift; sourceTree = "<group>"; };
 		5BACF6232159088D00D8E056 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				5BC8E12E217A00FC0045BC37 /* User.swift */,
+				5B8889CF2192CCB800B122C6 /* Friend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */,
 				5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */,
 				5B3F1C04218995BA0098008A /* FormFieldPresetFactory.swift in Sources */,
+				5B8889D02192CCB800B122C6 /* Friend.swift in Sources */,
 				5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */,
 				5B77AE3C21807AB800084ACC /* RequestsVC.swift in Sources */,
 				5B87DE3B217DDDB80094B7F2 /* DTTextField extension.swift in Sources */,
