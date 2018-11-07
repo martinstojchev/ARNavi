@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 struct FriendsData {
     let image : UIImage?
@@ -17,31 +19,31 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var friendsTableView: UITableView!
     
-    var friendsData = [FriendsData]()
-    var friends = ["Mirko","Petar","Slave","Letka","Stojce","Leon","Boris"]
-    var filteredFriends = [FriendsData]()
+//    var friendsData = [FriendsData]()
+    var friends = [Friend]()
+    var filteredFriends = [Friend]()
     let searchController = UISearchController(searchResultsController: nil)
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ref = Database.database().reference()
+        
         self.navigationItem.title = "Friends"
         friendsTableView.dataSource = self
         friendsTableView.delegate   = self
         friendsTableView.backgroundColor = AppColor.backgroundColor.rawValue
         view.backgroundColor = AppColor.backgroundColor.rawValue
         // Do any additional setup after loading the view.
-        friendsData.append(FriendsData(image: UIImage(named: "profile_pic"), title: "Petar"))
-        friendsData.append(FriendsData(image: UIImage(named: "profile_pic"), title: "Leon"))
-        friendsData.append(FriendsData(image: UIImage(named: "profile_pic"), title: "Mirko"))
-        friendsData.append(FriendsData(image: UIImage(named: "profile_pic"), title: "Boris"))
-        
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Friends"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,19 +51,19 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         if isFiltering() {
             return filteredFriends.count
         }
-        return friendsData.count
+        return friends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellTitle: String!
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsCell
         if isFiltering(){
-         cellTitle = filteredFriends[indexPath.row].title!
+         cellTitle = filteredFriends[indexPath.row].getName()
         }
         else {
-         cellTitle = friendsData[indexPath.row].title!
+         cellTitle = friends[indexPath.row].getName()
         }
-        let cellImage = friendsData[indexPath.row].image!
+        let cellImage = UIImage()
         
         
         cell.setFriendsCell(cellImage: cellImage, title: cellTitle)
@@ -77,9 +79,41 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredFriends = friendsData.filter({( friend : FriendsData) -> Bool in
-            return friend.title!.lowercased().contains(searchText.lowercased())
-        })
+        
+        guard let currentUserID = Auth.auth().currentUser?.uid else {return}
+        
+        var retrievedFriends = self.ref.child("users").observe(.value) { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary ?? [:]
+            for friend in value {
+                let friendID = friend.key as? String ?? ""
+                print("friendID: \(friendID)")
+                
+                if friendID != currentUserID {
+                    
+                let friend = friend.value as? NSDictionary ?? [:]
+                guard let name = friend["name"] as? String else {return}
+                
+                if name.lowercased() == searchText.lowercased() {
+                    let email = friend["email"] as? String ?? ""
+                    let username = friend["username"] as? String ?? ""
+                    
+                    let foundFriend = Friend(userID: friendID, name: name, username: username, email: email, image: UIImage())
+                    self.filteredFriends = []
+                    self.filteredFriends = [foundFriend]
+                    self.friendsTableView.reloadData()
+                }
+                
+               }
+            }
+        }
+        
+        print("retrievedFriends: \(retrievedFriends)")
+        
+        
+//        filteredFriends = friends.filter({( friend : Friend) -> Bool in
+//            return friend.getName().lowercased().contains(searchText.lowercased())
+//        })
         
         friendsTableView.reloadData()
     }

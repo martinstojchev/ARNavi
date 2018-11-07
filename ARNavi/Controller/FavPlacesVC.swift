@@ -9,26 +9,26 @@
 import UIKit
 import SideMenu
 import Firebase
-
+import FirebaseDatabase
 
 
 
 class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfilePictureDelegate {
     
-    
-    
-
     @IBOutlet weak var favPlacesTableView: UITableView!
     let favPlaces: [String] = ["Home", "Work", "City Mall"]
-    
     var selectedCustomImage: UIImage!
     var checkChangesForProfilePic: Bool!
     let searchController = UISearchController(searchResultsController: nil)
     var filteredPlaces = [String]()
+    var userFriends:[Friend] = [Friend]()
     
+    var ref: DatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = Database.database().reference()
         
         favPlacesTableView.dataSource = self
         favPlacesTableView.delegate   = self
@@ -47,6 +47,8 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         searchController.searchBar.placeholder = "Search Candies"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        
+        getUsersFriends()
         
     }
    
@@ -74,6 +76,8 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                     print("customImg for side menu")
                     
                 }
+                
+                sideMenuVC.userFriends = userFriends
                 
                 if let checkProfilePic = checkChangesForProfilePic {
                     print("checkProfilePic: \(checkProfilePic)")
@@ -162,6 +166,63 @@ extension FavPlacesVC: UISideMenuNavigationControllerDelegate {
         print("SideMenu Disappeared! (animated: \(animated))")
         
     }
+    
+    
+    func getUsersFriends(){
+        
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        
+        var userFriends:[Friend] = [Friend]()
+        
+        self.ref.child("users").child(currentUserID).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let value = snapshot.value as? NSDictionary
+            let friends = value?["friends"] as? NSDictionary ?? [:]
+            let ids  = friends["id"] as? NSArray ?? []
+            
+            for id in ids{
+                guard let friendsId = id as? String else {return }
+                print("frineds id: \(friendsId)")
+                
+                 // get the info for every user id
+                
+                self.ref.child("users").child(friendsId).observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    let name = value?["name"] as? String ?? ""
+                    let email = value?["email"] as? String ?? ""
+                    let username = value?["username"] as? String ?? ""
+                    
+                    let newFriend = Friend(userID: friendsId, name: name, username: username, email: email, image: UIImage())
+                    userFriends.append(newFriend)
+                    print("userFriends \(userFriends.count)")
+                    self.userFriends = userFriends
+                    
+                    
+                })
+            }
+            
+           
+            
+        }) { (error) in
+            
+            
+            print("error: \(error.localizedDescription)")
+            
+            
+        }
+        
+        
+    }
+    
+    func insertNewFriends(){
+        
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        let friendsID = ["NUdZ3DBNNUN6LqwRNwyXLTuKjm22","qCh5JIAjArPSema4mzIUbL2zr522", "qEqJbxVhQFYc7zJA01blnIAMkct2", "tVsSzAgJkbbMa11Oe7XJPrVduzp2"]
+        self.ref.child("users").child(currentUserID).child("friends").updateChildValues(["id" : friendsID])
+        
+    }
+    
 }
 
 extension FavPlacesVC: UISearchResultsUpdating {

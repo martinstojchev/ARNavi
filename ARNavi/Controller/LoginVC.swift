@@ -294,14 +294,4 @@ class LoginVC: UIViewController {
         
     }
 
-    
-    func getUsersFriends(){
-        
-        guard let currentUser = Auth.auth().currentUser?.uid else { return }
-        
-        
-    }
-    
-    
-
 }

@@ -38,6 +38,7 @@ class SideMenuVC: UIViewController {
     var storageRef: StorageReference!
     var isProfileImgSet = false
     var checkImageChanges = false
+    var userFriends:[Friend] = [Friend]()
     
     
     override func viewDidLoad() {
@@ -118,7 +119,14 @@ class SideMenuVC: UIViewController {
     }
     
     func transitionTo(viewControllerIdentifier: String) {
-        
+      
+        if viewControllerIdentifier == "FriendsVC"{
+            if let friendsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsVC") as? FriendsVC {
+                friendsVC.friends = userFriends
+                navigationController?.pushViewController(friendsVC, animated: true)
+                return
+            }
+        }
         
     if let destinationVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: viewControllerIdentifier) as? UIViewController {
         
