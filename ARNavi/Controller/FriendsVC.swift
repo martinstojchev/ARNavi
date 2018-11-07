@@ -65,8 +65,23 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         let cellImage = UIImage()
         
+        var buttonText:String!
+        var buttonColor: AppColor!
         
-        cell.setFriendsCell(cellImage: cellImage, title: cellTitle)
+        if friends.contains(where: { (friend) -> Bool in
+            return friend.getName().elementsEqual(cellTitle)
+        }) {
+            print("searched user is friend")
+            buttonText = "Remove"
+            buttonColor = AppColor.red
+        }
+        else {
+            print("searched user is not friend")
+            buttonText = "Add"
+            buttonColor = AppColor.green
+        }
+        
+        cell.setFriendsCell(cellImage: cellImage, title: cellTitle, buttonText: buttonText, buttonColor: buttonColor)
         
         return cell
     }
