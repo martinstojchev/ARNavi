@@ -124,11 +124,6 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
                                 })
                                 
                             }
-                            
-                        
-                        
-                        
-                    
                 }
        }
     }
@@ -199,13 +194,30 @@ extension FriendsVC : AddRemoveFriendDelegate {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
         let requestsID = id
         self.ref.child("requests").child(id).updateChildValues([currentUserID : currentUserID])
-        
-        
-        ref.child("users").child(id).updateChildValues(["requests" : currentUserID])
+
+        //ref.child("users").child(id).updateChildValues(["requests" : currentUserID])
         
     }
     
     func removeFriend(withID id: String) {
         print("friendsVC remove friend withID: \(id)")
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        
+        //Removing friend from current's friend list
+        self.ref.child("users").child(currentUserID).child("friends").child(id).removeValue { (error, databaseRef) in
+            
+            if let err = error {
+                print("error while removing friend from current user's friend list")
+                print(err.localizedDescription)
+            }
+            else {
+                self.checkForFriends()
+            }
+        }
+        
+        //Removing currendUser from the oposite's friend list
+        self.ref.child("users").child(id).child("friends").child(currentUserID).removeValue()
+        
+        
     }
 }
