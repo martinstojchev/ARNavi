@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Firebase
+import SideMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +20,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            
+            if shortcutItem.type == "com.martin.ARNavi.adduser" {
+                //shortcut add user was triggered
+                
+            }
+        }
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        
+        if let rootNavigation = self.window?.rootViewController as? UINavigationController {
+            print("rootnavigation action triggered")
+            
+            if shortcutItem.type == "Add user"{
+                print("quick action triggered")
+                
+//                print("root viewcontrollers: \(rootNavigation.viewControllers)")
+                
+                if let firstScreen = rootNavigation.viewControllers.first as? FirstScreenVC {
+                    
+                    if let favPlacesVC = rootNavigation.viewControllers.last as? FavPlacesVC {
+                        
+                         favPlacesVC.quickAction = "Add user"
+                         //firstScreen.navigationController?.pushViewController(favPlacesVC, animated: true)
+                         //favPlacesVC.performSegue(withIdentifier: "showSideMenu", sender: nil)
+                        
+                    }
+                    
+                }
+                
+                
+                
+               
+                
+                if let sideMenuVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SideMenuVC") as? SideMenuVC {
+                   
+                    if let friendsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsVC") as? FriendsVC {
+                        
+                        sideMenuVC.navigationController?.pushViewController(friendsVC, animated: true)
+                    }
+                    
+                }
+                
+                
+                
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

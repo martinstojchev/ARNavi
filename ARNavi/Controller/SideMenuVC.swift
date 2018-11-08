@@ -39,6 +39,7 @@ class SideMenuVC: UIViewController {
     var isProfileImgSet = false
     var checkImageChanges = false
     var userFriends:[Friend] = [Friend]()
+    var quickAction:String!
     
     
     override func viewDidLoad() {
@@ -51,7 +52,19 @@ class SideMenuVC: UIViewController {
         }else {
         setProfileImage()
         }
+        
+        
     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if(quickAction == "Add user"){
+            
+            self.transitionTo(viewControllerIdentifier: "FriendsVC")
+            quickAction = ""
+        }
     }
     
     func setupMenuView() {

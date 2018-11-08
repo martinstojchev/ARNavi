@@ -22,7 +22,13 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     let searchController = UISearchController(searchResultsController: nil)
     var filteredPlaces = [String]()
     var userFriends:[Friend] = [Friend]()
-    
+    var quickAction: String! {
+        didSet {
+         //print("didSet quick action")
+            performSegue(withIdentifier: "showSideMenu", sender: nil)
+            quickAction = ""
+        }
+    }
     var ref: DatabaseReference!
     
     override func viewDidLoad() {
@@ -130,6 +136,11 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 sideMenuVC.currentProfilePicture = customImg
                     print("customImg for side menu")
                     
+                }
+                
+                if let quickAct = quickAction {
+                
+                 sideMenuVC.quickAction = quickAct
                 }
                 
                 sideMenuVC.userFriends = userFriends
