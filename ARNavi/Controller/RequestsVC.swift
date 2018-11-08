@@ -26,12 +26,6 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
     
         ref = Database.database().reference()
-//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Martin", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Petar", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Stefan", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "leon", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-//        data.append(CellData(image: UIImage(named: "profile_pic"), title: "Boris", acceptImage: UIImage(named: "request_accept_checkmark"), declineImage: UIImage(named: "request_decline_checkmark")))
-        
         self.navigationItem.title = "Requests"
          requestsTableView.dataSource = self
          requestsTableView.delegate = self
@@ -108,19 +102,23 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell") as! RequestsTableViewCell
         var cellTitle: String!
-        
+        var userID: String!
         let cellImage = requests[indexPath.row].getImage()
+        
         if isFiltering(){
           cellTitle = filteredRequests[indexPath.row].getName()
+            userID  = filteredRequests[indexPath.row].getUserID()
         }
         else {
           cellTitle = requests[indexPath.row].getName()
+          userID    = requests[indexPath.row].getUserID()
         }
         
          let acceptImage = UIImage(named: "request_accept_checkmark") ?? UIImage()
          let declineImage = UIImage(named: "request_decline_checkmark") ?? UIImage()
         
-        cell.setRequestCell(image: cellImage, title: cellTitle, acceptImage: acceptImage, declineImage: declineImage)
+        cell.setRequestCell(image: cellImage, title: cellTitle, acceptImage: acceptImage, declineImage: declineImage, userid: userID, indexPathRow: indexPath)
+        cell.acceptDeclineDelegate = self
         
         return cell
     }
@@ -153,4 +151,62 @@ extension RequestsVC: UISearchResultsUpdating {
         // TODO
         filterContentForSearchText(searchController.searchBar.text!)
     }
+}
+
+extension RequestsVC: AcceptDeclineRequestDelegate {
+    
+    func acceptRequest(userID: String, indexPathRow: IndexPath) {
+        print("requestVC accept")
+        guard let currentUserID = Auth.auth().currentUser?.uid else {return }
+        
+        let currentUserUpdateValue = userID
+        ref.child("users").child(currentUserID).child("friends").updateChildValues([currentUserUpdateValue : currentUserUpdateValue])
+        
+        let parameterUserUpdateValue = currentUserID
+        ref.child("users").child(userID).child("friends").updateChildValues([parameterUserUpdateValue : parameterUserUpdateValue])
+        
+        
+        //ref.child("requests").child(currentUserID).child(userID).removeValue()
+        
+        ref.child("requests").child(currentUserID).child(userID).removeValue { (error, databaseRed) in
+            
+            if let err = error {
+                print("error while removing request in accept request")
+                print(err.localizedDescription)
+            }
+            else {
+                self.checkForRequests()
+            }
+        }
+        
+        
+        
+        
+    }
+    
+    func declineRequest(userID: String, indexPathRow: IndexPath) {
+        guard let currentUserID = Auth.auth().currentUser?.uid else {return }
+        
+//        ref.child("requests").child(currentUserID).child(userID).removeValue()
+        
+        ref.child("requests").child(currentUserID).child(userID).removeValue { (error, databaseRef) in
+            
+            if let err = error {
+                print("error while declining friend request")
+                print(err.localizedDescription)
+            }
+            else {
+                self.checkForRequests()
+            }
+        }
+        
+        
+        
+        
+    }
+    
+   
+
+    
+    
 }

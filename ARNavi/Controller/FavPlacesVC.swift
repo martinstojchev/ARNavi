@@ -48,7 +48,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        getUsersFriends()
+       // getUsersFriends()
         //insertNewRequests()
         
     }
@@ -169,52 +169,52 @@ extension FavPlacesVC: UISideMenuNavigationControllerDelegate {
     }
     
     
-    func getUsersFriends(){
-        
-        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        
-        var userFriends:[Friend] = [Friend]()
-        
-        self.ref.child("users").child(currentUserID).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            let value = snapshot.value as? NSDictionary
-            let friends = value?["friends"] as? NSDictionary ?? [:]
-            let ids  = friends["id"] as? NSArray ?? []
-            
-            for id in ids{
-                guard let friendsId = id as? String else {return }
-                print("frineds id: \(friendsId)")
-                
-                 // get the info for every user id
-                
-                self.ref.child("users").child(friendsId).observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    let name = value?["name"] as? String ?? ""
-                    let email = value?["email"] as? String ?? ""
-                    let username = value?["username"] as? String ?? ""
-                    
-                    let newFriend = Friend(userID: friendsId, name: name, username: username, email: email, image: UIImage())
-                    userFriends.append(newFriend)
-                    print("userFriends \(userFriends.count)")
-                    self.userFriends = userFriends
-                    
-                    
-                })
-            }
-            
-           
-            
-        }) { (error) in
-            
-            
-            print("error: \(error.localizedDescription)")
-            
-            
-        }
-        
-        
-    }
+//    func getUsersFriends(){
+//
+//        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+//
+//        var userFriends:[Friend] = [Friend]()
+//
+//        self.ref.child("users").child(currentUserID).observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//            let value = snapshot.value as? NSDictionary
+//            let friends = value?["friends"] as? NSDictionary ?? [:]
+//            let ids  = friends["id"] as? NSArray ?? []
+//
+//            for id in ids{
+//                guard let friendsId = id as? String else {return }
+//                print("frineds id: \(friendsId)")
+//
+//                 // get the info for every user id
+//
+//                self.ref.child("users").child(friendsId).observeSingleEvent(of: .value, with: { (snapshot) in
+//
+//                    let value = snapshot.value as? NSDictionary
+//                    let name = value?["name"] as? String ?? ""
+//                    let email = value?["email"] as? String ?? ""
+//                    let username = value?["username"] as? String ?? ""
+//
+//                    let newFriend = Friend(userID: friendsId, name: name, username: username, email: email, image: UIImage())
+//                    userFriends.append(newFriend)
+//                    print("userFriends \(userFriends.count)")
+//                    self.userFriends = userFriends
+//
+//
+//                })
+//            }
+//
+//
+//
+//        }) { (error) in
+//
+//
+//            print("error: \(error.localizedDescription)")
+//
+//
+//        }
+//
+//
+//    }
     
     func insertNewRequests(){
         

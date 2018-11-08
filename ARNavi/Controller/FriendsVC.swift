@@ -42,6 +42,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
+        checkForFriends()
         
     }
     
@@ -88,6 +89,48 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         cell.setFriendsCell(cellImage: cellImage, title: cellTitle, buttonText: buttonText, buttonColor: buttonColor, userID: userID)
         
         return cell
+    }
+    
+    func checkForFriends(){
+        
+        guard let currentUserID = Auth.auth().currentUser?.uid else {return}
+            
+            
+            ref.child("users").child(currentUserID).child("friends").observe(.value) { (snapshot) in
+                
+                var retrievedFriends = [Friend]()
+                let value = snapshot.value as? NSDictionary ?? [:]
+                print("requests value: \(value)")
+                for ids in value {
+                    let id = ids.key as? String ?? ""
+                    print("id: \(id)")
+                    
+                            if let friendIDString = ids.key as? String {
+                                print("friendIDString: \(friendIDString)")
+                                // find the info for the founded users
+                                self.ref.child("users").child(friendIDString).observeSingleEvent(of: .value, with: { (snapshot) in
+                                    
+                                    let value = snapshot.value as? NSDictionary ?? [:]
+                                    let name = value["name"] as? String ?? ""
+                                    let email = value["email"] as? String ?? ""
+                                    let username = value["username"] as? String ?? ""
+                                    
+                                    let foundFriend = Friend(userID: friendIDString, name: name, username: username, email: email, image: UIImage())
+                                    retrievedFriends.append(foundFriend)
+                                    self.friends = retrievedFriends
+                                    self.friendsTableView.reloadData()
+                                    print("friends count: \(self.friends.count)")
+                                    
+                                })
+                                
+                            }
+                            
+                        
+                        
+                        
+                    
+                }
+       }
     }
     
     // MARK: - Private instance methods
