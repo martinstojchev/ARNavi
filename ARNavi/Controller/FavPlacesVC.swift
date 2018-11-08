@@ -13,7 +13,7 @@ import FirebaseDatabase
 
 
 
-class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfilePictureDelegate {
+class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfilePictureDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var favPlacesTableView: UITableView!
     let favPlaces: [String] = ["Home", "Work", "City Mall"]
@@ -50,6 +50,60 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
        // getUsersFriends()
         //insertNewRequests()
+        setupLongPressGesture()
+        
+    }
+    
+    func setupLongPressGesture(){
+        let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        longPressGesture.minimumPressDuration = 0.6
+        longPressGesture.delegate = self
+        self.favPlacesTableView.addGestureRecognizer(longPressGesture)
+    }
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
+   
+        if gestureRecognizer.state == .ended {
+          let touchPoint = gestureRecognizer.location(in: self.favPlacesTableView)
+            
+            if let indexPath = favPlacesTableView.indexPathForRow(at: touchPoint){
+             
+                print("favPlace long press: \(favPlaces[indexPath.row])")
+                guard let selectedCell = favPlacesTableView.cellForRow(at: indexPath) else { return }
+                
+                showAlertLongPress(forCell: selectedCell)
+            }
+            
+         }
+    }
+    
+    func showAlertLongPress(forCell cell: UITableViewCell){
+        
+        guard let favPlaceName = cell.textLabel?.text else {return }
+        
+      let alert = UIAlertController(title: "Select action for \(favPlaceName)", message: "", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Show in AR", style: .default, handler: { (action) in
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Show on map", style: .default, handler: { (action) in
+                
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            
+        }))
+        
+        present(alert, animated: true)
         
     }
    
