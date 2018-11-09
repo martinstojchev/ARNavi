@@ -65,6 +65,11 @@ class SideMenuVC: UIViewController {
             self.transitionTo(viewControllerIdentifier: "FriendsVC")
             quickAction = ""
         }
+        
+        if(quickAction == "Update my info"){
+            self.transitionTo(viewControllerIdentifier: "UpdateInfoVC")
+            quickAction = ""
+        }
     }
     
     func setupMenuView() {

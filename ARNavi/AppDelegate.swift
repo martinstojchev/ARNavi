@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("rootnavigation action triggered")
             
             if shortcutItem.type == "Add user"{
-                print("quick action triggered")
+                //print("quick action triggered")
                 
 //                print("root viewcontrollers: \(rootNavigation.viewControllers)")
                 
@@ -54,22 +54,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                 }
+     
+            }
+            
+            else if shortcutItem.type == "Update my info"{
                 
-                
-                
-               
-                
-                if let sideMenuVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SideMenuVC") as? SideMenuVC {
-                   
-                    if let friendsVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsVC") as? FriendsVC {
+                if let firstScreen = rootNavigation.viewControllers.first as? FirstScreenVC {
+                    
+                    if let favPlacesVC = rootNavigation.viewControllers.last as? FavPlacesVC {
                         
-                        sideMenuVC.navigationController?.pushViewController(friendsVC, animated: true)
+                        favPlacesVC.quickAction = "Update my info"
+                        //firstScreen.navigationController?.pushViewController(favPlacesVC, animated: true)
+                        //favPlacesVC.performSegue(withIdentifier: "showSideMenu", sender: nil)
+                        
                     }
                     
                 }
-                
-                
-                
             }
         }
     }
