@@ -11,6 +11,14 @@ import DTTextField
 import Firebase
 import FirebaseDatabase
 import SwiftEntryKit
+import LocalAuthentication
+
+enum BiometricType {
+    case none
+    case touchID
+    case faceID
+}
+
 
 class LoginVC: UIViewController {
     
@@ -26,14 +34,50 @@ class LoginVC: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     var showPasswordButton: UIButton!
     var ref: DatabaseReference!
+    var keychainUser: String!
 
+    var biometricType: BiometricType {
+        get {
+            let context = LAContext()
+            var error: NSError?
+            
+            guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+                print(error?.localizedDescription ?? "")
+                return .none
+            }
+            
+            if #available(iOS 11.0, *) {
+                switch context.biometryType {
+                case .none:
+                    return .none
+                case .touchID:
+                    return .touchID
+                case .faceID:
+                    return .faceID
+                }
+            } else {
+                return  .touchID
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         
         ref = Database.database().reference()
         
-        
+        print("biometrics: \(biometricType)")
+        if(biometricType == .touchID){
+          biometricImageView.image = UIImage(named: "touchid_logo")
+            
+        }
+        else if (biometricType == .faceID){
+          biometricImageView.image = UIImage(named: "faceid_logo")
+        }
+        else if (biometricType == .none){
+          biometricImageView.isHidden = true
+        }
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = AppColor.backgroundColor.rawValue
@@ -50,12 +94,21 @@ class LoginVC: UIViewController {
         signupButton.tintColor = AppColor.white.rawValue
         forgotPasswordButton.tintColor = AppColor.gray.rawValue
         infoLabel.textColor = AppColor.gray.rawValue
+        let biometricsTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(biometricLoginAction))
+        biometricImageView.isUserInteractionEnabled = true
+        biometricImageView.addGestureRecognizer(biometricsTapGestureRecognizer)
+        
+        
         
         emailTextField.placeholderColor = AppColor.gray.rawValue
         passwordTextField.placeholderColor = AppColor.gray.rawValue
         
         passwordTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
         
+    }
+    
+    @objc func biometricLoginAction(){
+      authenticateUserUsingBiometrics()
     }
     
     @IBAction func loginUser(_ sender: Any) {
@@ -70,45 +123,13 @@ class LoginVC: UIViewController {
             return
         }
         
+       
+
         guard let email    = emailTextField.text    else { return }
         guard let password = passwordTextField.text else { return }
+        
+        loginUserWithCredentials(email: email, password: password)
 
-        let emailValid = isValidEmail(email: email)
-        
-        if (emailValid){
-            //email is valid, try to log in the user
-            
-            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                
-                if let err = error {
-                    print("Error with logging user")
-                    print(err.localizedDescription)
-                    self.showLoginPopup(title: "Error!", description: err.localizedDescription, image: UIImage(named: "error_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.red, isError: true)
-                }
-                else {
-                    print("user successfully logged in")
-                    DispatchQueue.main.async {
-                        self.updateDatabaseForUser()
-                    }
-                     //Show fav places vc
-                    if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
-                       
-                        //self.present(favPlacesVC, animated: true, completion: nil)
-                        self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
-                    }
-                }
-                
-            }
-            
-        }
-        else {
-            //email style is not ok, show an error
-            
-            emailTextField.showError(message: "Email is not valid")
-            return
-        }
-        
-        
     }
     
     
@@ -150,6 +171,61 @@ class LoginVC: UIViewController {
         }
         return existingUser
     }
+    
+    func loginUserWithCredentials(email: String?, password: String?) {
+     
+                guard let email    = email    else { return }
+                guard let password = password else { return }
+        
+                let emailValid = isValidEmail(email: email)
+        
+                if (emailValid){
+                    //email is valid, try to log in the user
+        
+                    Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+        
+                        if let err = error {
+                            print("Error with logging user")
+                            print(err.localizedDescription)
+                            self.showLoginPopup(title: "Error!", description: err.localizedDescription, image: UIImage(named: "error_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.red, isError: true)
+                        }
+                        else {
+                            print("user successfully logged in")
+                            DispatchQueue.main.async {
+                                self.updateDatabaseForUser()
+                            }
+        
+        
+                            if self.keychainUser.elementsEqual("No keychain user"){
+                                self.askUserForBiometricalLogin(email: email, password: password)
+                            }
+                            else{
+        
+                             //Show fav places vc
+                            if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
+        
+                                //self.present(favPlacesVC, animated: true, completion: nil)
+                                self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
+                              }
+        
+                            }
+        
+                        }
+        
+                    }
+        
+                }
+                else {
+                    //email style is not ok, show an error
+        
+                    emailTextField.showError(message: "Email is not valid")
+                    return
+                }
+        
+        
+        
+    }
+    
     
     func updateDatabaseForUser(){
         
@@ -221,6 +297,165 @@ class LoginVC: UIViewController {
             }
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+         let lastAccessedUserName = UserDefaults.standard.object(forKey: "lastAccessedUserName") as? String
+        
+        
+        if (lastAccessedUserName == nil){
+            print("no stored user in the keychain")
+            keychainUser = "No keychain user"
+            
+        }
+         else {
+            print("lastAccessedUserName: \(lastAccessedUserName!)")
+            keychainUser = lastAccessedUserName!
+            print("keychainUser: \(keychainUser!)")
+            if (biometricType != .none){
+              authenticateUserUsingBiometrics()
+            }
+        }
+    }
+    
+    func askUserForBiometricalLogin(email: String, password: String){
+        
+        
+        
+        if keychainUser.elementsEqual("No keychain user") {
+            //ask the user if wants to setup biometrical login
+            
+            let alertController = UIAlertController(title: "Biometrical login", message: "This application has feature to login to your app with your biometric. Do you want to use it?", preferredStyle: .alert)
+            
+            alertController.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (cancelAction) in
+                
+                print("do not save to keychain")
+                //Show fav places vc
+                if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
+                    
+                    //self.present(favPlacesVC, animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
+                }
+                
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (yesAction) in
+                
+                
+                self.saveAccountDetailsToKeychain(account: email, password: password)
+                //Show fav places vc
+                if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
+                    
+                    //self.present(favPlacesVC, animated: true, completion: nil)
+                    self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
+                }
+                
+            }))
+            
+            
+            
+            present(alertController, animated: true)
+            
+        }
+        
+    }
+    
+    // Biometrical login methods
+    
+    fileprivate func saveAccountDetailsToKeychain(account: String, password: String) {
+        
+        if (account != "" && password != ""){
+        
+        print("saveAccountDetails called")
+        UserDefaults.standard.set(account, forKey: "lastAccessedUserName")
+        print("user defaults set")
+        let passwordItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: account, accessGroup: KeychainConfiguration.accessGroup)
+        do {
+            try passwordItem.savePassword(password)
+        } catch {
+            print("Error saving password")
+        }
+        
+        }
+        
+    }
+    
+     fileprivate func authenticateUserUsingBiometrics() {
+        let context = LAContext()
+        if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: nil) {
+            self.evaulateTocuhIdAuthenticity(context: context)
+        }
+    }
+    
+    func evaulateTocuhIdAuthenticity(context: LAContext) {
+        guard let lastAccessedUserName = UserDefaults.standard.object(forKey: "lastAccessedUserName") as? String else { return }
+        print("evaluateBiometrical username: \(lastAccessedUserName)")
+        context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: lastAccessedUserName) { (authSuccessful, authError) in
+            if authSuccessful {
+                self.loadPasswordFromKeychainAndAuthenticateUser(lastAccessedUserName)
+            } else {
+                
+                if let error = authError as? NSError {
+                    print("error evaluating biometrics")
+                    self.showError(error: error.code)
+                }
+            }
+        }
+    }
+    
+    func showError(error: Int) {
+        
+        print("show Error: \(error)")
+        var message: String = ""
+        switch error {
+        case LAError.authenticationFailed.rawValue:
+            message = "Authentication was not successful because the user failed to provide valid credentials. Please enter password to login."
+            break
+        case LAError.userCancel.rawValue:
+            message = "Authentication was canceled by the user"
+            break
+        case LAError.userFallback.rawValue:
+            message = "Authentication was canceled because the user tapped the fallback button"
+            break
+        case LAError.biometryNotEnrolled.rawValue:
+            message = "Authentication could not start because Biometric security is not enrolled ."
+            break
+        case LAError.passcodeNotSet.rawValue:
+            message = "Passcode is not set on the device."
+            break
+        case LAError.systemCancel.rawValue:
+            message = "Authentication was canceled by system"
+            break
+        default:
+            message = "Did not find error on LAError object"
+            break
+        }
+         //show error message
+        let errorAlert = UIAlertController(title: "Biometrical error", message: message, preferredStyle: .alert)
+        errorAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(errorAlert, animated: true)
+        //self.showPopupWithMessage(message)
+    }
+    
+    fileprivate func loadPasswordFromKeychainAndAuthenticateUser(_ account: String) {
+        guard !account.isEmpty else { return }
+        
+        let passwordItem = KeychainPasswordItem(service:   KeychainConfiguration.serviceName, account: account, accessGroup: KeychainConfiguration.accessGroup)
+        do {
+            let storedPassword = try passwordItem.readPassword()
+             //authenticateUser(storedPassword)
+             loginUserWithCredentials(email: account, password: storedPassword)
+             // login the user with mail and passowrd
+        } catch KeychainPasswordItem.KeychainError.noPassword {
+            print("No saved password")
+        } catch {
+            print("Unhandled error")
+        }
+    }
+    
     
     
     func showLoginPopup(title: String, description: String, image: UIImage, buttonTitle: String, buttonTitleColor: AppColor, buttonBackgroundColor: AppColor, popupBackgroundColor: AppColor, isError: Bool){
