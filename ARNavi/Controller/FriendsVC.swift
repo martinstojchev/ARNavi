@@ -29,21 +29,34 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
         ref = Database.database().reference()
         
+        let rightBarButtonImg = UIImage(named: "search_icon")
+        let rightNavBarButton = UIBarButtonItem(image: rightBarButtonImg, style: .done, target: self, action: #selector(showSearchBar))
+        self.navigationItem.rightBarButtonItem = rightNavBarButton
         self.navigationItem.title = "Friends"
         friendsTableView.dataSource = self
         friendsTableView.delegate   = self
         friendsTableView.backgroundColor = AppColor.backgroundColor.rawValue
         view.backgroundColor = AppColor.backgroundColor.rawValue
         // Do any additional setup after loading the view.
+        setupSearchController()
+        definesPresentationContext = true
+        
+        checkForFriends()
+        
+    }
+    
+    @objc func setupSearchController(){
+        
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Friends"
         navigationItem.searchController = searchController
-        definesPresentationContext = true
         
-        checkForFriends()
-        
+    }
+    
+    @objc func showSearchBar(){
+        present(searchController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
