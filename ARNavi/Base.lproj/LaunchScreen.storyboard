@@ -13,32 +13,11 @@
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchScreenVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="6nS-3w-32a">
-                                <rect key="frame" x="82" y="396" width="211" height="131"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="131" id="OYR-cd-yUF"/>
-                                    <constraint firstAttribute="width" constant="211" id="tIa-Ob-BUf"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AR Navi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oC7-eX-c0l">
-                                <rect key="frame" x="113.5" y="307" width="148.5" height="53"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="44"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="oC7-eX-c0l" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Kx4-LR-65Y"/>
-                            <constraint firstItem="oC7-eX-c0l" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="LXt-ez-RKS"/>
-                            <constraint firstItem="6nS-3w-32a" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="awZ-ob-KXi"/>
-                            <constraint firstItem="6nS-3w-32a" firstAttribute="top" secondItem="oC7-eX-c0l" secondAttribute="bottom" constant="36" id="xv0-13-WNx"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -47,7 +26,4 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="splash_logo" width="512" height="512"/>
-    </resources>
 </document>

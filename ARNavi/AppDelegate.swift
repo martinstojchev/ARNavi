@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Firebase
 import SideMenu
+import Lottie
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        if let splashVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplashScreenVC") as? SplashScreenVC {
+         self.window?.rootViewController = splashVC
+         self.window?.makeKeyAndVisible()
+        }
+        
+        
         if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             
             if shortcutItem.type == "com.martin.ARNavi.adduser" {
@@ -31,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+ 
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
@@ -72,6 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+    }
+    
+    class func sharedInstance() -> AppDelegate{
+        return UIApplication.shared.delegate as! AppDelegate
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

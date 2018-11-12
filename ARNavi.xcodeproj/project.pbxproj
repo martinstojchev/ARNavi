@@ -26,6 +26,9 @@
 		5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF621215903DB00D8E056 /* FirstScreenVC.swift */; };
 		5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6232159088D00D8E056 /* LoginVC.swift */; };
 		5BACF6262159156100D8E056 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6252159156100D8E056 /* SignupVC.swift */; };
+		5BAD8C30219991DA00EC8221 /* SplashScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD8C2F219991DA00EC8221 /* SplashScreenVC.swift */; };
+		5BAD8C332199939F00EC8221 /* location_pin.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BAD8C322199939F00EC8221 /* location_pin.json */; };
+		5BAD8C35219997EF00EC8221 /* location.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BAD8C34219997EF00EC8221 /* location.json */; };
 		5BBB50512181C636004FE186 /* HidingKeyboard extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB50502181C636004FE186 /* HidingKeyboard extension.swift */; };
 		5BC8E12D2179F7110045BC37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BC8E12C2179F7110045BC37 /* GoogleService-Info.plist */; };
 		5BC8E12F217A00FC0045BC37 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC8E12E217A00FC0045BC37 /* User.swift */; };
@@ -56,6 +59,9 @@
 		5BACF621215903DB00D8E056 /* FirstScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenVC.swift; sourceTree = "<group>"; };
 		5BACF6232159088D00D8E056 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		5BACF6252159156100D8E056 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		5BAD8C2F219991DA00EC8221 /* SplashScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenVC.swift; sourceTree = "<group>"; };
+		5BAD8C322199939F00EC8221 /* location_pin.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = location_pin.json; sourceTree = "<group>"; };
+		5BAD8C34219997EF00EC8221 /* location.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = location.json; sourceTree = "<group>"; };
 		5BBB50502181C636004FE186 /* HidingKeyboard extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HidingKeyboard extension.swift"; sourceTree = "<group>"; };
 		5BC8E12C2179F7110045BC37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5BC8E12E217A00FC0045BC37 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -83,6 +89,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BAD8C312199938900EC8221 /* Splash animation */ = {
+			isa = PBXGroup;
+			children = (
+				5BAD8C34219997EF00EC8221 /* location.json */,
+				5BAD8C322199939F00EC8221 /* location_pin.json */,
+			);
+			path = "Splash animation";
+			sourceTree = "<group>";
+		};
 		5BFF09D52158DABC0067B35F = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +119,7 @@
 		5BFF09E02158DABC0067B35F /* ARNavi */ = {
 			isa = PBXGroup;
 			children = (
+				5BAD8C312199938900EC8221 /* Splash animation */,
 				5BFF09F92158DDE40067B35F /* Helpers */,
 				5BFF09F82158DAF70067B35F /* Controller */,
 				5BFF09F72158DAF00067B35F /* View */,
@@ -140,6 +156,7 @@
 		5BFF09F82158DAF70067B35F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5BAD8C2F219991DA00EC8221 /* SplashScreenVC.swift */,
 				5BACF621215903DB00D8E056 /* FirstScreenVC.swift */,
 				5BACF6232159088D00D8E056 /* LoginVC.swift */,
 				5BACF6252159156100D8E056 /* SignupVC.swift */,
@@ -248,6 +265,8 @@
 				5BC8E12D2179F7110045BC37 /* GoogleService-Info.plist in Resources */,
 				5BFF09EC2158DABD0067B35F /* Assets.xcassets in Resources */,
 				5BFF09E72158DABC0067B35F /* Main.storyboard in Resources */,
+				5BAD8C35219997EF00EC8221 /* location.json in Resources */,
+				5BAD8C332199939F00EC8221 /* location_pin.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +365,7 @@
 				5BFF09E22158DABC0067B35F /* AppDelegate.swift in Sources */,
 				5B77AE3A21807A9C00084ACC /* UpdateInfoVC.swift in Sources */,
 				5B3F1C062189B5F90098008A /* RequestsTableViewCell.swift in Sources */,
+				5BAD8C30219991DA00EC8221 /* SplashScreenVC.swift in Sources */,
 				5B77AE3621805D9000084ACC /* SideMenuVC.swift in Sources */,
 				5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */,
 				5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */,

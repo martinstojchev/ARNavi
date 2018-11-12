@@ -820,10 +820,59 @@
             </objects>
             <point key="canvasLocation" x="1888.8" y="-385.45727136431788"/>
         </scene>
+        <!--Splash ScreenVC-->
+        <scene sceneID="eDl-rQ-fRC">
+            <objects>
+                <viewController storyboardIdentifier="SplashScreenVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="G2a-sJ-ohP" customClass="SplashScreenVC" customModule="ARNavi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DgZ-Hq-ESQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AR Navi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlB-6A-6bu">
+                                <rect key="frame" x="110" y="307" width="155" height="53"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="44"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="VX9-0B-9du">
+                                <rect key="frame" x="82" y="396" width="211" height="131"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="211" id="g2H-ua-PVQ"/>
+                                    <constraint firstAttribute="height" constant="131" id="xoC-eg-XLN"/>
+                                </constraints>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1Q-Ae-nHZ" customClass="LOTAnimationView">
+                                <rect key="frame" x="112.5" y="131" width="150" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="F67-81-NAT"/>
+                                    <constraint firstAttribute="width" constant="150" id="cbS-Cz-LFF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="d1Q-Ae-nHZ" firstAttribute="centerX" secondItem="DgZ-Hq-ESQ" secondAttribute="centerX" id="Iuy-F3-4IA"/>
+                            <constraint firstItem="VX9-0B-9du" firstAttribute="top" secondItem="RlB-6A-6bu" secondAttribute="bottom" constant="36" id="WL3-ow-5T3"/>
+                            <constraint firstItem="RlB-6A-6bu" firstAttribute="centerY" secondItem="DgZ-Hq-ESQ" secondAttribute="centerY" id="nVa-Tf-p1e"/>
+                            <constraint firstItem="RlB-6A-6bu" firstAttribute="centerX" secondItem="DgZ-Hq-ESQ" secondAttribute="centerX" id="qO4-OD-Zqb"/>
+                            <constraint firstItem="VX9-0B-9du" firstAttribute="centerX" secondItem="DgZ-Hq-ESQ" secondAttribute="centerX" id="rVK-3d-x0p"/>
+                            <constraint firstItem="RlB-6A-6bu" firstAttribute="top" secondItem="d1Q-Ae-nHZ" secondAttribute="bottom" constant="26" id="xxQ-fq-mim"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="102-QK-Phb"/>
+                    </view>
+                    <connections>
+                        <outlet property="animationView" destination="d1Q-Ae-nHZ" id="hOa-TT-daW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ze5-Yd-AJC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-900" y="-179"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="jSu-w3-lEj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cW4-LZ-hwL" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cW4-LZ-hwL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Wp-RR-31K">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -840,6 +889,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="splash_logo" width="512" height="512"/>
         <image name="touchid_logo" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
