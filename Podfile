@@ -15,4 +15,5 @@ target 'ARNavi' do
   pod 'SideMenu'
   pod 'SwiftEntryKit', '0.8.2'
   pod "SwiftSpinner"
+  pod 'lottie-ios'
 end
