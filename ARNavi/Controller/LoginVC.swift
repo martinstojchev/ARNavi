@@ -12,6 +12,7 @@ import Firebase
 import FirebaseDatabase
 import SwiftEntryKit
 import LocalAuthentication
+import SwiftSpinner
 
 enum BiometricType {
     case none
@@ -181,15 +182,18 @@ class LoginVC: UIViewController {
         
                 if (emailValid){
                     //email is valid, try to log in the user
+                    SwiftSpinner.show("", animated: true)
         
                     Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
         
                         if let err = error {
+                            SwiftSpinner.hide()
                             print("Error with logging user")
                             print(err.localizedDescription)
                             self.showLoginPopup(title: "Error!", description: err.localizedDescription, image: UIImage(named: "error_icon")!, buttonTitle: "OK", buttonTitleColor: AppColor.white, buttonBackgroundColor: AppColor.black, popupBackgroundColor: AppColor.red, isError: true)
                         }
                         else {
+                            
                             print("user successfully logged in")
                             DispatchQueue.main.async {
                                 self.updateDatabaseForUser()
@@ -205,6 +209,7 @@ class LoginVC: UIViewController {
                             if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
         
                                 //self.present(favPlacesVC, animated: true, completion: nil)
+                                SwiftSpinner.hide()
                                 self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
                               }
         
