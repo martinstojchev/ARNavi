@@ -130,6 +130,7 @@ PODS:
   - SideMenu (5.0.0)
   - SwiftEntryKit (0.8.2):
     - QuickLayout (= 2.1.1)
+  - SwiftSpinner (1.6.2)
 
 DEPENDENCIES:
   - DTTextField
@@ -140,6 +141,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - SideMenu
   - SwiftEntryKit (= 0.8.2)
+  - SwiftSpinner
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -168,6 +170,7 @@ SPEC REPOS:
     - QuickLayout
     - SideMenu
     - SwiftEntryKit
+    - SwiftSpinner
 
 SPEC CHECKSUMS:
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
@@ -195,7 +198,8 @@ SPEC CHECKSUMS:
   QuickLayout: 9af2b7fd89a6552828f51a5aba28d1bcdb8b340c
   SideMenu: e4303cca3170aff3e1f0ebc44f378cfca6b33fe9
   SwiftEntryKit: c3782ddda1ccbd35899d5f9bfad1c3ab9c823e2a
+  SwiftSpinner: 3a4c6dea425e5a31b908a8b1dd5dcd1ad4d96340
 
-PODFILE CHECKSUM: ecc59e995f0e19bf6aef0dff9d183ebf4ff63137
+PODFILE CHECKSUM: bbe8f1ca5fc67a087271dfa0fce13ba28fe703e7
 
 COCOAPODS: 1.5.3

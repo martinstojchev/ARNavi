@@ -14,5 +14,5 @@ target 'ARNavi' do
   pod 'Firebase/Storage'
   pod 'SideMenu'
   pod 'SwiftEntryKit', '0.8.2'
-
+  pod "SwiftSpinner"
 end
