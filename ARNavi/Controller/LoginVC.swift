@@ -182,7 +182,7 @@ class LoginVC: UIViewController {
         
                 if (emailValid){
                     //email is valid, try to log in the user
-                    SwiftSpinner.show("", animated: true)
+                    SwiftSpinner.show("Logging in...", animated: true)
         
                     Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
         

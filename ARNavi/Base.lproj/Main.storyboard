@@ -673,7 +673,7 @@
                         <outlet property="changePassTxtField" destination="Ht4-2o-JnD" id="XQ5-05-bJo"/>
                         <outlet property="removeAccButton" destination="PE1-aV-0u5" id="1RZ-WM-8SA"/>
                         <outlet property="updateNameTxtField" destination="kFc-QV-21U" id="LKw-zD-s0D"/>
-                        <outlet property="updateUsernameTxtField" destination="2Lx-Sx-ZFJ" id="DWY-hC-N2R"/>
+                        <outlet property="updateUsernameTxtField" destination="2Lx-Sx-ZFJ" id="Qf2-yb-Jir"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5PP-Yx-c2N" userLabel="First Responder" sceneMemberID="firstResponder"/>

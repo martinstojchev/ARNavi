@@ -11,6 +11,7 @@ import DTTextField
 import Firebase
 import FirebaseDatabase
 import SwiftEntryKit
+import SwiftSpinner
 
 class SignupVC: UIViewController {
 
@@ -94,18 +95,23 @@ class SignupVC: UIViewController {
                 
             }
             else {
+                SwiftSpinner.show("Signing up...", animated: true)
                 // signup the user
                 Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                     
                     if let err = error {
                          print("creating user failed")
                          print(err.localizedDescription)
+                        SwiftSpinner.show(err.localizedDescription, animated: true).addTapHandler({
+                            SwiftSpinner.hide()
+                        })
                     }
                     else {
                         
                         print("successfully created user")
                         self.loggedUser = User(name: name, username: username, email: email)
                         self.updateUsersName(displayName: name)
+                        SwiftSpinner.hide()
                     }
                     
                     

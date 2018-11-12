@@ -12,10 +12,10 @@ import Firebase
 import FirebaseCore
 import FirebaseDatabase
 import SwiftEntryKit
+import SwiftSpinner
 
 class UpdateInfoVC: UIViewController {
     @IBOutlet weak var updateUsernameTxtField: DTTextField!
-    
     @IBOutlet weak var updateNameTxtField: DTTextField!
     @IBOutlet weak var changePassTxtField: DTTextField!
     @IBOutlet weak var removeAccButton: UIButton!
@@ -55,6 +55,7 @@ class UpdateInfoVC: UIViewController {
 
     @IBAction func removeAccount(_ sender: Any) {
         
+        SwiftSpinner.show("Removing your account...", animated: true)
         let currentUser = Auth.auth().currentUser
         guard let currentUserId = currentUser?.uid else { return }
         
@@ -62,6 +63,9 @@ class UpdateInfoVC: UIViewController {
             if let err = error {
                 print("error while removing this account")
                 print(err.localizedDescription)
+                SwiftSpinner.show(err.localizedDescription, animated: true).addTapHandler({
+                    SwiftSpinner.hide()
+                })
                 
             }
             else {
@@ -69,6 +73,7 @@ class UpdateInfoVC: UIViewController {
                 
                 self.ref.child("users").child(currentUserId).removeValue()
                 print("successfully removed this account from database")
+                SwiftSpinner.hide()
                 
                 if let firstVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstScreenVC") as? FirstScreenVC {
                     self.navigationController?.pushViewController(firstVC, animated: true)
@@ -87,7 +92,7 @@ class UpdateInfoVC: UIViewController {
     func updateUsersName(name: String) {
         
         ref = Database.database().reference()
-        
+        SwiftSpinner.show("Updating name...", animated: true)
         print("updateUsersName with name: \(name)")
         
             guard let currentUserID = Auth.auth().currentUser?.uid else { return }
@@ -105,9 +110,17 @@ class UpdateInfoVC: UIViewController {
             if let err = error {
 
                 print("Error: \(err.localizedDescription)")
+                SwiftSpinner.show(err.localizedDescription, animated: true).addTapHandler({
+                    SwiftSpinner.hide()
+                })
             }
             else {
+                self.updateNameTxtField.insertText("")
                 print("Successfully changed displayname for current user")
+                SwiftSpinner.show("Successfully changed displayname for current user", animated: true).addTapHandler({
+                    SwiftSpinner.hide()
+                })
+                
             }
 
         })
@@ -115,6 +128,7 @@ class UpdateInfoVC: UIViewController {
     }
     
     func updateUsersUsername(username: String) {
+        SwiftSpinner.show("Updating username...", animated: true)
         ref = Database.database().reference()
         print("updateUsersUsername with username: \(username)")
         
@@ -123,22 +137,27 @@ class UpdateInfoVC: UIViewController {
         //update the username in database
         ref.child("users/\(currentUserID)/username").setValue(username)
         
+        SwiftSpinner.hide()
         print("updated info for logged user.")
         
     }
     
     func updateUsersPassword(password: String) {
         
-        
+        SwiftSpinner.show("Updating password", animated: true)
         print("updateUsersPassword with password: \(password)")
         Auth.auth().currentUser?.updatePassword(to: password, completion: { (error) in
             
             if let err = error {
                 print("error occurred while updating users password")
                 print(err.localizedDescription)
+                SwiftSpinner.show(err.localizedDescription, animated: true).addTapHandler({
+                    SwiftSpinner.hide()
+                })
             }
             else {
                 print("successfully updated users password")
+                SwiftSpinner.hide()
             }
         })
     }
@@ -148,6 +167,7 @@ class UpdateInfoVC: UIViewController {
         let alert = UIAlertController(title: "Reauthenticate", message: "Please fill your credentials", preferredStyle: .alert)
         let loginAction = UIAlertAction(title: "Login", style: .default) { (alertAction) in
             
+            SwiftSpinner.show("Reauthenticating...", animated: true)
             let emailTextField = alert.textFields![0] as UITextField
             let passTextField = alert.textFields![1] as  UITextField
             
@@ -167,12 +187,17 @@ class UpdateInfoVC: UIViewController {
                 if let err = error {
                     print("error occured while reauthenticating")
                     print(err.localizedDescription)
+                    SwiftSpinner.show(err.localizedDescription, animated: true).addTapHandler({
+                        SwiftSpinner.hide()
+                        self.reauthenticateUserForm()
+                    })
                     
                 }
                 else {
                     // user re-authenticated
                     print("user re-authenticated")
-                    //SwiftEntryKit.dismiss()
+                    SwiftSpinner.hide()
+                    
                 }
             })
             
@@ -181,6 +206,7 @@ class UpdateInfoVC: UIViewController {
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alertAction) in
              self.dismiss(animated: true, completion: nil)
+             self.navigationController?.popViewController(animated: true)
         }
         
         alert.addTextField { (textField) in

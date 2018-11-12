@@ -12,6 +12,7 @@ import Firebase
 import Photos
 import FirebaseFirestore
 import FirebaseStorage
+import SwiftSpinner
 
 protocol ProfilePictureDelegate: class {
     
@@ -102,15 +103,20 @@ class SideMenuVC: UIViewController {
     
 
     func logoutCurrentUser() {
-        
+        SwiftSpinner.show("Logging out...", animated: true)
         let firebaseAuth = Auth.auth()
         do{
             try firebaseAuth.signOut()
             print("user is signed out")
             //isUserLogged = false
+            SwiftSpinner.hide()
+            transitionToFirstScreen()
         }
         catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
+            SwiftSpinner.show(signOutError.localizedDescription, animated: true).addTapHandler ({
+                SwiftSpinner.hide()
+            })
         }
         
     }
@@ -119,7 +125,7 @@ class SideMenuVC: UIViewController {
     @IBAction func logoutUser(_ sender: Any) {
         
         logoutCurrentUser()
-        transitionToFirstScreen()
+        
     }
     
     func transitionToFirstScreen() {
