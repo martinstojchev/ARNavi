@@ -30,6 +30,8 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     var ref: DatabaseReference!
+    let impact = UIImpactFeedbackGenerator()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +72,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
    
         if gestureRecognizer.state == .ended {
+            
           let touchPoint = gestureRecognizer.location(in: self.favPlacesTableView)
             
             if let indexPath = favPlacesTableView.indexPathForRow(at: touchPoint){
@@ -81,6 +84,10 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             }
             
          }
+        
+        if gestureRecognizer.state == .began{
+        impact.impactOccurred()
+        }
     }
     
     func showAlertLongPress(forCell cell: UITableViewCell){
