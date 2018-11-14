@@ -144,6 +144,7 @@
                                 <state key="normal" title="Log in with Twitter"/>
                                 <connections>
                                     <action selector="signupUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="35U-fg-68q"/>
+                                    <action selector="twitterLoginAction:" destination="Jsz-md-uVm" eventType="touchUpInside" id="lrX-Ig-yhh"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dIb-BW-yHS">

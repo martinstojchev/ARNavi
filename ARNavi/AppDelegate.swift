@@ -11,6 +11,7 @@ import CoreData
 import Firebase
 import SideMenu
 import Lottie
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        TWTRTwitter.sharedInstance().start(withConsumerKey: "W7gUASry4YKefi3EZHgIR9MTX", consumerSecret: "ehTv1Xiq1rHdAzidfsP8f4o1M6McKes1FIFjlNrPmZB4W0hRyG")
         
         if let splashVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplashScreenVC") as? SplashScreenVC {
          self.window?.rootViewController = splashVC
@@ -37,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
     }
     
  

@@ -132,6 +132,9 @@ PODS:
   - SwiftEntryKit (0.8.2):
     - QuickLayout (= 2.1.1)
   - SwiftSpinner (1.6.2)
+  - TwitterCore (3.2.0)
+  - TwitterKit (3.4.1):
+    - TwitterCore (>= 3.1.0)
 
 DEPENDENCIES:
   - DTTextField
@@ -144,6 +147,7 @@ DEPENDENCIES:
   - SideMenu
   - SwiftEntryKit (= 0.8.2)
   - SwiftSpinner
+  - TwitterKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -174,6 +178,8 @@ SPEC REPOS:
     - SideMenu
     - SwiftEntryKit
     - SwiftSpinner
+    - TwitterCore
+    - TwitterKit
 
 SPEC CHECKSUMS:
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
@@ -203,7 +209,9 @@ SPEC CHECKSUMS:
   SideMenu: e4303cca3170aff3e1f0ebc44f378cfca6b33fe9
   SwiftEntryKit: c3782ddda1ccbd35899d5f9bfad1c3ab9c823e2a
   SwiftSpinner: 3a4c6dea425e5a31b908a8b1dd5dcd1ad4d96340
+  TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
+  TwitterKit: 054005edf5350aa9074af74b41456e5a61e3f322
 
-PODFILE CHECKSUM: c24f45232b96c071102c9958f6f55b18f9633646
+PODFILE CHECKSUM: 4822e35625e840c4920547c3699ca4f3e85d3ed2
 
 COCOAPODS: 1.5.3

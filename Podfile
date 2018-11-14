@@ -16,4 +16,5 @@ target 'ARNavi' do
   pod 'SwiftEntryKit', '0.8.2'
   pod "SwiftSpinner"
   pod 'lottie-ios'
+  pod ‘TwitterKit’ 
 end

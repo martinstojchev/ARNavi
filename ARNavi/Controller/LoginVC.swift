@@ -13,6 +13,7 @@ import FirebaseDatabase
 import SwiftEntryKit
 import LocalAuthentication
 import SwiftSpinner
+import TwitterKit
 
 enum BiometricType {
     case none
@@ -67,6 +68,8 @@ class LoginVC: UIViewController {
         self.hideKeyboardWhenTappedAround()
         
         ref = Database.database().reference()
+        
+        //configureTwitterSignInButton()
         
         print("biometrics: \(biometricType)")
         if(biometricType == .touchID){
@@ -201,6 +204,7 @@ class LoginVC: UIViewController {
         
         
                             if self.keychainUser.elementsEqual("No keychain user"){
+                                SwiftSpinner.hide()
                                 self.askUserForBiometricalLogin(email: email, password: password)
                             }
                             else{
@@ -212,7 +216,12 @@ class LoginVC: UIViewController {
                                 SwiftSpinner.hide()
                                 self.performSegue(withIdentifier: "loginToFavSegue", sender: nil)
                               }
-        
+                                
+                            else {
+                                SwiftSpinner.hide()
+                                }
+                                
+                                
                             }
         
                         }
@@ -368,6 +377,29 @@ class LoginVC: UIViewController {
         
     }
     
+//    fileprivate func configureTwitterSignInButton() {
+//        let twitterSignInButton = TWTRLogInButton(logInCompletion: { session, error in
+//            if (error != nil) {
+//                print("Twitter authentication failed")
+//            } else {
+//                guard let token = session?.authToken else {return}
+//                guard let secret = session?.authTokenSecret else {return}
+//                let credential = TwitterAuthProvider.credential(withToken: token, secret: secret)
+//                Auth.auth().signIn(with: credential, completion: { (user, error) in
+//                    if error == nil {
+//                        print("Twitter authentication succeed")
+//                    } else {
+//                        print("Twitter authentication failed")
+//                    }
+//                })
+//            }
+//        })
+//
+//        twitterSignInButton.frame = CGRect(x: twitterLoginButton.frame.maxX + 20, y: twitterLoginButton.frame.maxY + 20, width: twitterLoginButton.frame.width, height: twitterLoginButton.frame.height)
+//         self.view.addSubview(twitterSignInButton)
+//
+//    }
+    
     // Biometrical login methods
     
     fileprivate func saveAccountDetailsToKeychain(account: String, password: String) {
@@ -461,7 +493,118 @@ class LoginVC: UIViewController {
         }
     }
     
+    //Twitter login action
     
+    @IBAction func twitterLoginAction(_ sender: Any) {
+        
+        TWTRTwitter.sharedInstance().logIn { (session, error) in
+            
+        
+            
+            if let session = session {
+                let authToken = session.authToken
+                let authTokenSecret = session.authTokenSecret
+                print("session: \(session)")
+                
+                
+                
+                let credential = TwitterAuthProvider.credential(withToken: session.authToken, secret: session.authTokenSecret)
+                
+                Auth.auth().signInAndRetrieveData(with: credential, completion: { (authResult, error) in
+                    
+                    if let err = error {
+                        
+                        print("firebase error sign in and retreive data")
+                        print(err.localizedDescription)
+                    }
+                    else {
+                        
+                        let alertController = UIAlertController(title: "Input email address", message: "Please input your email address to use this application. Login with Twitter does not provide us your email address.", preferredStyle: .alert)
+                        
+                        
+                        
+                        let okAction = UIAlertAction(title: "Add", style: .default, handler: { (action) in
+                            
+                            let emailTextField = alertController.textFields![0] as UITextField
+                            
+                            guard let email = emailTextField.text else {return}
+                            
+                            guard let twitterUserID = Auth.auth().currentUser?.uid else {return}
+                            
+                            guard let userName = Auth.auth().currentUser?.displayName else { return }
+                            
+                            print("twitter user id: \(twitterUserID)")
+                            print("twitter email address: \(email)")
+                            
+                            self.writeUserToDatabase(userID: twitterUserID, userName: userName, email: email)
+                            self.updateUsersEmail(email: email)
+                            
+                            
+                        })
+                        
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                            
+                        })
+                            
+                            alertController.addAction(okAction)
+                            alertController.addAction(cancelAction)
+                        alertController.addTextField(configurationHandler: { (textField) in
+                            textField.placeholder = "Your email"
+                        })
+                        
+                        self.present(alertController, animated: true)
+                            
+                        
+                        print("user is signed in on firebase")
+                    }
+                })
+                
+            }
+            else if let err = error {
+                print("error twitter login: \(err.localizedDescription)")
+            }
+        
+            
+        }
+            
+       
+    }
+    
+    func updateUsersEmail(email : String){
+        
+            
+        Auth.auth().currentUser?.updateEmail(to: email, completion: { (error) in
+            
+            if let err = error {
+                print("error while chainging mail address for twitter user")
+                print(err.localizedDescription)
+            }
+            else {
+                print("successfully changed email address for twitter user")
+            }
+        })
+        
+        
+        
+    }
+    
+    func writeUserToDatabase(userID: String,userName: String, email: String) {
+        
+       
+        print("userID: \(userID), userName: \(userName),, userEmail: \(email)")
+        
+        self.ref.child("users").child(userID).setValue(["name": userName,"email": email])
+        
+        transitionToFavPlaces()
+        print("User stored to realtime database....")
+    }
+    
+    func transitionToFavPlaces() {
+        
+        if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
+            navigationController?.pushViewController(favPlacesVC, animated: true)
+        }
+    }
     
     func showLoginPopup(title: String, description: String, image: UIImage, buttonTitle: String, buttonTitleColor: AppColor, buttonBackgroundColor: AppColor, popupBackgroundColor: AppColor, isError: Bool){
         
