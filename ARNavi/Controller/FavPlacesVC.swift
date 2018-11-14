@@ -87,6 +87,8 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         guard let favPlaceName = cell.textLabel?.text else {return }
         
+        let shareText = favPlaceName.appending(" with coordinate(lat: 20.232312312, lon: 23.323211441)")
+        
         guard let indexPathForCell = favPlacesTableView.indexPath(for: cell) else {return}
         
       let alert = UIAlertController(title: "Select action for \(favPlaceName)", message: "", preferredStyle: .actionSheet)
@@ -101,6 +103,8 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
             
+            let activityController = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+            self.present(activityController, animated: true)
         }))
         
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
