@@ -734,24 +734,8 @@
                                     <action selector="signupUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gxg-NL-J1l"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9nD-Gm-Rrw">
-                                <rect key="frame" x="25" y="501" width="325" height="34"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="Sign up with Facebook"/>
-                                <connections>
-                                    <action selector="signupUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oln-IF-74m"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBd-Ng-3Zj">
-                                <rect key="frame" x="25" y="555" width="325" height="34"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="Sign up with Twitter"/>
-                                <connections>
-                                    <action selector="signupUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vGU-7b-ijT"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1mS-KQ-u2h">
-                                <rect key="frame" x="25" y="604" width="325" height="34"/>
+                                <rect key="frame" x="25" y="496" width="325" height="34"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4y9-C7-8oo">
                                         <rect key="frame" x="0.0" y="7" width="237" height="20.5"/>
@@ -772,7 +756,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9nD-Gm-Rrw" firstAttribute="top" secondItem="gdy-25-T0i" secondAttribute="bottom" constant="20" id="488-sp-lEn"/>
                             <constraint firstItem="wAL-an-EWI" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="5H6-Je-9U1"/>
                             <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="wAL-an-EWI" secondAttribute="trailing" constant="25" id="5xC-6q-Sgy"/>
                             <constraint firstItem="DVS-G2-XI4" firstAttribute="top" secondItem="7NI-Wf-k1B" secondAttribute="bottom" constant="20" id="6JR-wI-FSY"/>
@@ -783,37 +766,30 @@
                             <constraint firstItem="7NI-Wf-k1B" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="Bap-Nb-KMz"/>
                             <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="1mS-KQ-u2h" secondAttribute="trailing" constant="25" id="G3f-RX-0cx"/>
                             <constraint firstItem="wAL-an-EWI" firstAttribute="top" secondItem="inK-81-WCS" secondAttribute="bottom" constant="20" id="Gbz-sn-zVJ"/>
-                            <constraint firstItem="1mS-KQ-u2h" firstAttribute="top" secondItem="cBd-Ng-3Zj" secondAttribute="bottom" constant="15" id="Hli-LV-hlj"/>
                             <constraint firstItem="XCf-T5-V9N" firstAttribute="top" secondItem="wAL-an-EWI" secondAttribute="bottom" constant="20" id="MRf-Xs-k8w"/>
                             <constraint firstItem="KKz-pm-JlS" firstAttribute="top" secondItem="zWw-a6-Vbg" secondAttribute="top" constant="20" id="NQz-wZ-u38"/>
-                            <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="9nD-Gm-Rrw" secondAttribute="trailing" constant="25" id="PgS-Xc-hCk"/>
                             <constraint firstItem="inK-81-WCS" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="Rqb-sp-k7G"/>
-                            <constraint firstItem="9nD-Gm-Rrw" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="UCg-ML-A8P"/>
                             <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="XCf-T5-V9N" secondAttribute="trailing" constant="25" id="V3r-Ae-Kbe"/>
                             <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="inK-81-WCS" secondAttribute="trailing" constant="25" id="Vim-wE-UAP"/>
                             <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="gdy-25-T0i" secondAttribute="trailing" constant="25" id="djW-cX-8ya"/>
                             <constraint firstItem="DVS-G2-XI4" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="eec-6c-TDd"/>
                             <constraint firstItem="KKz-pm-JlS" firstAttribute="centerX" secondItem="P8C-bv-Qyr" secondAttribute="centerX" id="gyH-6Q-l1L"/>
-                            <constraint firstItem="cBd-Ng-3Zj" firstAttribute="top" secondItem="9nD-Gm-Rrw" secondAttribute="bottom" constant="20" id="kZA-z3-xoU"/>
                             <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="7NI-Wf-k1B" secondAttribute="trailing" constant="25" id="khs-RK-3lR"/>
                             <constraint firstItem="XCf-T5-V9N" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="kma-T6-4b9"/>
                             <constraint firstItem="gdy-25-T0i" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="mFv-AH-7yP"/>
-                            <constraint firstItem="cBd-Ng-3Zj" firstAttribute="leading" secondItem="zWw-a6-Vbg" secondAttribute="leading" constant="25" id="pyY-gA-h38"/>
-                            <constraint firstItem="zWw-a6-Vbg" firstAttribute="trailing" secondItem="cBd-Ng-3Zj" secondAttribute="trailing" constant="25" id="rlm-pr-aph"/>
+                            <constraint firstItem="1mS-KQ-u2h" firstAttribute="top" secondItem="gdy-25-T0i" secondAttribute="bottom" constant="15" id="npK-Hd-nRI"/>
                             <constraint firstItem="inK-81-WCS" firstAttribute="top" secondItem="DVS-G2-XI4" secondAttribute="bottom" constant="20" id="ykw-99-Ztb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zWw-a6-Vbg"/>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="inK-81-WCS" id="Jdj-XB-aVp"/>
-                        <outlet property="facebookSignupButton" destination="9nD-Gm-Rrw" id="2Be-1a-TzP"/>
                         <outlet property="infoLabel" destination="4y9-C7-8oo" id="20S-bg-NYL"/>
                         <outlet property="loginButton" destination="Lfu-zf-PTE" id="5hU-Zi-1C9"/>
                         <outlet property="nameTextField" destination="7NI-Wf-k1B" id="hOW-kj-df0"/>
                         <outlet property="passwordTextField" destination="wAL-an-EWI" id="ouO-q6-Qvv"/>
                         <outlet property="repeatPassTextField" destination="XCf-T5-V9N" id="r5n-Bp-EuG"/>
                         <outlet property="signupButton" destination="gdy-25-T0i" id="KbS-u2-oeF"/>
-                        <outlet property="twitterSignupButton" destination="cBd-Ng-3Zj" id="ttT-h5-aBs"/>
                         <outlet property="usernameTextField" destination="DVS-G2-XI4" id="gxa-8h-iDf"/>
                     </connections>
                 </viewController>
