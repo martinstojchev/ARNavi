@@ -50,7 +50,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2J-u7-XnH">
                                 <rect key="frame" x="142" y="615" width="91" height="30"/>
-                                <state key="normal" title="Try the demo"/>
+                                <state key="normal" title="Try the demo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="showDemo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nIz-LO-vz1"/>
                                 </connections>
@@ -230,14 +232,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xO0-3i-T1Q">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="satellite" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xO0-3i-T1Q">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <outlet property="delegate" destination="Fzb-xM-bRs" id="G0D-V5-wdA"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ES-pM-94H">
-                                <rect key="frame" x="327" y="40" width="32" height="32"/>
+                                <rect key="frame" x="327" y="50" width="32" height="32"/>
                                 <state key="normal" image="arrow"/>
                                 <connections>
                                     <action selector="showMyLocation:" destination="Fzb-xM-bRs" eventType="touchUpInside" id="JTM-zI-7Of"/>
@@ -294,7 +296,7 @@
                             <constraint firstAttribute="bottom" secondItem="xO0-3i-T1Q" secondAttribute="bottom" id="Dic-FF-5bp"/>
                             <constraint firstItem="Omu-vf-wl2" firstAttribute="leading" secondItem="PAG-tF-Ri8" secondAttribute="leading" id="G7D-gI-r4V"/>
                             <constraint firstItem="c61-ar-6X3" firstAttribute="bottom" secondItem="2T2-0i-WmN" secondAttribute="bottom" constant="20" id="KkD-ID-IeU"/>
-                            <constraint firstItem="4ES-pM-94H" firstAttribute="top" secondItem="c61-ar-6X3" secondAttribute="top" constant="20" id="Mer-7Z-B6a"/>
+                            <constraint firstItem="4ES-pM-94H" firstAttribute="top" secondItem="c61-ar-6X3" secondAttribute="top" constant="30" id="Mer-7Z-B6a"/>
                             <constraint firstItem="Omu-vf-wl2" firstAttribute="top" secondItem="PAG-tF-Ri8" secondAttribute="top" id="PV0-q8-Ovw"/>
                             <constraint firstAttribute="bottom" secondItem="Omu-vf-wl2" secondAttribute="bottom" id="R9N-YH-3iL"/>
                             <constraint firstItem="xO0-3i-T1Q" firstAttribute="leading" secondItem="PAG-tF-Ri8" secondAttribute="leading" id="RcN-lt-xlU"/>

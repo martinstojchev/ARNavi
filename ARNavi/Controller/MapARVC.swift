@@ -90,6 +90,7 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
         // Do any additional setup after loading the view, typically from a nib.
         
         myPositionButton.isHidden = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backToFirstScreen))
         
         //Location stuff
         checkLocationServices()
@@ -147,6 +148,12 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
         text += "Distance: \(String(format: "%.2f \(metricsForDistance)", distance))"
         statusTextView.text = text
         
+    }
+    
+    @objc func backToFirstScreen(){
+        print("back to first screen")
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
