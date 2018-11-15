@@ -23,6 +23,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     var filteredFriends = [Friend]()
     let searchController = UISearchController(searchResultsController: nil)
     var ref: DatabaseReference!
+    let impact = UIImpactFeedbackGenerator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,7 +208,7 @@ extension FriendsVC : AddRemoveFriendDelegate {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
         let requestsID = id
         self.ref.child("requests").child(id).updateChildValues([currentUserID : currentUserID])
-
+        impact.impactOccurred()
         //ref.child("users").child(id).updateChildValues(["requests" : currentUserID])
         
     }
@@ -215,7 +216,7 @@ extension FriendsVC : AddRemoveFriendDelegate {
     func removeFriend(withID id: String) {
         print("friendsVC remove friend withID: \(id)")
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        
+        impact.impactOccurred()
         //Removing friend from current's friend list
         self.ref.child("users").child(currentUserID).child("friends").child(id).removeValue { (error, databaseRef) in
             
