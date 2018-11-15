@@ -22,6 +22,17 @@
 		5B8889D221957D1400B122C6 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B8889D121957D1400B122C6 /* LocalAuthentication.framework */; };
 		5B8889D421957F7400B122C6 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8889D321957F7400B122C6 /* KeychainPasswordItem.swift */; };
 		5B8889D62195808B00B122C6 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8889D52195808B00B122C6 /* KeychainConfiguration.swift */; };
+		5B8EFADF219D631A0099B057 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B8EFADE219D631A0099B057 /* art.scnassets */; };
+		5B8EFAE1219D63AF0099B057 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAE0219D63AF0099B057 /* LocationSearchTable.swift */; };
+		5B8EFAE3219D63DB0099B057 /* SCNNode Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAE2219D63DB0099B057 /* SCNNode Extension.swift */; };
+		5B8EFAE5219D64220099B057 /* SceneKitUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAE4219D64220099B057 /* SceneKitUtils.swift */; };
+		5B8EFAE7219D64310099B057 /* DynamicGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAE6219D64310099B057 /* DynamicGeometry.swift */; };
+		5B8EFAE9219D64400099B057 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAE8219D64400099B057 /* String+Extension.swift */; };
+		5B8EFAEB219D64540099B057 /* FloationPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAEA219D64540099B057 /* FloationPoint+Extension.swift */; };
+		5B8EFAED219D64640099B057 /* Annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAEC219D64640099B057 /* Annotations.swift */; };
+		5B8EFAEF219D64880099B057 /* LocationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAEE219D64880099B057 /* LocationNode.swift */; };
+		5B8EFAF1219D64A60099B057 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAF0219D64A60099B057 /* Location.swift */; };
+		5B8EFAF3219D64DA0099B057 /* MapARVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EFAF2219D64DA0099B057 /* MapARVC.swift */; };
 		5BACF6202158F8FA00D8E056 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF61F2158F8FA00D8E056 /* AppColors.swift */; };
 		5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF621215903DB00D8E056 /* FirstScreenVC.swift */; };
 		5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BACF6232159088D00D8E056 /* LoginVC.swift */; };
@@ -55,6 +66,17 @@
 		5B8889D121957D1400B122C6 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		5B8889D321957F7400B122C6 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		5B8889D52195808B00B122C6 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
+		5B8EFADE219D631A0099B057 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		5B8EFAE0219D63AF0099B057 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		5B8EFAE2219D63DB0099B057 /* SCNNode Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode Extension.swift"; sourceTree = "<group>"; };
+		5B8EFAE4219D64220099B057 /* SceneKitUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneKitUtils.swift; sourceTree = "<group>"; };
+		5B8EFAE6219D64310099B057 /* DynamicGeometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicGeometry.swift; sourceTree = "<group>"; };
+		5B8EFAE8219D64400099B057 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		5B8EFAEA219D64540099B057 /* FloationPoint+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloationPoint+Extension.swift"; sourceTree = "<group>"; };
+		5B8EFAEC219D64640099B057 /* Annotations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotations.swift; sourceTree = "<group>"; };
+		5B8EFAEE219D64880099B057 /* LocationNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationNode.swift; sourceTree = "<group>"; };
+		5B8EFAF0219D64A60099B057 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		5B8EFAF2219D64DA0099B057 /* MapARVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapARVC.swift; sourceTree = "<group>"; };
 		5BACF61F2158F8FA00D8E056 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		5BACF621215903DB00D8E056 /* FirstScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScreenVC.swift; sourceTree = "<group>"; };
 		5BACF6232159088D00D8E056 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -126,6 +148,7 @@
 				5BFF09F62158DAE80067B35F /* Model */,
 				5BFF09E12158DABC0067B35F /* AppDelegate.swift */,
 				5BFF09E52158DABC0067B35F /* Main.storyboard */,
+				5B8EFADE219D631A0099B057 /* art.scnassets */,
 				5BFF09EB2158DABD0067B35F /* Assets.xcassets */,
 				5BFF09ED2158DABD0067B35F /* LaunchScreen.storyboard */,
 				5BFF09F02158DABD0067B35F /* Info.plist */,
@@ -140,6 +163,9 @@
 			children = (
 				5BC8E12E217A00FC0045BC37 /* User.swift */,
 				5B8889CF2192CCB800B122C6 /* Friend.swift */,
+				5B8EFAEC219D64640099B057 /* Annotations.swift */,
+				5B8EFAEE219D64880099B057 /* LocationNode.swift */,
+				5B8EFAF0219D64A60099B057 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -166,6 +192,8 @@
 				5B77AE3921807A9C00084ACC /* UpdateInfoVC.swift */,
 				5B77AE3B21807AB800084ACC /* RequestsVC.swift */,
 				5B77AE3D21807AD500084ACC /* SettingsVC.swift */,
+				5B8EFAE0219D63AF0099B057 /* LocationSearchTable.swift */,
+				5B8EFAF2219D64DA0099B057 /* MapARVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,6 +207,11 @@
 				5B3F1C03218995BA0098008A /* FormFieldPresetFactory.swift */,
 				5B8889D321957F7400B122C6 /* KeychainPasswordItem.swift */,
 				5B8889D52195808B00B122C6 /* KeychainConfiguration.swift */,
+				5B8EFAE2219D63DB0099B057 /* SCNNode Extension.swift */,
+				5B8EFAE4219D64220099B057 /* SceneKitUtils.swift */,
+				5B8EFAE6219D64310099B057 /* DynamicGeometry.swift */,
+				5B8EFAE8219D64400099B057 /* String+Extension.swift */,
+				5B8EFAEA219D64540099B057 /* FloationPoint+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -265,6 +298,7 @@
 				5BFF09EF2158DABD0067B35F /* LaunchScreen.storyboard in Resources */,
 				5BC8E12D2179F7110045BC37 /* GoogleService-Info.plist in Resources */,
 				5BFF09EC2158DABD0067B35F /* Assets.xcassets in Resources */,
+				5B8EFADF219D631A0099B057 /* art.scnassets in Resources */,
 				5BFF09E72158DABC0067B35F /* Main.storyboard in Resources */,
 				5BAD8C35219997EF00EC8221 /* location.json in Resources */,
 				5BAD8C332199939F00EC8221 /* location_pin.json in Resources */,
@@ -385,24 +419,34 @@
 			files = (
 				5B77AE3821807A8400084ACC /* FriendsVC.swift in Sources */,
 				5B3F1C0A2189CA580098008A /* FriendsCell.swift in Sources */,
+				5B8EFAEB219D64540099B057 /* FloationPoint+Extension.swift in Sources */,
 				5BACF6262159156100D8E056 /* SignupVC.swift in Sources */,
 				5BBB50512181C636004FE186 /* HidingKeyboard extension.swift in Sources */,
 				5BACF6202158F8FA00D8E056 /* AppColors.swift in Sources */,
 				5B87DE39217DA6720094B7F2 /* FavPlacesVC.swift in Sources */,
 				5BFF09E22158DABC0067B35F /* AppDelegate.swift in Sources */,
 				5B77AE3A21807A9C00084ACC /* UpdateInfoVC.swift in Sources */,
+				5B8EFAE1219D63AF0099B057 /* LocationSearchTable.swift in Sources */,
 				5B3F1C062189B5F90098008A /* RequestsTableViewCell.swift in Sources */,
 				5BAD8C30219991DA00EC8221 /* SplashScreenVC.swift in Sources */,
+				5B8EFAEF219D64880099B057 /* LocationNode.swift in Sources */,
+				5B8EFAE7219D64310099B057 /* DynamicGeometry.swift in Sources */,
+				5B8EFAF3219D64DA0099B057 /* MapARVC.swift in Sources */,
 				5B77AE3621805D9000084ACC /* SideMenuVC.swift in Sources */,
 				5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */,
 				5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */,
 				5B8889D62195808B00B122C6 /* KeychainConfiguration.swift in Sources */,
 				5B3F1C04218995BA0098008A /* FormFieldPresetFactory.swift in Sources */,
+				5B8EFAE5219D64220099B057 /* SceneKitUtils.swift in Sources */,
 				5B8889D02192CCB800B122C6 /* Friend.swift in Sources */,
+				5B8EFAE9219D64400099B057 /* String+Extension.swift in Sources */,
+				5B8EFAE3219D63DB0099B057 /* SCNNode Extension.swift in Sources */,
 				5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */,
+				5B8EFAED219D64640099B057 /* Annotations.swift in Sources */,
 				5B8889D421957F7400B122C6 /* KeychainPasswordItem.swift in Sources */,
 				5B77AE3C21807AB800084ACC /* RequestsVC.swift in Sources */,
 				5B87DE3B217DDDB80094B7F2 /* DTTextField extension.swift in Sources */,
+				5B8EFAF1219D64A60099B057 /* Location.swift in Sources */,
 				5BC8E12F217A00FC0045BC37 /* User.swift in Sources */,
 				5B77AE3E21807AD500084ACC /* SettingsVC.swift in Sources */,
 			);
