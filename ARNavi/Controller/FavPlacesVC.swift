@@ -52,7 +52,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Candies"
+        searchController.searchBar.placeholder = "Search Places"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
