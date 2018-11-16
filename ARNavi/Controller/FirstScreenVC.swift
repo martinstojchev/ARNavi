@@ -79,6 +79,7 @@ class FirstScreenVC: UIViewController {
     @IBAction func showDemo(_ sender: Any) {
         if let mapARVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapARVC")as? MapARVC {
             self.navigationController?.pushViewController(mapARVC, animated: true)
+            mapARVC.segueToFirstScreen = true
             self.navigationController?.navigationBar.prefersLargeTitles = false
         }
     }

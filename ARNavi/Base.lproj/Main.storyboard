@@ -239,7 +239,7 @@
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ES-pM-94H">
-                                <rect key="frame" x="327" y="50" width="32" height="32"/>
+                                <rect key="frame" x="327" y="94" width="32" height="32"/>
                                 <state key="normal" image="arrow"/>
                                 <connections>
                                     <action selector="showMyLocation:" destination="Fzb-xM-bRs" eventType="touchUpInside" id="JTM-zI-7Of"/>
@@ -403,6 +403,7 @@
                     <connections>
                         <outlet property="favPlacesTableView" destination="Pgc-kK-Kpt" id="qWX-XD-5jN"/>
                         <segue destination="xsF-lg-7N3" kind="presentation" identifier="showSideMenu" id="4d0-BJ-fkS"/>
+                        <segue destination="Fzb-xM-bRs" kind="show" identifier="showMap" id="y3E-vs-dm3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hKc-gm-VhU" userLabel="First Responder" sceneMemberID="firstResponder"/>

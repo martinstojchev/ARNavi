@@ -50,8 +50,8 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
     var nodePoints: [SCNNode] = []
     var isCustomNode: Bool = false
     let impact = UIImpactFeedbackGenerator()
-    
-    
+    var coordinatesForSaving: CLLocationCoordinate2D!
+    var segueToFirstScreen: Bool!
     
     var distance: Float! = 0.0 {
       
@@ -78,6 +78,8 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
     var requestedRouteForTap: Bool = false
     var directionsForRoute:[MKDirections] = []
     var annotationsOnMap: [MyAnnotations] = []
+    var savingPlaceDelegate: SavingPlacesDelegate?
+    var locationSearchTableDelegate: HandleMapSearch?
     
     // Drawing path
     private var drawingNodes = [DynamicGeometryNode]()
@@ -112,8 +114,12 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
         resultSearchController?.hidesNavigationBarDuringPresentation = false
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
-        locationSearchTable.handleMapSearchDelegate = self
-        
+        //locationSearchTable.handleMapSearchDelegate = self
+        if let locationSearchDelegate = locationSearchTableDelegate {
+            locationSearchTable.handleMapSearchDelegate = locationSearchTableDelegate
+        }else {
+          locationSearchTable.handleMapSearchDelegate = self
+        }
         
         locationSearchTable.mapView = mapView
         
@@ -152,7 +158,13 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
     
     @objc func backToFirstScreen(){
         print("back to first screen")
+        if (segueToFirstScreen){
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        }
+        else {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        }
         navigationController?.popViewController(animated: true)
     }
     
@@ -685,6 +697,7 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
                 let touchLocation = gestureRecognizer.location(in: mapView)
                 let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
                 print("Tapped location: \(locationCoordinate.latitude),\(locationCoordinate.longitude)")
+                coordinatesForSaving = locationCoordinate
                 impact.impactOccurred()
                 requestRoute(endLocation: locationCoordinate)
                 cancelButton.isHidden = false
@@ -1073,8 +1086,42 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
         button.addTarget(self, action: #selector(handleMapView), for: .touchUpInside)
         pinView?.leftCalloutAccessoryView = button
         
+        let savePlaceSquare = CGSize(width: 30, height: 30)
+        let savePlaceButton = UIButton(frame: CGRect(origin: CGPoint.zero, size: savePlaceSquare))
+        savePlaceButton.setBackgroundImage(UIImage(named: "save_icon"), for: .normal)
+        savePlaceButton.addTarget(self, action: #selector(savePlaceFromMap), for: .touchUpInside)
+        pinView?.rightCalloutAccessoryView = savePlaceButton
+        print("saving pin latitude: \(pinView?.annotation?.coordinate.latitude) , longitude: \(pinView?.annotation?.coordinate.longitude)")
+        
+        
         return pinView
         
+    }
+    
+    @objc func savePlaceFromMap(){
+        print("save button pressed")
+        print("saving coordinates: lat: \(coordinatesForSaving.latitude), lon: \(coordinatesForSaving.longitude)")
+        let savingPlaceAlert = UIAlertController(title: "Save place", message: "Enter the name of your favourite place", preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
+            
+            let nameTxtField = savingPlaceAlert.textFields?[0]
+            guard let placeName = nameTxtField?.text else {return }
+            
+            print("placeName for saving place: \(placeName)")
+            self.savingPlaceDelegate?.savePlace(name: placeName, coordinate: self.coordinatesForSaving)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        
+        savingPlaceAlert.addTextField { (nameTxtField) in
+            nameTxtField.placeholder = "Place name"
+        }
+        
+        savingPlaceAlert.addAction(saveAction)
+        savingPlaceAlert.addAction(cancelAction)
+        present(savingPlaceAlert, animated: true)
     }
     
     
@@ -1092,23 +1139,6 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
         showInARButton.isHidden = false
         
     }
-    
-    
-//    @IBAction func switchStateChanged(_ sender: Any) {
-//
-//        print("Switch state changed: \(switchButton.isOn)")
-//        if (switchButton.isOn){
-//
-//            showInARButton.isHidden = false
-//        }
-//        else {
-//            showInARButton.isHidden = true
-//        }
-//
-//    }
-//
-    
-    
     
     
 }
@@ -1132,6 +1162,7 @@ extension MapARVC: HandleMapSearch {
         
         //cache the pin
         selectedPin = placemark
+        coordinatesForSaving = placemark.coordinate
         //clear existing pins
         mapView.removeAnnotations(mapView.annotations)
         

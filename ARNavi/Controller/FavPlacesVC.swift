@@ -10,7 +10,11 @@ import UIKit
 import SideMenu
 import Firebase
 import FirebaseDatabase
+import CoreLocation
 
+protocol SavingPlacesDelegate {
+    func savePlace(name: String, coordinate: CLLocationCoordinate2D)
+}
 
 
 class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfilePictureDelegate, UIGestureRecognizerDelegate {
@@ -173,12 +177,31 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             }
         }
         
+        if (segue.identifier == "showMap"){
+            
+            if let mapARVC = segue.destination as? MapARVC{
+                
+                mapARVC.savingPlaceDelegate = self
+                mapARVC.segueToFirstScreen = false
+                
+                self.navigationController?.navigationBar.prefersLargeTitles = false
+            }
+        }
+        
         
     }
     
     @objc func addNewLocation(){
         
         print("add new place tapped")
+//        if let mapARVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapARVC") as? MapARVC {
+//            mapARVC.savingPlaceDelegate = self
+//
+//            self.navigationController?.navigationBar.prefersLargeTitles = false
+//            self.navigationController?.pushViewController(mapARVC, animated: true)
+//        }
+        
+        performSegue(withIdentifier: "showMap", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -228,6 +251,21 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         return searchController.isActive && !searchBarIsEmpty()
     }
     
+    func saveNewPlaceToDatabase(name: String, coordinate: CLLocationCoordinate2D) {
+        
+        ref = Database.database().reference()
+        
+        guard let currendUserID = Auth.auth().currentUser?.uid else {return}
+        let savingLatitude = String(coordinate.latitude)
+        let savingLongitude = String(coordinate.longitude)
+        
+        ref.child("users").child(currendUserID).child("places").child(name).updateChildValues(["lat" : savingLatitude])
+        ref.child("users").child(currendUserID).child("places").child(name).updateChildValues(["lon" : savingLongitude])
+        
+        
+        
+    }
+    
 }
 
 extension FavPlacesVC: UISideMenuNavigationControllerDelegate {
@@ -268,4 +306,13 @@ extension FavPlacesVC: UISearchResultsUpdating {
         // TODO
         filterContentForSearchText(searchController.searchBar.text!)
     }
+}
+
+extension FavPlacesVC: SavingPlacesDelegate {
+    func savePlace(name: String, coordinate: CLLocationCoordinate2D) {
+        print("saving place with name: \(name) and coordinate lat: \(coordinate.latitude), lon: \(coordinate.longitude)")
+        saveNewPlaceToDatabase(name: name, coordinate: coordinate)
+    }
+    
+    
 }
