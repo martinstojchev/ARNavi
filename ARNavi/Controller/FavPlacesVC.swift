@@ -20,11 +20,11 @@ protocol SavingPlacesDelegate {
 class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ProfilePictureDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var favPlacesTableView: UITableView!
-    var favPlaces: [String] = ["Home", "Work", "City Mall"]
+    var favPlaces: [FavouritePlace] = []
     var selectedCustomImage: UIImage!
     var checkChangesForProfilePic: Bool!
     let searchController = UISearchController(searchResultsController: nil)
-    var filteredPlaces = [String]()
+    var filteredPlaces = [FavouritePlace]()
     var userFriends:[Friend] = [Friend]()
     var quickAction: String! {
         didSet {
@@ -63,6 +63,64 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
        // getUsersFriends()
         //insertNewRequests()
         setupLongPressGesture()
+        checkForPlaces()
+        
+    }
+    
+    func checkForPlaces(){
+        guard let currentUserID = Auth.auth().currentUser?.uid else {return}
+        
+        ref.child("users").child(currentUserID).child("places").observe(.value) { (snapshot) in
+            
+            var retrievedPlaces = [FavouritePlace]()
+            let value = snapshot.value as? NSDictionary ?? [:]
+            var placeLatitudeString: String!
+            var placeLongitudeString: String!
+            
+            for place in value {
+                
+                guard let placeName = place.key as? String else {return}
+                print("placeName: \(placeName)")
+                let coordinates = place.value as? NSDictionary ?? [:]
+                
+                for coordinate in coordinates {
+                    
+                    
+                    guard let coordinateKey = coordinate.key as? String else {return }
+                    print("coordinateKey: \(coordinateKey)")
+                    print("coordinateValue: \(coordinate.value)")
+                    if (coordinateKey == "lat"){
+                        //print("coordinate equal to lat")
+                        placeLatitudeString = coordinate.value as? String
+                        //print("placeLatitude: \(placeLatitudeString)")
+                    }
+                    if(coordinateKey == "lon"){
+                        //print("coordinate equal to lon")
+                        placeLongitudeString = coordinate.value as? String
+                       // print("placeLatitude: \(placeLongitudeString)")
+                        
+                        guard let placeLatitude = Double(placeLatitudeString) else {return}
+                        guard let placeLongitude = Double(placeLongitudeString) else {return}
+                        
+                        print("placeLatitude: \(placeLatitude), placeLongitude: \(placeLongitude)")
+                        
+                        let currentCoordinate = CLLocationCoordinate2D(latitude: placeLatitude, longitude: placeLongitude)
+                        let currentFavPlace = FavouritePlace(name: placeName, coordinate: currentCoordinate)
+                        retrievedPlaces.append(currentFavPlace)
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                self.favPlaces = retrievedPlaces
+                self.favPlacesTableView.reloadData()
+                
+            }
+            
+            
+        }
         
     }
     
@@ -120,9 +178,16 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
+             let selecetedCellTitle = self.favPlacesTableView.cellForRow(at: indexPathForCell)
+            guard let placeName = selecetedCellTitle?.textLabel?.text else {return}
              self.favPlaces.remove(at: indexPathForCell.row)
              self.favPlacesTableView.deleteRows(at: [indexPathForCell], with: .fade)
              self.favPlacesTableView.reloadData()
+            guard let currentUserID = Auth.auth().currentUser?.uid else {return}
+            
+            print("secelted cell title: \(placeName)")
+             self.ref.child("users").child(currentUserID).child("places").child(placeName).removeValue()
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
@@ -216,9 +281,9 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         if isFiltering(){
-            cell.textLabel?.text = filteredPlaces[indexPath.row]
+            cell.textLabel?.text = filteredPlaces[indexPath.row].getName()
         }else {
-            cell.textLabel?.text = favPlaces[indexPath.row]
+            cell.textLabel?.text = favPlaces[indexPath.row].getName()
         }
         
         
@@ -240,8 +305,8 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredPlaces = favPlaces.filter({( place : String) -> Bool in
-            return place.lowercased().contains(searchText.lowercased())
+        filteredPlaces = favPlaces.filter({( place : FavouritePlace) -> Bool in
+            return place.getName().lowercased().contains(searchText.lowercased())
         })
         
         favPlacesTableView.reloadData()
