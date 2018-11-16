@@ -52,6 +52,7 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
     let impact = UIImpactFeedbackGenerator()
     var coordinatesForSaving: CLLocationCoordinate2D!
     var segueToFirstScreen: Bool!
+    var favPlaceMark: MKPlacemark!
     
     var distance: Float! = 0.0 {
       
@@ -99,6 +100,15 @@ class MapARVC: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate, M
         
         self.mapView.delegate = self
         self.setupGesture()
+        
+        if let favPlacemark = favPlaceMark {
+            dropPinZoomIn(placemark: favPlacemark)
+        }
+        else {
+            if (mapView.annotations.count > 0){
+                mapView.removeAnnotations(mapView.annotations)
+            }
+        }
         
         //searchController
         let locationSearchTable = storyboard?.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
@@ -1164,7 +1174,9 @@ extension MapARVC: HandleMapSearch {
         selectedPin = placemark
         coordinatesForSaving = placemark.coordinate
         //clear existing pins
+        
         mapView.removeAnnotations(mapView.annotations)
+        
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate

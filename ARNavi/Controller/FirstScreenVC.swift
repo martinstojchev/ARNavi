@@ -59,6 +59,7 @@ class FirstScreenVC: UIViewController {
             if let favPlacesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavPlacesVC") as? FavPlacesVC {
                 
                 //self.present(favPlacesVC, animated: true, completion: nil)
+                favPlacesVC.checkForPlaces()
                 self.navigationController?.pushViewController(favPlacesVC, animated: true)
             }
             

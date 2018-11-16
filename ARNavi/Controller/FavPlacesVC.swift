@@ -11,6 +11,7 @@ import SideMenu
 import Firebase
 import FirebaseDatabase
 import CoreLocation
+import MapKit
 
 protocol SavingPlacesDelegate {
     func savePlace(name: String, coordinate: CLLocationCoordinate2D)
@@ -35,7 +36,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     var ref: DatabaseReference!
     let impact = UIImpactFeedbackGenerator()
-    
+    var favPlaceMark: MKPlacemark!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +70,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     func checkForPlaces(){
         guard let currentUserID = Auth.auth().currentUser?.uid else {return}
+        ref = Database.database().reference()
         
         ref.child("users").child(currentUserID).child("places").observe(.value) { (snapshot) in
             
@@ -167,7 +169,13 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }))
         
         alert.addAction(UIAlertAction(title: "Show on map", style: .default, handler: { (action) in
-                
+            
+            let favPlaceCoordinate = self.favPlaces[indexPathForCell.row].getCoordinate()
+            print("favPlaceCoordinate lat: \(favPlaceCoordinate.latitude), lon: \(favPlaceCoordinate.longitude)")
+            self.favPlaceMark = MKPlacemark(coordinate: favPlaceCoordinate)
+            self.performSegue(withIdentifier: "showMap", sender: self)
+            
+            
         }))
         
         alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
@@ -248,6 +256,10 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 
                 mapARVC.savingPlaceDelegate = self
                 mapARVC.segueToFirstScreen = false
+                
+                if let favPlacePlacemark = favPlaceMark {
+                    mapARVC.favPlaceMark = favPlacePlacemark
+                }
                 
                 self.navigationController?.navigationBar.prefersLargeTitles = false
             }
