@@ -16,6 +16,7 @@
 		5B77AE3A21807A9C00084ACC /* UpdateInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B77AE3921807A9C00084ACC /* UpdateInfoVC.swift */; };
 		5B77AE3C21807AB800084ACC /* RequestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B77AE3B21807AB800084ACC /* RequestsVC.swift */; };
 		5B77AE3E21807AD500084ACC /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B77AE3D21807AD500084ACC /* SettingsVC.swift */; };
+		5B82C610219EB4A900329B0E /* FavouritePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B82C60F219EB4A900329B0E /* FavouritePlace.swift */; };
 		5B87DE39217DA6720094B7F2 /* FavPlacesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87DE38217DA6720094B7F2 /* FavPlacesVC.swift */; };
 		5B87DE3B217DDDB80094B7F2 /* DTTextField extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B87DE3A217DDDB80094B7F2 /* DTTextField extension.swift */; };
 		5B8889D02192CCB800B122C6 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8889CF2192CCB800B122C6 /* Friend.swift */; };
@@ -60,6 +61,7 @@
 		5B77AE3921807A9C00084ACC /* UpdateInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInfoVC.swift; sourceTree = "<group>"; };
 		5B77AE3B21807AB800084ACC /* RequestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsVC.swift; sourceTree = "<group>"; };
 		5B77AE3D21807AD500084ACC /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		5B82C60F219EB4A900329B0E /* FavouritePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlace.swift; sourceTree = "<group>"; };
 		5B87DE38217DA6720094B7F2 /* FavPlacesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavPlacesVC.swift; sourceTree = "<group>"; };
 		5B87DE3A217DDDB80094B7F2 /* DTTextField extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DTTextField extension.swift"; sourceTree = "<group>"; };
 		5B8889CF2192CCB800B122C6 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				5B8EFAEC219D64640099B057 /* Annotations.swift */,
 				5B8EFAEE219D64880099B057 /* LocationNode.swift */,
 				5B8EFAF0219D64A60099B057 /* Location.swift */,
+				5B82C60F219EB4A900329B0E /* FavouritePlace.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				5B8EFAF3219D64DA0099B057 /* MapARVC.swift in Sources */,
 				5B77AE3621805D9000084ACC /* SideMenuVC.swift in Sources */,
 				5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */,
+				5B82C610219EB4A900329B0E /* FavouritePlace.swift in Sources */,
 				5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */,
 				5B8889D62195808B00B122C6 /* KeychainConfiguration.swift in Sources */,
 				5B3F1C04218995BA0098008A /* FormFieldPresetFactory.swift in Sources */,
