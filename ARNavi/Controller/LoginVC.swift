@@ -30,7 +30,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var forgotPasswordButton: UIButton!
     @IBOutlet weak var biometricImageView: UIImageView!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var facebookLoginbutton: UIButton!
+    @IBOutlet weak var googleLoginButton: UIButton!
     @IBOutlet weak var twitterLoginButton: UIButton!
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
@@ -88,9 +88,9 @@ class LoginVC: UIViewController {
         loginButton.backgroundColor = AppColor.red.rawValue
         loginButton.tintColor = AppColor.white.rawValue
         loginButton.layer.cornerRadius = 7
-        facebookLoginbutton.backgroundColor = AppColor.facebookBlue.rawValue
-        facebookLoginbutton.tintColor = AppColor.white.rawValue
-        facebookLoginbutton.layer.cornerRadius = 7
+        googleLoginButton.backgroundColor = AppColor.googleGreen.rawValue
+        googleLoginButton.tintColor = AppColor.white.rawValue
+        googleLoginButton.layer.cornerRadius = 7
         twitterLoginButton.backgroundColor = AppColor.twitterBlue.rawValue
         twitterLoginButton.tintColor = AppColor.white.rawValue
         twitterLoginButton.layer.cornerRadius = 7

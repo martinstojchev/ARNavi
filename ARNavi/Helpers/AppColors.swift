@@ -19,6 +19,7 @@ enum AppColor{
     case backgroundColor
     case registerPopupColor
     case green
+    case googleGreen
     
 }
 
@@ -49,6 +50,8 @@ extension AppColor: RawRepresentable {
         case UIColor(red: 98/255, green: 149/255, blue: 101/255, alpha: 1)      :self = .registerPopupColor
             
         case UIColor(red: 83/255, green: 215/255, blue: 105/255, alpha: 1)      :self = .green
+        
+        case UIColor(red: 57/255, green: 162/255, blue: 86/255, alpha: 1)       :self = .googleGreen
             
             
         default: return nil
@@ -71,6 +74,7 @@ extension AppColor: RawRepresentable {
         case .backgroundColor    : return  UIColor(red: 0/255, green: 169/255, blue: 165/255, alpha: 1)
         case .registerPopupColor : return  UIColor(red: 98/255, green: 149/255, blue: 101/255, alpha: 1)
         case .green              : return  UIColor(red: 83/255, green: 215/255, blue: 105/255, alpha: 1)
+        case .googleGreen        : return  UIColor(red: 57/255, green: 162/255, blue: 86/255, alpha: 1)
             
         }
     }
