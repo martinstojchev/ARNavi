@@ -276,7 +276,7 @@
                                 </connections>
                             </button>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nRQ-Pp-4tT">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="90"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="0SI-m3-i2t"/>
@@ -301,7 +301,7 @@
                             <constraint firstAttribute="bottom" secondItem="Omu-vf-wl2" secondAttribute="bottom" id="R9N-YH-3iL"/>
                             <constraint firstItem="xO0-3i-T1Q" firstAttribute="leading" secondItem="PAG-tF-Ri8" secondAttribute="leading" id="RcN-lt-xlU"/>
                             <constraint firstItem="xO0-3i-T1Q" firstAttribute="top" secondItem="PAG-tF-Ri8" secondAttribute="top" id="bLs-cV-dFR"/>
-                            <constraint firstItem="nRQ-Pp-4tT" firstAttribute="top" secondItem="PAG-tF-Ri8" secondAttribute="top" id="pcN-rg-PhF"/>
+                            <constraint firstItem="nRQ-Pp-4tT" firstAttribute="top" secondItem="c61-ar-6X3" secondAttribute="top" id="pcN-rg-PhF"/>
                             <constraint firstItem="c61-ar-6X3" firstAttribute="trailing" secondItem="2T2-0i-WmN" secondAttribute="trailing" constant="16" id="quf-WD-AHd"/>
                             <constraint firstItem="6sR-wt-wFI" firstAttribute="leading" secondItem="c61-ar-6X3" secondAttribute="leading" constant="16" id="vpz-kK-2r6"/>
                             <constraint firstItem="c61-ar-6X3" firstAttribute="bottom" secondItem="Ssv-c0-m7c" secondAttribute="bottom" constant="20" id="xkp-hq-d50"/>
