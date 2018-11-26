@@ -14,6 +14,7 @@ import SwiftEntryKit
 import LocalAuthentication
 import SwiftSpinner
 import TwitterKit
+import GoogleSignIn
 
 enum BiometricType {
     case none
@@ -22,7 +23,7 @@ enum BiometricType {
 }
 
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController, GIDSignInUIDelegate {
     
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var emailTextField: DTTextField!
@@ -69,7 +70,7 @@ class LoginVC: UIViewController {
         
         ref = Database.database().reference()
         
-        //configureTwitterSignInButton()
+        GIDSignIn.sharedInstance()?.uiDelegate = self
         
         print("biometrics: \(biometricType)")
         if(biometricType == .touchID){
@@ -91,6 +92,7 @@ class LoginVC: UIViewController {
         googleLoginButton.backgroundColor = AppColor.googleGreen.rawValue
         googleLoginButton.tintColor = AppColor.white.rawValue
         googleLoginButton.layer.cornerRadius = 7
+        googleLoginButton.addTarget(self, action: #selector(googleSignin), for: .touchUpInside)
         twitterLoginButton.backgroundColor = AppColor.twitterBlue.rawValue
         twitterLoginButton.tintColor = AppColor.white.rawValue
         twitterLoginButton.layer.cornerRadius = 7
@@ -109,6 +111,11 @@ class LoginVC: UIViewController {
         
         passwordTextField.addShowPasswordButton(showImage: UIImage(named: "show_icon")!, hideImage: UIImage(named: "hide_icon")!)
         
+    }
+    
+    @objc func googleSignin(){
+        print("google signin tapped")
+        GIDSignIn.sharedInstance()?.signIn()
     }
     
     @objc func biometricLoginAction(){
