@@ -44,6 +44,8 @@
 		5BBB50512181C636004FE186 /* HidingKeyboard extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB50502181C636004FE186 /* HidingKeyboard extension.swift */; };
 		5BC8E12D2179F7110045BC37 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BC8E12C2179F7110045BC37 /* GoogleService-Info.plist */; };
 		5BC8E12F217A00FC0045BC37 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC8E12E217A00FC0045BC37 /* User.swift */; };
+		5BF7001821AD3B2F00D6B95B /* ShareModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7001721AD3B2F00D6B95B /* ShareModalVC.swift */; };
+		5BF7001A21AD3EC200D6B95B /* ShareModalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7001921AD3EC200D6B95B /* ShareModalCell.swift */; };
 		5BFF09E22158DABC0067B35F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF09E12158DABC0067B35F /* AppDelegate.swift */; };
 		5BFF09E72158DABC0067B35F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFF09E52158DABC0067B35F /* Main.storyboard */; };
 		5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF09E82158DABC0067B35F /* ARNavi.xcdatamodeld */; };
@@ -89,6 +91,8 @@
 		5BBB50502181C636004FE186 /* HidingKeyboard extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HidingKeyboard extension.swift"; sourceTree = "<group>"; };
 		5BC8E12C2179F7110045BC37 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5BC8E12E217A00FC0045BC37 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5BF7001721AD3B2F00D6B95B /* ShareModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModalVC.swift; sourceTree = "<group>"; };
+		5BF7001921AD3EC200D6B95B /* ShareModalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModalCell.swift; sourceTree = "<group>"; };
 		5BFF09DE2158DABC0067B35F /* ARNavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFF09E12158DABC0067B35F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFF09E62158DABC0067B35F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			children = (
 				5B3F1C052189B5F90098008A /* RequestsTableViewCell.swift */,
 				5B3F1C092189CA580098008A /* FriendsCell.swift */,
+				5BF7001921AD3EC200D6B95B /* ShareModalCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 				5B77AE3D21807AD500084ACC /* SettingsVC.swift */,
 				5B8EFAE0219D63AF0099B057 /* LocationSearchTable.swift */,
 				5B8EFAF2219D64DA0099B057 /* MapARVC.swift */,
+				5BF7001721AD3B2F00D6B95B /* ShareModalVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -450,6 +456,7 @@
 				5B8EFAE5219D64220099B057 /* SceneKitUtils.swift in Sources */,
 				5B8889D02192CCB800B122C6 /* Friend.swift in Sources */,
 				5B8EFAE9219D64400099B057 /* String+Extension.swift in Sources */,
+				5BF7001A21AD3EC200D6B95B /* ShareModalCell.swift in Sources */,
 				5B8EFAE3219D63DB0099B057 /* SCNNode Extension.swift in Sources */,
 				5BACF6242159088D00D8E056 /* LoginVC.swift in Sources */,
 				5B8EFAED219D64640099B057 /* Annotations.swift in Sources */,
@@ -458,6 +465,7 @@
 				5B87DE3B217DDDB80094B7F2 /* DTTextField extension.swift in Sources */,
 				5B8EFAF1219D64A60099B057 /* Location.swift in Sources */,
 				5BC8E12F217A00FC0045BC37 /* User.swift in Sources */,
+				5BF7001821AD3B2F00D6B95B /* ShareModalVC.swift in Sources */,
 				5B77AE3E21807AD500084ACC /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

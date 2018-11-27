@@ -184,6 +184,17 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             self.present(activityController, animated: true)
         }))
         
+        alert.addAction(UIAlertAction(title: "Share with friends", style: .default, handler: { (action) in
+            
+            if let shareModalVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareModalVC") as? ShareModalVC {
+               
+                self.present(shareModalVC, animated: true, completion: nil)
+            }
+            
+            
+            
+        }))
+        
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
             
              let selecetedCellTitle = self.favPlacesTableView.cellForRow(at: indexPathForCell)
