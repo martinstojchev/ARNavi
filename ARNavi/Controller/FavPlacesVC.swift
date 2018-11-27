@@ -27,6 +27,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     let searchController = UISearchController(searchResultsController: nil)
     var filteredPlaces = [FavouritePlace]()
     var userFriends:[Friend] = [Friend]()
+    var friends = [Friend]()
     var quickAction: String! {
         didSet {
          //print("didSet quick action")
@@ -65,6 +66,7 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         //insertNewRequests()
         setupLongPressGesture()
         checkForPlaces()
+        checkForFriends()
         
     }
     
@@ -188,6 +190,12 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             
             if let shareModalVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareModalVC") as? ShareModalVC {
                
+                guard let indexPath = self.favPlacesTableView.indexPath(for: cell) else {return}
+                let sharingPlace = self.favPlaces[indexPath.row]
+                shareModalVC.sharingFavPlace = sharingPlace
+                shareModalVC.friends = self.friends
+                print("longpress on place: \(sharingPlace.getName())")
+                
                 self.present(shareModalVC, animated: true, completion: nil)
             }
             
@@ -353,6 +361,44 @@ class FavPlacesVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         
     }
+    
+    func checkForFriends(){
+        
+        guard let currentUserID = Auth.auth().currentUser?.uid else {return}
+        
+        
+        ref.child("users").child(currentUserID).child("friends").observe(.value) { (snapshot) in
+            
+            var retrievedFriends = [Friend]()
+            let value = snapshot.value as? NSDictionary ?? [:]
+            print("requests value: \(value)")
+            for ids in value {
+                let id = ids.key as? String ?? ""
+                print("id: \(id)")
+                
+                if let friendIDString = ids.key as? String {
+                    print("friendIDString: \(friendIDString)")
+                    // find the info for the founded users
+                    self.ref.child("users").child(friendIDString).observeSingleEvent(of: .value, with: { (snapshot) in
+                        
+                        let value = snapshot.value as? NSDictionary ?? [:]
+                        let name = value["name"] as? String ?? ""
+                        let email = value["email"] as? String ?? ""
+                        let username = value["username"] as? String ?? ""
+                        
+                        let foundFriend = Friend(userID: friendIDString, name: name, username: username, email: email, image: UIImage())
+                        retrievedFriends.append(foundFriend)
+                        self.friends = retrievedFriends
+                        
+                        print("friends count: \(self.friends.count)")
+                        
+                    })
+                    
+                }
+            }
+        }
+    }
+    
     
 }
 

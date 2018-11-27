@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol SharingPlacesDelegate {
+    func sharePlaceWithFriend(friendID: String, friendName: String)
+}
+
 class ShareModalCell: UITableViewCell {
 
     @IBOutlet weak var friendsNameLabel: UILabel!
     @IBOutlet weak var sendButton: UIButton!
     var userID: String!
-    
+    var sharePlaceDelegate: SharingPlacesDelegate!
     
     func setShareModelCell(friendName: String, userID: String, buttonTextColor: AppColor, buttonBackgroudColor: AppColor){
         
@@ -30,10 +34,21 @@ class ShareModalCell: UITableViewCell {
     
     @objc func tappedSendButtonAction(){
         
+        guard let friendName = self.friendsNameLabel.text else {return }
+        guard let friendID   = self.userID else {return}
+        
+        print("tapped cell name: \(friendName) with id: \(friendID)")
+        sharePlaceDelegate.sharePlaceWithFriend(friendID: friendID, friendName: friendName)
+        
         sendButton.backgroundColor = UIColor.gray
         sendButton.tintColor = UIColor.white
-        sendButton.isUserInteractionEnabled = false
-        sendButton.titleLabel?.text = "Sent"
+        self.sendButton.isUserInteractionEnabled = false
+        self.sendButton.setTitle("Sent", for: .normal)
+        
+        
+        
+        
+        
     }
     
     
