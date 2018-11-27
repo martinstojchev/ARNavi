@@ -34,14 +34,19 @@ class ShareModalVC: UIViewController , UITableViewDelegate, UITableViewDataSourc
      
         cancelModalButton.tintColor = AppColor.white.rawValue
         cancelModalButton.addTarget(self, action: #selector(cancelModalButtonAction), for: .touchUpInside)
-        
+        shareModalTableview.layer.cornerRadius = 7
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(integerLiteral: 40)
+    }
     
+ 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ModalCell") as! ShareModalCell

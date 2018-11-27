@@ -391,9 +391,10 @@
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <state key="normal" title="Cancel"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IEN-gp-J0j">
+                            <tableView clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IEN-gp-J0j">
                                 <rect key="frame" x="16" y="82" width="343" height="565"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ModalCell" id="Al5-b8-CCp" customClass="ShareModalCell" customModule="ARNavi" customModuleProvider="target">
@@ -410,7 +411,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fig-k3-rzU">
-                                                    <rect key="frame" x="282" y="0.0" width="60" height="40"/>
+                                                    <rect key="frame" x="278" y="5" width="60" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="4o6-ZX-TOc"/>
                                                         <constraint firstAttribute="width" constant="60" id="s3U-Ya-1tS"/>
@@ -420,11 +421,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XYd-fA-unm" firstAttribute="leading" secondItem="bZx-bA-y2S" secondAttribute="leading" constant="15" id="0pL-8l-Me5"/>
-                                                <constraint firstAttribute="trailing" secondItem="Fig-k3-rzU" secondAttribute="trailing" constant="1" id="3aF-gE-fXU"/>
+                                                <constraint firstAttribute="trailing" secondItem="Fig-k3-rzU" secondAttribute="trailing" constant="5" id="3aF-gE-fXU"/>
                                                 <constraint firstAttribute="bottom" secondItem="XYd-fA-unm" secondAttribute="bottom" id="8Eu-iL-TPv"/>
-                                                <constraint firstItem="Fig-k3-rzU" firstAttribute="top" secondItem="bZx-bA-y2S" secondAttribute="top" id="FLh-9N-b0w"/>
+                                                <constraint firstItem="Fig-k3-rzU" firstAttribute="top" secondItem="bZx-bA-y2S" secondAttribute="top" constant="5" id="FLh-9N-b0w"/>
                                                 <constraint firstItem="XYd-fA-unm" firstAttribute="top" secondItem="bZx-bA-y2S" secondAttribute="top" id="PYd-5e-ZGe"/>
-                                                <constraint firstAttribute="bottom" secondItem="Fig-k3-rzU" secondAttribute="bottom" id="aEY-8S-3nl"/>
+                                                <constraint firstAttribute="bottom" secondItem="Fig-k3-rzU" secondAttribute="bottom" constant="5" id="aEY-8S-3nl"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
