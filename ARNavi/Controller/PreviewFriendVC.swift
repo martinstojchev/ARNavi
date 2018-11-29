@@ -22,6 +22,12 @@ class PreviewFriendVC: UIViewController{
             previewingLabel.text = friend.getName()
             //previewingImageView.image = friend.getImage()
         }
+        
+        view.backgroundColor = AppColor.peekColor.rawValue
+        
+        previewingImageView.layer.cornerRadius = previewingImageView.frame.width / 2
+        previewingImageView.layer.borderColor  = AppColor.black.rawValue.cgColor
+        previewingImageView.layer.borderWidth  = 1
     }
     
 

@@ -142,6 +142,8 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         guard let finalView = storyboard?.instantiateViewController(withIdentifier: "ShowFriendVC") as? ShowFriendVC else {return}
         if let friend = fourcedTouchFriend {
           finalView.showingFriend = friend
+            finalView.isFriend = true
+            finalView.navigationController?.navigationBar.prefersLargeTitles = false
         }
         show(finalView, sender: self)
     }

@@ -11,21 +11,31 @@ import Firebase
 import FirebaseDatabase
 
 
-class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate {
+   
     
+  
     @IBOutlet weak var requestsTableView: UITableView!
     
     var requests = [Friend]()
     let searchController = UISearchController(searchResultsController: nil)
     var filteredRequests = [Friend]()
     var ref: DatabaseReference!
-    
+    var fourcedTouchRequestFriend: Friend!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         ref = Database.database().reference()
+        
+        if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
+            registerForPreviewing(with: self, sourceView: requestsTableView)
+        }
+        else {
+            print("Peak and pop isn't compatible")
+        }
+        
         self.navigationItem.title = "Requests"
          requestsTableView.dataSource = self
          requestsTableView.delegate = self
@@ -40,6 +50,31 @@ class RequestsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         navigationItem.searchController = searchController
         definesPresentationContext = true
          checkForRequests()
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let forcePressedIndexPath = requestsTableView.indexPathForRow(at: location) else {return nil}
+        guard let cell = requestsTableView.cellForRow(at: forcePressedIndexPath) else {return nil}
+        let tappedRequestFriend = requests[forcePressedIndexPath.row]
+        fourcedTouchRequestFriend = tappedRequestFriend
+        //print("force pressed cell : \(cell.cellLabel.text)")
+        print("friend for cell : \(tappedRequestFriend.getName())")
+        
+        guard let previewView = storyboard?.instantiateViewController(withIdentifier: "PreviewFriendVC") as? PreviewFriendVC else {return nil}
+        previewView.tappedFriend = tappedRequestFriend
+        
+        return previewView
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+       
+        guard let finalView = storyboard?.instantiateViewController(withIdentifier: "ShowFriendVC") as? ShowFriendVC else {return}
+        if let friend = fourcedTouchRequestFriend {
+            finalView.showingFriend = friend
+            finalView.isFriend = false
+        }
+        show(finalView, sender: self)
     }
     
     func checkForRequests(){
