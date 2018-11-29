@@ -46,6 +46,8 @@
 		5BC8E12F217A00FC0045BC37 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC8E12E217A00FC0045BC37 /* User.swift */; };
 		5BF7001821AD3B2F00D6B95B /* ShareModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7001721AD3B2F00D6B95B /* ShareModalVC.swift */; };
 		5BF7001A21AD3EC200D6B95B /* ShareModalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7001921AD3EC200D6B95B /* ShareModalCell.swift */; };
+		5BF7001C21AFE91500D6B95B /* PreviewFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7001B21AFE91500D6B95B /* PreviewFriendVC.swift */; };
+		5BF7001E21AFE93700D6B95B /* ShowFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF7001D21AFE93700D6B95B /* ShowFriendVC.swift */; };
 		5BFF09E22158DABC0067B35F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF09E12158DABC0067B35F /* AppDelegate.swift */; };
 		5BFF09E72158DABC0067B35F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFF09E52158DABC0067B35F /* Main.storyboard */; };
 		5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF09E82158DABC0067B35F /* ARNavi.xcdatamodeld */; };
@@ -93,6 +95,8 @@
 		5BC8E12E217A00FC0045BC37 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5BF7001721AD3B2F00D6B95B /* ShareModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModalVC.swift; sourceTree = "<group>"; };
 		5BF7001921AD3EC200D6B95B /* ShareModalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareModalCell.swift; sourceTree = "<group>"; };
+		5BF7001B21AFE91500D6B95B /* PreviewFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewFriendVC.swift; sourceTree = "<group>"; };
+		5BF7001D21AFE93700D6B95B /* ShowFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFriendVC.swift; sourceTree = "<group>"; };
 		5BFF09DE2158DABC0067B35F /* ARNavi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARNavi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFF09E12158DABC0067B35F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFF09E62158DABC0067B35F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 				5B8EFAE0219D63AF0099B057 /* LocationSearchTable.swift */,
 				5B8EFAF2219D64DA0099B057 /* MapARVC.swift */,
 				5BF7001721AD3B2F00D6B95B /* ShareModalVC.swift */,
+				5BF7001B21AFE91500D6B95B /* PreviewFriendVC.swift */,
+				5BF7001D21AFE93700D6B95B /* ShowFriendVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -439,6 +445,7 @@
 				5BBB50512181C636004FE186 /* HidingKeyboard extension.swift in Sources */,
 				5BACF6202158F8FA00D8E056 /* AppColors.swift in Sources */,
 				5B87DE39217DA6720094B7F2 /* FavPlacesVC.swift in Sources */,
+				5BF7001C21AFE91500D6B95B /* PreviewFriendVC.swift in Sources */,
 				5BFF09E22158DABC0067B35F /* AppDelegate.swift in Sources */,
 				5B77AE3A21807A9C00084ACC /* UpdateInfoVC.swift in Sources */,
 				5B8EFAE1219D63AF0099B057 /* LocationSearchTable.swift in Sources */,
@@ -448,6 +455,7 @@
 				5B8EFAE7219D64310099B057 /* DynamicGeometry.swift in Sources */,
 				5B8EFAF3219D64DA0099B057 /* MapARVC.swift in Sources */,
 				5B77AE3621805D9000084ACC /* SideMenuVC.swift in Sources */,
+				5BF7001E21AFE93700D6B95B /* ShowFriendVC.swift in Sources */,
 				5BFF09EA2158DABC0067B35F /* ARNavi.xcdatamodeld in Sources */,
 				5B82C610219EB4A900329B0E /* FavouritePlace.swift in Sources */,
 				5BACF622215903DB00D8E056 /* FirstScreenVC.swift in Sources */,

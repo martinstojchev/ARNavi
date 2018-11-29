@@ -12,7 +12,7 @@ import FirebaseDatabase
 
 
 
-class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIViewControllerPreviewingDelegate{
     
     
     
@@ -24,11 +24,19 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     let searchController = UISearchController(searchResultsController: nil)
     var ref: DatabaseReference!
     let impact = UIImpactFeedbackGenerator()
+    var fourcedTouchFriend: Friend!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         ref = Database.database().reference()
+   
+        if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
+            registerForPreviewing(with: self, sourceView: friendsTableView)
+        }
+        else {
+            print("Peak and pop isn't compatible")
+        }
         
         let rightBarButtonImg = UIImage(named: "search_icon")
         let rightNavBarButton = UIBarButtonItem(image: rightBarButtonImg, style: .done, target: self, action: #selector(showSearchBar))
@@ -69,6 +77,11 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //Preparing for peak and pop preview friends
+        
+       
+        
         var cellTitle: String!
         let userID: String!
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsCell
@@ -81,6 +94,7 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
             userID = friends[indexPath.row].getUserID()
         }
         
+       
         
         let cellImage = UIImage()
         
@@ -103,6 +117,33 @@ class FriendsVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
         cell.setFriendsCell(cellImage: cellImage, title: cellTitle, buttonText: buttonText, buttonColor: buttonColor, userID: userID)
         
         return cell
+    }
+    
+    //peek and pop methods
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        
+        guard let forcePressedIndexPath = friendsTableView.indexPathForRow(at: location) else {return nil}
+        guard let cell = friendsTableView.cellForRow(at: forcePressedIndexPath) as? FriendsCell else {return nil}
+        let tappedFriend = friends[forcePressedIndexPath.row]
+        fourcedTouchFriend = tappedFriend
+        print("force pressed cell : \(cell.cellLabel.text)")
+        print("friend for cell : \(tappedFriend.getName())")
+        
+        guard let previewView = storyboard?.instantiateViewController(withIdentifier: "PreviewFriendVC") as? PreviewFriendVC else {return nil}
+        previewView.tappedFriend = tappedFriend
+        return previewView
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        
+
+        guard let finalView = storyboard?.instantiateViewController(withIdentifier: "ShowFriendVC") as? ShowFriendVC else {return}
+        if let friend = fourcedTouchFriend {
+          finalView.showingFriend = friend
+        }
+        show(finalView, sender: self)
     }
     
     func checkForFriends(){

@@ -858,6 +858,121 @@
             </objects>
             <point key="canvasLocation" x="5581.6000000000004" y="-776.76161919040487"/>
         </scene>
+        <!--Preview FriendVC-->
+        <scene sceneID="HjS-4e-0dS">
+            <objects>
+                <viewController storyboardIdentifier="PreviewFriendVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kHf-h6-V94" customClass="PreviewFriendVC" customModule="ARNavi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Rg-F0-uda">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="jFW-Kv-dwC">
+                                <rect key="frame" x="77.5" y="223.5" width="220" height="220"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="3T4-Oy-6WQ"/>
+                                    <constraint firstAttribute="width" constant="220" id="f1h-WK-cyv"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FW-d0-yKH">
+                                <rect key="frame" x="16" y="459" width="343" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="F50-y6-I02"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jFW-Kv-dwC" firstAttribute="centerY" secondItem="4Rg-F0-uda" secondAttribute="centerY" id="02M-lS-LQO"/>
+                            <constraint firstItem="jFW-Kv-dwC" firstAttribute="centerX" secondItem="4Rg-F0-uda" secondAttribute="centerX" id="4dv-7w-sLM"/>
+                            <constraint firstItem="29k-fh-DWv" firstAttribute="trailing" secondItem="6FW-d0-yKH" secondAttribute="trailing" constant="16" id="FX8-VR-uJL"/>
+                            <constraint firstItem="6FW-d0-yKH" firstAttribute="top" secondItem="jFW-Kv-dwC" secondAttribute="bottom" constant="15.5" id="HTR-7U-m0t"/>
+                            <constraint firstItem="6FW-d0-yKH" firstAttribute="leading" secondItem="29k-fh-DWv" secondAttribute="leading" constant="16" id="xjA-gO-t4I"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="29k-fh-DWv"/>
+                    </view>
+                    <connections>
+                        <outlet property="previewingImageView" destination="jFW-Kv-dwC" id="Lc3-ib-kVY"/>
+                        <outlet property="previewingLabel" destination="6FW-d0-yKH" id="Dbo-c1-TOh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JSp-Ke-hVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6436" y="-777.66116941529242"/>
+        </scene>
+        <!--Show FriendVC-->
+        <scene sceneID="SgV-XJ-ObB">
+            <objects>
+                <viewController storyboardIdentifier="ShowFriendVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="31u-5D-pug" customClass="ShowFriendVC" customModule="ARNavi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ie4-A5-XoO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_pic" translatesAutoresizingMaskIntoConstraints="NO" id="pr5-0o-wD5">
+                                <rect key="frame" x="62.5" y="43" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="Pkl-Hx-2eV"/>
+                                    <constraint firstAttribute="width" constant="250" id="bZN-HJ-mMS"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJG-L1-KT2">
+                                <rect key="frame" x="16" y="323" width="343" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ehX-gp-BWU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpi-yp-TuU">
+                                <rect key="frame" x="16" y="388" width="343" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="FLF-vS-UWG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ex-me-geh">
+                                <rect key="frame" x="40" y="455" width="295" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fue-jA-zhV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="Share current location with this friend"/>
+                                <connections>
+                                    <action selector="shareCurrenLocation:" destination="31u-5D-pug" eventType="touchUpInside" id="bGs-M0-VSh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="QcB-qp-Wew" firstAttribute="trailing" secondItem="jpi-yp-TuU" secondAttribute="trailing" constant="16" id="2fy-Xr-OT8"/>
+                            <constraint firstItem="pr5-0o-wD5" firstAttribute="centerX" secondItem="ie4-A5-XoO" secondAttribute="centerX" id="4dw-s8-LIv"/>
+                            <constraint firstItem="pr5-0o-wD5" firstAttribute="top" secondItem="QcB-qp-Wew" secondAttribute="top" constant="23" id="MFt-7b-fc0"/>
+                            <constraint firstItem="QcB-qp-Wew" firstAttribute="trailing" secondItem="TJG-L1-KT2" secondAttribute="trailing" constant="16" id="OLH-DA-yEf"/>
+                            <constraint firstItem="3ex-me-geh" firstAttribute="top" secondItem="jpi-yp-TuU" secondAttribute="bottom" constant="17" id="P6M-5j-wXe"/>
+                            <constraint firstItem="3ex-me-geh" firstAttribute="centerX" secondItem="ie4-A5-XoO" secondAttribute="centerX" id="cz6-RA-YNP"/>
+                            <constraint firstItem="jpi-yp-TuU" firstAttribute="leading" secondItem="QcB-qp-Wew" secondAttribute="leading" constant="16" id="hHg-Rj-ifb"/>
+                            <constraint firstItem="jpi-yp-TuU" firstAttribute="top" secondItem="TJG-L1-KT2" secondAttribute="bottom" constant="15" id="htS-HQ-pMJ"/>
+                            <constraint firstItem="TJG-L1-KT2" firstAttribute="top" secondItem="pr5-0o-wD5" secondAttribute="bottom" constant="30" id="ppl-Cs-bav"/>
+                            <constraint firstItem="TJG-L1-KT2" firstAttribute="leading" secondItem="QcB-qp-Wew" secondAttribute="leading" constant="16" id="rzF-MY-b8G"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QcB-qp-Wew"/>
+                    </view>
+                    <connections>
+                        <outlet property="shareCurrenLocationButton" destination="3ex-me-geh" id="B1q-1w-r1Y"/>
+                        <outlet property="showEmailLabel" destination="jpi-yp-TuU" id="GPv-FC-ey6"/>
+                        <outlet property="showImageView" destination="pr5-0o-wD5" id="UsG-qs-qfb"/>
+                        <outlet property="showNameLabel" destination="TJG-L1-KT2" id="LgR-QU-hi0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Igl-gI-6Fv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7280.8000000000002" y="-778.56071964017997"/>
+        </scene>
         <!--Update InfoVC-->
         <scene sceneID="gsu-wT-X1P">
             <objects>
@@ -1108,6 +1223,7 @@
     <resources>
         <image name="app_logo" width="512" height="512"/>
         <image name="arrow" width="32" height="32"/>
+        <image name="profile_pic" width="100" height="100"/>
         <image name="splash_logo" width="512" height="512"/>
         <image name="touchid_logo" width="512" height="512"/>
     </resources>
