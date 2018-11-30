@@ -393,6 +393,10 @@ extension SideMenuVC:  UIImagePickerControllerDelegate, UINavigationControllerDe
                 self.downloadImageFromCloud()
                 
             }
+            else {
+                #warning("Temporary solution for profile image. Improvements needed")
+                self.downloadImageFromCloud()
+            }
         }
         
         
